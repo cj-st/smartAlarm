@@ -1,11 +1,12 @@
+//every page load
 $(document).ready( function() {
     var clockDiv;
     var currentMode=0;
-    var count=0;
     var modeArr;
     var alarmCount=0;
     var number=0;
 
+    //display time on webpage
     function displayTime() {
         var currentTime = new Date();
         var hours = currentTime.getHours();
@@ -37,11 +38,10 @@ $(document).ready( function() {
         clockDiv.innerText = hours + ":" + minutes + ":" + seconds+
          " "+ meridiem +"\n" + month+" "+date+" "+year;
     }
-    function print(){
-        clockDiv = document.getElementById('clock');
-        clockDiv.innerText="a";
-    }
+
+    //display weather info and load weather background on webpage
     function weather(){
+        //get weather data from forecast.io
         $.ajax({
         url: "https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/49.2611,-123.2531",
         dataType: "jsonp",
@@ -54,6 +54,7 @@ $(document).ready( function() {
             weatherDiv=document.getElementById('weather');
 
             weatherDiv.innerText="Currently "+ icon +" " + Math.round(temp)+" °C";
+
             switch(icon){
             case 'clear-day':
                 background.style.backgroundImage='url("sunny.jpg")';
@@ -93,9 +94,9 @@ $(document).ready( function() {
     });
     }
 
-    weather();
+    weather();  //display weather
+    var auto=setInterval(displayTime,1000); //display time every second
 
-    var auto=setInterval(displayTime,1000);
 
     var alarmDate=document.getElementById("alarmDate");
     var option=document.createElement("option");
@@ -104,7 +105,7 @@ $(document).ready( function() {
 
     alarmDate.add(option,alarmDate[0]);
 
-
+    //drop down for date
     for(var i=0;i<7;i++){
         var option1=document.createElement("option");
         var date = new Date();
@@ -118,6 +119,7 @@ $(document).ready( function() {
     optionHour.text="hr";
     alarmHour.add(optionHour,alarmHour[0]);
 
+    //drop down for hour
     for(var j=1;j<13;j++){
         var option2=document.createElement("option");
         if(j<10){
@@ -132,6 +134,7 @@ $(document).ready( function() {
     var optionMinute=document.createElement("option");
     optionMinute.text="min";
 
+    //drop down for minute
     alarmMinute.add(optionMinute,alarmMinute[0]);
 
     for(var k=1;k<60;k++){
@@ -144,6 +147,7 @@ $(document).ready( function() {
         alarmMinute.add(option3,alarmMinute[k]);
     }
 
+    //drop down for am/pm
     var alarmMeridiem=document.getElementById("alarmMeridiem");
     var optionAm=document.createElement("option");
     optionAm.text="am";
@@ -152,51 +156,42 @@ $(document).ready( function() {
     optionPm.text="pm";
     alarmMeridiem.add(optionPm,alarmMeridiem[1]);
 
-
-    var countData=0;
+    //get root of data from firebase
     var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
-    //delete all data once there are 200 of them
-    // messagesRef.on('value',function(data){
-    //     for(var i in data){
-    //         countData++;
-    //     }
-    //     if(countData>200){
-    //         messagesRef.remove();
-    //         counData=0;
-    //     }
-    // });
 
+    //set alarm listener
     var set=document.getElementById('setAlarm');
     set.onclick=function(){
         var alarmdate=document.getElementById('alarmDate').value;
         var alarmhour=document.getElementById('alarmHour').value;
         var alarmminute=document.getElementById('alarmMinute').value;
         var alarmmeridiem=document.getElementById('alarmMeridiem').value;
+
+        //send valid alarm data to firebase
         if(alarmdate!='DD/MM/YY'&&alarmhour!='hr'&&alarmminute!='min'){
-
-           if(number <= 10) {
-
-            var childRef = messagesRef.child("alarm" + (number+1));
-            childRef.set({id:number+1,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
-
+            if(number <= 10) {
+                var childRef = messagesRef.child("alarm" + (number+1));
+                childRef.set({id:number+1,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
             //alert fails when there are too many data
-        }else { alert('maximum alarm set')};
-        }else { alert('please select a day and time')};
+            }else { alert('maximum alarm set')};
+        }else {
+            alert('please select a day and time')
+        };
     };
 
+    //create alarm from firebase data
     messagesRef.on('child_added',function(snapshot){
         number++;
         var showAlarm=document.createElement("button");
         showAlarm.id= number;
         showAlarm.innerText=snapshot.val().date+" "+snapshot.val().hour+":"+snapshot.val().minute;
         document.getElementById("background").appendChild(showAlarm);
-        showAlarm.onclick=function(){
 
+        //remove alarm data and alarm object upon click
+        showAlarm.onclick=function(){
             var childRef = messagesRef.child('alarm' + showAlarm.id);
             childRef.remove();
-            // Get the child element node
             var child = document.getElementById(showAlarm.id);
-            // Remove the child element from the document
             child.parentNode.removeChild(child);
 
             };

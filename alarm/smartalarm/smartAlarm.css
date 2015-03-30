@@ -6,12 +6,7 @@
     height:100vh;
     background-size:cover;
 }
-#popup{
-    position:fixed;
-    top:5%;
-    left:0%;
-    color:white;
-}
+
 #clock{
     position:fixed;
     top:25%;
