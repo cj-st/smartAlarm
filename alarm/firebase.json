@@ -1,0 +1,9 @@
+{
+  "firebase": "281alarm",
+  "public": "./smartalarm",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
