@@ -2,7 +2,12 @@ body{
     height:100vh;
     background-size:cover;
 }
+
+/*add space to the top of texts*/
 .top-buffer { margin-top:400px; }
+
+
+/*overwriting bootstrap(kinda bad)*/
 #clock{
     font-size:50px;
     text-align: center;

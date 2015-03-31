@@ -6,14 +6,14 @@ $(document).ready( function() {
     var alarmCount=0;
     var number=0;
 
-    //display time on webpage
+    //display time on webpage(bug: am pm has some issues)
     function displayTime() {
         var currentTime = new Date();
         var hours = currentTime.getHours();
         var minutes = currentTime.getMinutes();
         var seconds = currentTime.getSeconds();
         var date = currentTime.getDate();
-        //var month = currentTime.getMonth()+1;
+        var monthNum = currentTime.getMonth()+1;
         var locale = "en-us";
         var month = currentTime.toLocaleString(locale, { month: "short" });
         var year = currentTime.getFullYear();
@@ -37,6 +37,19 @@ $(document).ready( function() {
         //set text inside clock div
         clockDiv.innerText = hours + ":" + minutes + ":" + seconds+
          " "+ meridiem +"\n" + month+" "+date+" "+year;
+
+         // check alarm
+         messagesRef.on('child_added',function(snapshot){
+            if((snapshot.val().date.indexOf(date+'/'+ monthNum +'/'+year)!=-1) && snapshot.val().hour==hours && snapshot.val().minute==minutes &&seconds=="00"){
+                var aud =document.createElement("audio");
+                aud.setAttribute("id","aud");
+                aud.setAttribute("src","alarm.mp3");
+                document.getElementById("myAudio").appendChild(aud);
+               //http://www.orangefreesounds.com/mp3-alarm-clock
+                aud.play();
+                aud.loop=true;
+            }
+         });
     }
 
     //display weather info and load weather background on webpage
@@ -100,7 +113,7 @@ $(document).ready( function() {
 
     var alarmDate=document.getElementById("alarmDate");
     var option=document.createElement("option");
-    var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     option.text="DD/MM/YY";
 
     alarmDate.add(option,alarmDate[0]);
@@ -108,9 +121,9 @@ $(document).ready( function() {
     //drop down for date
     for(var i=0;i<7;i++){
         var option1=document.createElement("option");
-        var date = new Date();
-        date.setDate(date.getDate() + i);
-        option1.text=days[i]+", "+date.getDate()+'/'+ (date.getMonth()+1) +'/'+date.getFullYear();
+        var optionDate = new Date();
+        optionDate.setDate(optionDate.getDate() + i);
+        option1.text=days[optionDate.getDay()]+", "+optionDate.getDate()+'/'+ (optionDate.getMonth()+1) +'/'+optionDate.getFullYear();
         alarmDate.add(option1,alarmDate[i+1]);
     }
 
@@ -196,6 +209,11 @@ $(document).ready( function() {
             childRef.remove();
             var child = document.getElementById(showAlarm.id);
             child.parentNode.removeChild(child);
+            //taking into account user can remove button that is not ringing
+            if(document.getElementById("aud")!==null){
+                var audio = document.getElementById("aud");
+                audio.parentNode.removeChild(audio);
+            }
             number--;
 
             };
