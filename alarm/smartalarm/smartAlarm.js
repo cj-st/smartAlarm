@@ -173,20 +173,22 @@ $(document).ready( function() {
                 var childRef = messagesRef.child("alarm" + (number+1));
                 childRef.set({id:number+1,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
             //alert fails when there are too many data
-            }else { alert('maximum alarm set')};
+            }else {
+                alert('maximum alarm set');
+            }
         }else {
-            alert('please select a day and time')
-        };
+            alert('please select a day and time');
+        }
     };
 
     //create alarm from firebase data
     messagesRef.on('child_added',function(snapshot){
         number++;
         var showAlarm=document.createElement("button");
-        showAlarm.setAttribute("class","btn btn-primary btn-block");
+        showAlarm.setAttribute("class","btn btn-primary");
         showAlarm.id= number;
         showAlarm.innerText=snapshot.val().date+" "+snapshot.val().hour+":"+snapshot.val().minute;
-        document.body.appendChild(showAlarm);
+        document.getElementById("alarms").appendChild(showAlarm);
 
         //remove alarm data and alarm object upon click
         showAlarm.onclick=function(){
