@@ -48,7 +48,7 @@ $(document).ready( function() {
         success: function (data) {
             var icon=data.currently.icon;
             var temp=(data.currently.temperature-32)/1.8;
-            var background = document.getElementById('background');
+            var background = document.body;
             clockDiv = document.getElementById('clock');
             weatherDiv=document.getElementById('weather');
             weatherDiv=document.getElementById('weather');
@@ -183,9 +183,10 @@ $(document).ready( function() {
     messagesRef.on('child_added',function(snapshot){
         number++;
         var showAlarm=document.createElement("button");
+        showAlarm.setAttribute("class","btn btn-primary btn-block");
         showAlarm.id= number;
         showAlarm.innerText=snapshot.val().date+" "+snapshot.val().hour+":"+snapshot.val().minute;
-        document.getElementById("background").appendChild(showAlarm);
+        document.body.appendChild(showAlarm);
 
         //remove alarm data and alarm object upon click
         showAlarm.onclick=function(){
@@ -193,6 +194,7 @@ $(document).ready( function() {
             childRef.remove();
             var child = document.getElementById(showAlarm.id);
             child.parentNode.removeChild(child);
+            number--;
 
             };
 
