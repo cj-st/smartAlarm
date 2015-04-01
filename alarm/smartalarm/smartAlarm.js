@@ -45,25 +45,20 @@ $(document).ready( function() {
         messagesRef.on('value',function(snapshot){
             for(var id in snapshot.val()){
                 if((snapshot.val()[id].date.indexOf(date+'/'+ monthNum +'/'+year)!=-1) && snapshot.val()[id].hour==hours && snapshot.val()[id].minute==minutes &&seconds=="00"){
-                    alert('hi');
+                    var aud =document.createElement("audio");
+                    aud.setAttribute("id","aud" +snapshot.val()[id].id);
+                    console.log(aud.id);
+                    aud.setAttribute("src","alarm.mp3");
+                    document.getElementById("myAudio").appendChild(aud);
+                   //http://www.orangefreesounds.com/mp3-alarm-clock
+                    aud.play();
+                    aud.loop=true;
                     messagesRef.off("value");
                     break;
                 }
             }
         });
-         // check alarm
-         // messagesRef.on('child_added',function(snapshot){
-         //    if((snapshot.val().date.indexOf(date+'/'+ monthNum +'/'+year)!=-1) && snapshot.val().hour==hours && snapshot.val().minute==minutes &&seconds=="00"){
-         //       //  var aud =document.createElement("audio");
-         //       //  aud.setAttribute("id","aud");
-         //       //  aud.setAttribute("src","alarm.mp3");
-         //       //  document.getElementById("myAudio").appendChild(aud);
-         //       // //http://www.orangefreesounds.com/mp3-alarm-clock
-         //       //  aud.play();
-         //       //  aud.loop=true;
-         //       alert('hi');
-         //    }
-         // });
+
     }
 
     //display weather info and load weather background on webpage
@@ -196,6 +191,7 @@ $(document).ready( function() {
         var childRef;
         var currentId;
         //send valid alarm data to firebase
+        //could check if alarm has been set(more work)
         if(alarmdate!='DD/MM/YY'&&alarmhour!='hr'&&alarmminute!='min'){
             console.log(storeId);
             //repopulate removed ids first
@@ -222,7 +218,7 @@ $(document).ready( function() {
         number++;
         var showAlarm=document.createElement("button");
         showAlarm.setAttribute("class","btn btn-primary");
-        showAlarm.id= number;
+        showAlarm.id= snapshot.val().id;
         showAlarm.innerText=snapshot.val().date+" "+snapshot.val().hour+":"+snapshot.val().minute;
         document.getElementById("alarms").appendChild(showAlarm);
 
@@ -232,15 +228,18 @@ $(document).ready( function() {
             currentId=showAlarm.id;
             storeId.push(currentId);
 
+            //taking into account user can remove button that is not ringing
+            if(document.getElementById("aud")!==null){
+                var audio = document.getElementById("aud"+number);
+                audio.parentNode.removeChild(audio);
+            }
+
             var childRef = messagesRef.child('alarm' + showAlarm.id);
             childRef.remove();
             var child = document.getElementById(showAlarm.id);
             child.parentNode.removeChild(child);
-            //taking into account user can remove button that is not ringing
-            // if(document.getElementById("aud")!==null){
-            //     var audio = document.getElementById("aud");
-            //     audio.parentNode.removeChild(audio);
-            // }
+            child = document.getElementById('aud'+showAlarm.id);
+            child.parentNode.removeChild(child);
             number--;
             };
 
