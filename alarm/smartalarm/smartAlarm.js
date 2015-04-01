@@ -245,4 +245,28 @@ $(document).ready( function() {
 
     });
 
+    function GetMap() {
+        var myOptions = {
+            zoom: 8,
+            center: { lat: -34.397, lng: 150.644},
+        };
+        map = new google.maps.Map(document.getElementById("mapContainer"),myOptions);
+    }
+    google.maps.event.addDomListener(window, 'load', GetMap);
+
+    //use of proxy to encode into jsonp format
+    var mapsUrl    = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&mode=bicycling&language=en&key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
+    var encodedUrl = encodeURIComponent(mapsUrl);
+    var proxyUrl   = 'https://jsonp.afeld.me/?url=' + encodedUrl;
+
+    $.ajax({
+        url: proxyUrl,
+        dataType: 'jsonp',
+        cache: false,
+        success: function (data) {
+            console.log(data);
+        }
+    });
+
+
 });
