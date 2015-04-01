@@ -5,7 +5,7 @@ $(document).ready( function() {
     var modeArr;
     var alarmCount=0;
     var number=0;
-
+    var storeId=[];
     //display time on webpage(bug: am pm has some issues)
     function displayTime() {
         var currentTime = new Date();
@@ -18,12 +18,15 @@ $(document).ready( function() {
         var month = currentTime.toLocaleString(locale, { month: "short" });
         var year = currentTime.getFullYear();
         var meridiem = "AM";
-        if(hours>12){
-            hours-=12;
-            meridiem = "PM";
+        if(hours>=12){
             if(hours==12){
-                meridiem="AM";
+                meridiem="PM";
+            }else{
+                hours-=12;
+                meridiem = "PM";
             }
+        }else{
+            meridiem="AM";
         }
 
 
@@ -38,18 +41,29 @@ $(document).ready( function() {
         clockDiv.innerText = hours + ":" + minutes + ":" + seconds+
          " "+ meridiem +"\n" + month+" "+date+" "+year;
 
-         // check alarm
-         messagesRef.on('child_added',function(snapshot){
-            if((snapshot.val().date.indexOf(date+'/'+ monthNum +'/'+year)!=-1) && snapshot.val().hour==hours && snapshot.val().minute==minutes &&seconds=="00"){
-                var aud =document.createElement("audio");
-                aud.setAttribute("id","aud");
-                aud.setAttribute("src","alarm.mp3");
-                document.getElementById("myAudio").appendChild(aud);
-               //http://www.orangefreesounds.com/mp3-alarm-clock
-                aud.play();
-                aud.loop=true;
+        //turn off listener when done
+        messagesRef.on('value',function(snapshot){
+            for(var id in snapshot.val()){
+                if((snapshot.val()[id].date.indexOf(date+'/'+ monthNum +'/'+year)!=-1) && snapshot.val()[id].hour==hours && snapshot.val()[id].minute==minutes &&seconds=="00"){
+                    alert('hi');
+                    messagesRef.off("value");
+                    break;
+                }
             }
-         });
+        });
+         // check alarm
+         // messagesRef.on('child_added',function(snapshot){
+         //    if((snapshot.val().date.indexOf(date+'/'+ monthNum +'/'+year)!=-1) && snapshot.val().hour==hours && snapshot.val().minute==minutes &&seconds=="00"){
+         //       //  var aud =document.createElement("audio");
+         //       //  aud.setAttribute("id","aud");
+         //       //  aud.setAttribute("src","alarm.mp3");
+         //       //  document.getElementById("myAudio").appendChild(aud);
+         //       // //http://www.orangefreesounds.com/mp3-alarm-clock
+         //       //  aud.play();
+         //       //  aud.loop=true;
+         //       alert('hi');
+         //    }
+         // });
     }
 
     //display weather info and load weather background on webpage
@@ -150,14 +164,14 @@ $(document).ready( function() {
     //drop down for minute
     alarmMinute.add(optionMinute,alarmMinute[0]);
 
-    for(var k=1;k<60;k++){
+    for(var k=0;k<60;k++){
         var option3=document.createElement("option");
         if(k<10){
             option3.text='0'+k;
         }else{
             option3.text=k;
         }
-        alarmMinute.add(option3,alarmMinute[k]);
+        alarmMinute.add(option3,alarmMinute[k+1]);
     }
 
     //drop down for am/pm
@@ -179,12 +193,21 @@ $(document).ready( function() {
         var alarmhour=document.getElementById('alarmHour').value;
         var alarmminute=document.getElementById('alarmMinute').value;
         var alarmmeridiem=document.getElementById('alarmMeridiem').value;
-
+        var childRef;
+        var currentId;
         //send valid alarm data to firebase
         if(alarmdate!='DD/MM/YY'&&alarmhour!='hr'&&alarmminute!='min'){
+            console.log(storeId);
+            //repopulate removed ids first
             if(number <= 10) {
-                var childRef = messagesRef.child("alarm" + (number+1));
-                childRef.set({id:number+1,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
+                if(storeId.length===0){
+                    childRef = messagesRef.child("alarm" + (number+1));
+                    childRef.set({id:number+1,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
+                }else{
+                    currentId=storeId.pop();
+                    childRef = messagesRef.child("alarm" + (currentId));
+                    childRef.set({id:currentId,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
+                }
             //alert fails when there are too many data
             }else {
                 alert('maximum alarm set');
@@ -205,17 +228,20 @@ $(document).ready( function() {
 
         //remove alarm data and alarm object upon click
         showAlarm.onclick=function(){
+            //store id to be remove in array
+            currentId=showAlarm.id;
+            storeId.push(currentId);
+
             var childRef = messagesRef.child('alarm' + showAlarm.id);
             childRef.remove();
             var child = document.getElementById(showAlarm.id);
             child.parentNode.removeChild(child);
             //taking into account user can remove button that is not ringing
-            if(document.getElementById("aud")!==null){
-                var audio = document.getElementById("aud");
-                audio.parentNode.removeChild(audio);
-            }
+            // if(document.getElementById("aud")!==null){
+            //     var audio = document.getElementById("aud");
+            //     audio.parentNode.removeChild(audio);
+            // }
             number--;
-
             };
 
     });
