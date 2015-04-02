@@ -17,6 +17,9 @@
                        key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8&sensor=false">
     </script>
 
+    <link rel="stylesheet" type="text/css" href="TomTom-JavaScript-SDK-2.1.0/css/tomtom.map.min.css" />
+    <script type="text/javascript" src="TomTom-JavaScript-SDK-2.1.0/js/leaflet.js"></script>
+    <script type="text/javascript" src="TomTom-JavaScript-SDK-2.1.0/js/tomtom.map.js"></script>
 </head>
 <body >
 <!-- alarms -->
@@ -27,8 +30,11 @@
     <div class="row" id="myAudio">
     </div>
 </div>
+
+<!-- tomtom has its own css might not work well with bootstrap
+ --><div style="width: 50%; height: 50%;" id="map"></div>
 <!-- <div class="container">
-    <div id="mapContainer" style="width:500px;height:500px"></div>
+    <div id="map" style="width:100%;height:100%"></div>
 </div> -->
 <div class="container">
   <p style="color:red">Enter your location and your destination. (ie burnaby,ca/vancouver,ca)</p>
