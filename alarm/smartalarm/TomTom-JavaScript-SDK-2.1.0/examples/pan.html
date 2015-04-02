@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>TomTom JavaScript SDK - Map</title>
+		<link rel="stylesheet" type="text/css" href="../css/tomtom.map.min.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="../css/tomtom.map.ie.min.css" /><![endif]-->
+        <script type="text/javascript" src="../js/leaflet.js"></script>
+        <script type="text/javascript" src="../js/tomtom.map.js"></script>
+        <script type="text/javascript" src="apikey.js"></script>
+        <script>
+        	window.onload = function() {
+        		
+        		// set the base image path used by tomtom.Marker
+				tomtom.setImagePath("../images/");
+        		
+        		// define a set of points to cycle through
+        		var points = [
+					[ 39.73845, -104.98485 ],
+					[ 34.05224, -118.24334 ],
+					[ 37.78008, -122.42017 ]
+				];
+        		
+        		// keep track of which point is currently being displayed
+        		var pointIndex = 0;
+        		
+        		// create the map
+        		var map = new tomtom.Map({
+        			domNode: "map",
+        			cookie: false,
+        			displayTraffic: true,
+        			scale: true
+        		});
+        		
+        		// after the map loads, start moving around
+        		map.on("load", function() {
+        			
+        			// every 2 seconds, go to the next point
+	        		setTimeout(function() {
+	        			
+	        			// get the next point
+	        			var point = points[pointIndex];
+	        			
+	        			// center the map on the current point
+	        			map.setView(point, 16);
+	        			
+	        			// increment the point index
+	        			pointIndex++
+	        			
+	        			// go back to the beginning once the end is reached
+	        			if (pointIndex >= points.length)
+	        				pointIndex = 0;
+	        			
+	        		}, 2000);
+        			
+        		});
+        		
+        	};
+        </script>
+        <style type="text/css">
+        	html, body {
+        		width: 100%;
+        		height: 100%;
+        		margin: 0;
+        		padding: 0;
+        	}
+        </style>
+	</head>
+	<body>
+		<div style="width: 100%; height: 100%;" id="map"></div>
+	</body>
+</html>

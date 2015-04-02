@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>TomTom JavaScript SDK - Map</title>
+        <script type="text/javascript" src="../js/tomtom.services.js"></script>
+        <script type="text/javascript" src="apikey.js"></script>
+        <script type="text/javascript">
+        	window.onload = function() {
+
+	   			var geocoder = new tomtom.services.GeocodingService();
+	   			var container = document.getElementById("geocodeOutput");
+
+	   			// forward geocode
+	   			document.getElementById("geocode").onclick = function() {
+	       			container.innerHTML = "Loading...";
+
+	       			var address = document.getElementById("geocodeInput").value;
+
+	       			// this is the one line that executes the geocode query
+	       			geocoder.geocode(address, function(response) {
+	       				container.innerHTML = JSON.stringify(response, null, 4);
+	       			});
+	       		};
+
+       			var reverseContainer = document.getElementById("reverseOutput");
+
+	   			document.getElementById("reverseGeocode").onclick = function() {
+	       			reverseContainer.innerHTML = "Loading...";
+
+	   				var latitude = document.getElementById("reverseLatitude").value;
+	   				var longitude = document.getElementById("reverseLongitude").value;
+
+	   				geocoder.reverseGeocode([latitude, longitude], function(response) {
+	   					reverseContainer.innerHTML = JSON.stringify(response, null, 4);
+	   				});
+	   			};
+
+	   			// traffic model
+	   			var trafficContainer = document.getElementById("trafficOutput");
+
+	   			document.getElementById("traffic").onclick = function() {
+	   				trafficContainer.innerHTML = "Loading...";
+
+	   				var window = {
+	   					left: document.getElementById("minLongitude").value,
+	   					bottom: document.getElementById("maxLatitude").value,
+	   					right: document.getElementById("maxLongitude").value,
+	   					top: document.getElementById("minLatitude").value
+	   				};
+
+	   				var zoom = document.getElementById("zoom").value;
+
+	   				var trafficService = new tomtom.services.TrafficService();
+
+	   				trafficService.getTrafficModel(window, zoom, function(response) {
+	   					trafficContainer.innerHTML = JSON.stringify(response, null, 4);
+	   				});
+	   			};
+
+	   			// routing
+	   			var routingContainer = document.getElementById("routingOutput");
+
+	   			document.getElementById("route").onclick = function() {
+	   				routingContainer.innerHTML = "Loading...";
+
+	   				var points = [];
+
+	   				// loop through each potential point
+	   				for (var pointIndex = 0; pointIndex < 5; pointIndex++) {
+	   					var lat = document.getElementById("lat" + pointIndex).value;
+	   					var lon = document.getElementById("lon" + pointIndex).value;
+
+	   					// if the lat / lon were specified, add the point
+	   					if (lat && lon) {
+	   						points.push([lat, lon]);
+	   					}
+	   				}
+
+	   				var routingService = new tomtom.services.RoutingService();
+
+	   				routingService.getRoute(points, { avoidTraffic: true, includeTraffic: true }, function(response) {
+	   					routingContainer.innerHTML = JSON.stringify(response, null, 4);
+	   				});
+	   			};
+        	};
+        </script>
+        <style type="text/css">
+        	html, body {
+        		width: 100%;
+        		height: 100%;
+        	}
+
+			.service {
+				margin: 10px;
+				border: 1px solid #ccc;
+				padding: 20px;
+				width: 600px;
+				float: left;
+			}
+
+			.service h2 {
+				margin-top: 0;
+			}
+
+        	.service pre {
+        		height: 300px;
+        		overflow: auto;
+        	}
+        </style>
+	</head>
+	<body>
+		<h1>Service Tests</h1>
+
+		<div class="service">
+			<h2>Geocode</h2>
+			<label>Address:</label><input id="geocodeInput" type="text" />
+			<button id="geocode">Submit</button>
+
+			<pre id="geocodeOutput" class="result prettyprint">
+
+			</pre>
+		</div>
+
+		<div class="service">
+			<h2>Reverse Geocode</h2>
+			<label>Latitude:</label><input id="reverseLatitude" type="text" name="latitude" />
+			<label>Longitude:</label><input id="reverseLongitude" type="text" name="longitude" />
+			<button id="reverseGeocode">Submit</button>
+
+			<pre id="reverseOutput" class="result prettyprint">
+
+			</pre>
+		</div>
+
+		<div class="service">
+			<h2>Traffic</h2>
+			<div>
+				<label>Latitude:</label><input type="text" id="minLatitude" value="46.41513882831074" />
+				<label>Longitude:</label><input type="text" id="minLongitude" value ="-93.89575624695162" />
+			</div>
+			<div>
+				<label>Latitude:</label><input type="text" id="maxLatitude" value="34.94899078738923" />
+				<label>Longitude:</label><input type="text" id="maxLongitude" value="-53.57593202820306" />
+			</div>
+			<label>Zoom:</label><input type="text" id="zoom" value="6" />
+			<button id="traffic">Submit</button>
+
+			<pre id="trafficOutput" class="result prettyprint">
+
+			</pre>
+		</div>
+
+		<div class="service">
+			<h2>Routing</h2>
+			<div>
+				<h3>Start</h3>
+				<label>Latitude:</label><input type="text" id="lat0" value="43.20846" />
+				<label>Longitude:</label><input type="text" id="lon0" value ="-71.53686" />
+			</div>
+			<div>
+				<h3>Point 1</h3>
+				<label>Latitude:</label><input type="text" id="lat1" value="" />
+				<label>Longitude:</label><input type="text" id="lon1" value ="" />
+			</div>
+			<div>
+				<h3>Point 2</h3>
+				<label>Latitude:</label><input type="text" id="lat2" value="" />
+				<label>Longitude:</label><input type="text" id="lon2" value ="" />
+			</div>
+			<div>
+				<h3>Point 3</h3>
+				<label>Latitude:</label><input type="text" id="lat3" value="" />
+				<label>Longitude:</label><input type="text" id="lon3" value ="" />
+			</div>
+			<div>
+				<h3>End</h3>
+				<label>Latitude:</label><input type="text" id="lat4" value="42.35779" />
+				<label>Longitude:</label><input type="text" id="lon4" value ="-71.05976" />
+			</div>
+			<button id="route">Submit</button>
+
+			<pre id="routingOutput" class="result prettyprint">
+
+			</pre>
+		</div>
+	</body>
+</html>

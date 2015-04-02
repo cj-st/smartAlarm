@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>TomTom JavaScript SDK - Map</title>
+		<link rel="stylesheet" type="text/css" href="../css/tomtom.map.min.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="../css/tomtom.map.ie.min.css" /><![endif]-->
+        <script type="text/javascript" src="../js/leaflet.js"></script>
+        <script type="text/javascript" src="../js/tomtom.map.js"></script>
+        <script type="text/javascript" src="apikey.js"></script>
+        <script type="text/javascript" src="points.js"></script>
+        <script>
+	        window.onload = function() {
+	        	
+	       		// get points is defined in points.js
+	       		// due to security restrictions in Chrome, AJAX requests cannot be made against local files
+	       		// which is why the data is being loaded as a JavaScript file
+	       		var points = getPoints();
+        		
+        		// set the base image path used by tomtom.Marker
+				tomtom.setImagePath("../images/");
+	       				
+        		// create a basic map
+				var map = new tomtom.Map({
+	      			domNode: "map",
+	      			cookie: true,
+	      			scale: true
+	      		});
+	          		
+				var markerManager = new tomtom.MarkerManager({ map: map, animation: { effect: "drop", duration: 1000, delay: 50 } });
+        		
+        		map.on("load", function() {
+        			
+	        		for (var pointIndex = 0; pointIndex < points.length && pointIndex < 20; pointIndex++) {
+	        			var point = points[pointIndex];
+	        			
+	        			markerManager.addMarker(new tomtom.Marker([point.lat, point.lon]));
+	        		}
+	        		
+	        		markerManager.update();
+        		});
+	        };
+        </script>
+        <style type="text/css">
+        	html, body {
+        		width: 100%;
+        		height: 100%;
+        		margin: 0;
+        		padding: 0;
+        	}
+        </style>
+	</head>
+	<body>
+		<div style="width: 100%; height: 100%;" id="map"></div>
+	</body>
+</html>

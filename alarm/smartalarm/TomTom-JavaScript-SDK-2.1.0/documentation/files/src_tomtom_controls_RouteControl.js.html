@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\tomtom\controls\RouteControl.js - TomTom JavaScript SDK</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://www.tomtom.com/global/images/tomtom-logo_tcm166-3340.png" title="TomTom JavaScript SDK"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/L.Control.Pan.html">L.Control.Pan</a></li>
+            
+                <li><a href="../classes/L.Control.ZoomSlider.html">L.Control.ZoomSlider</a></li>
+            
+                <li><a href="../classes/tomtom.AjaxUtil.html">tomtom.AjaxUtil</a></li>
+            
+                <li><a href="../classes/tomtom.Animation.html">tomtom.Animation</a></li>
+            
+                <li><a href="../classes/tomtom.controls.AutoComplete.html">tomtom.controls.AutoComplete</a></li>
+            
+                <li><a href="../classes/tomtom.controls.ContextMenu.html">tomtom.controls.ContextMenu</a></li>
+            
+                <li><a href="../classes/tomtom.controls.FindLocationControl.html">tomtom.controls.FindLocationControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.PanZoomBar.html">tomtom.controls.PanZoomBar</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RouteControl.html">tomtom.controls.RouteControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RoutePlannerControl.html">tomtom.controls.RoutePlannerControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.TabContainer.html">tomtom.controls.TabContainer</a></li>
+            
+                <li><a href="../classes/tomtom.CustomDivIcon.html">tomtom.CustomDivIcon</a></li>
+            
+                <li><a href="../classes/tomtom.CustomMarker.html">tomtom.CustomMarker</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtil.html">tomtom.dom.DomUtil</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtilResult.html">tomtom.dom.DomUtilResult</a></li>
+            
+                <li><a href="../classes/tomtom.layers.MapLayer.html">tomtom.layers.MapLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficIncidentLayer.html">tomtom.layers.TrafficIncidentLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficLayer.html">tomtom.layers.TrafficLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.WMSLayer.html">tomtom.layers.WMSLayer</a></li>
+            
+                <li><a href="../classes/tomtom.LocaleManager.html">tomtom.LocaleManager</a></li>
+            
+                <li><a href="../classes/tomtom.Main.html">tomtom.Main</a></li>
+            
+                <li><a href="../classes/tomtom.Map.html">tomtom.Map</a></li>
+            
+                <li><a href="../classes/tomtom.Marker.html">tomtom.Marker</a></li>
+            
+                <li><a href="../classes/tomtom.MarkerManager.html">tomtom.MarkerManager</a></li>
+            
+                <li><a href="../classes/tomtom.services.GeocodingService.html">tomtom.services.GeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.HDTRegionsService.html">tomtom.services.HDTRegionsService</a></li>
+            
+                <li><a href="../classes/tomtom.services.InitializeService.html">tomtom.services.InitializeService</a></li>
+            
+                <li><a href="../classes/tomtom.services.LegacyGeocodingService.html">tomtom.services.LegacyGeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.RoutingService.html">tomtom.services.RoutingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.TrafficService.html">tomtom.services.TrafficService</a></li>
+            
+                <li><a href="../classes/tomtom.services.ViewportService.html">tomtom.services.ViewportService</a></li>
+            
+                <li><a href="../classes/tomtom.StringBundle.html">tomtom.StringBundle</a></li>
+            
+                <li><a href="../classes/tomtom.TrafficMarker.html">tomtom.TrafficMarker</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\tomtom\controls\RouteControl.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+define([
+    &quot;text!templates/controls/RouteControl.html&quot;,
+    &quot;../Utils&quot;,
+    &quot;text!templates/controls/RouteControl_summary.html&quot;,
+    &quot;text!templates/controls/RouteControl_instruction.html&quot;,
+    &quot;../dom/DomUtil&quot;,
+    &quot;../Main&quot;,
+    &quot;./AutoComplete&quot;,
+    &quot;../Map&quot;
+  ],
+
+  function (template, utils, routeSummaryTemplate, instructionTemplate, du) {
+
+    tomtom.controls.RouteControl = L.Class.extend({
+
+      /**
+       * A control which can be used to allow a user to build and display a route on the map.
+       * The control will allow the user to choose a start and end point and a departure time and then will display
+       * the route on the map as well as all of the instructions.
+       *
+       * Example:
+       *
+       *     var routeControl = new tomtom.controls.RouteControl({ domNode: &quot;route&quot;, map: map });
+       *
+       * Please note that this control is not in the tomtom.map.js file.  To use it, the tomtom.controls.js file must be included.
+       *
+       * @constructor
+       * @class RouteControl
+       * @namespace tomtom.controls
+       * @param options Configuration options for the route control.
+       * @param {tomtom.Map} options.map The map that the route information will be displayed on.
+       * @param {String | DOM Node} options.domNode The DOM node which the route control will be displayed in.
+       */
+      initialize: function (options) {
+
+        this.markers = null;
+        this._geocodeTimeoutId = 0;
+        this._fromAutoComplete = null;
+        this._toAutoComplete = null;
+        this._eventHandles = [];
+        this.log = new tomtom.Logger();
+        this._container = du.create(L.DomUtil.get(options.domNode));
+        this.setMap(options.map);
+
+        this.draw();
+
+      },
+
+      draw: function () {
+
+        this._bundle = new tomtom.StringBundle(&quot;Controls&quot;);
+        var twelveHourTime = this._bundle.getString(&quot;time_type&quot;) == &quot;12&quot;;
+
+        this.controlId = utils.getUniqueControlId(&quot;RouteControl&quot;);
+
+        // apply the template, using i18n
+        this._container.html(L.Util.template(template, {
+          controlId: this.controlId,
+          fromLabel: this._bundle.getString(&quot;route_planner_label_for_departure&quot;),
+          toLabel: this._bundle.getString(&quot;route_planner_label_for_destination&quot;),
+          trafficLabel: this._bundle.getString(&quot;avoid_traffic_label_text&quot;),
+          minimizeDelays: this._bundle.getString(&quot;tripAdvisor_avoid_traffic_text&quot;),
+          leaveLabel: this._bundle.getString(&quot;tripAdvisor_leaving&quot;),
+          rightNow: this._bundle.getString(&quot;tripAdvisor_rightnow&quot;),
+          tomorrowAt: this._bundle.getString(&quot;tripAdvisor_tomorrow&quot;),
+          laterToday: this._bundle.getString(&quot;tripAdvisor_today&quot;),
+          specificDayAndTime: this._bundle.getString(&quot;tripAdvisor_otherdatetime&quot;),
+          noSpecificDayAndTime: this._bundle.getString(&quot;tripAdvisor_nospecificdaytime&quot;),
+          today: this._bundle.getString(&quot;cal_today&quot;),
+          monday: this._bundle.getString(&quot;cal_monday&quot;),
+          tuesday: this._bundle.getString(&quot;cal_tuesday&quot;),
+          wednesday: this._bundle.getString(&quot;cal_wednesday&quot;),
+          thursday: this._bundle.getString(&quot;cal_thursday&quot;),
+          friday: this._bundle.getString(&quot;cal_friday&quot;),
+          saturday: this._bundle.getString(&quot;cal_saturday&quot;),
+          sunday: this._bundle.getString(&quot;cal_sunday&quot;),
+          planRoute: this._bundle.getString(&quot;button_plan_trip&quot;)
+        }));
+
+        // gather input fields
+        this._fromNode = this._container.find(&quot;input[name=&#x27;routeFrom&#x27;]&quot;);
+        this._toNode = this._container.find(&quot;input[name=&#x27;routeTo&#x27;]&quot;);
+        this._routeTimeNode = this._container.find(&quot;select[name=&#x27;routeTime&#x27;]&quot;);
+        this._planRouteNode = this._container.find(&quot;button.tt-route-control-planRoute&quot;);
+        this._dayNode = this._container.find(&quot;select[name=&#x27;routeDay&#x27;]&quot;);
+        this._leaveAtNode = this._container.find(&quot;select[name=&#x27;routeLeaveAt&#x27;]&quot;);
+        this._timeNode = this._container.find(&quot;select[name=&#x27;routeTime&#x27;]&quot;);
+        this._avoidTrafficNode = this._container.find(&quot;input[name=&#x27;routeTraffic&#x27;]&quot;);
+        this._routeInformationNode = this._container.find(&quot;.tt-route-control-information&quot;);
+        this._summaryNode = this._container.find(&quot;.tt-route-control-summary&quot;);
+        this._instructionsNode = this._container.find(&quot;.tt-route-control-instructions&quot;);
+        this._errorContainer = this._container.find(&quot;.tt-error&quot;);
+
+        // create the auto complete handlers
+        this._fromAutoComplete = new tomtom.controls.AutoComplete(
+          this._fromNode.get(0),
+          L.Util.bind(this._getAutocompleteResults, this),
+          L.Util.bind(this._autoCompleteItemSelected, this)
+        );
+
+        this._toAutoComplete = new tomtom.controls.AutoComplete(
+          this._toNode.get(0),
+          L.Util.bind(this._getAutocompleteResults, this),
+          L.Util.bind(this._autoCompleteItemSelected, this)
+        );
+
+        var timeSelect = this._routeTimeNode;
+
+        // clear the previous options
+        timeSelect.empty();
+
+        // fill in the route times
+        for (var i = 0; i &lt; 1440; i += 30) {
+          var totalHours = Math.floor(i / 60);
+          var hours = totalHours + 12;
+          var minutes = utils.zeroPad(i % 60, 2);
+          var suffix = &quot;am&quot;;
+
+          if (twelveHourTime) {
+
+            if (hours &gt; 12) {
+              hours -= 12;
+            }
+
+            if (totalHours &gt; 12) {
+              suffix = &quot;pm&quot;;
+              hours -= 12;
+            }
+
+          } else {
+            if (hours == 12) {
+              hours = 0;
+            }
+            else if (hours &gt; 12) {
+              hours -= 12;
+            }
+          }
+
+          var option = du.create(&quot;option&quot;);
+          option.val(i);
+          option.html(hours + &quot;:&quot; + minutes + (twelveHourTime ? &quot; &quot; + suffix : &quot;&quot;));
+
+          timeSelect.append(option);
+        }
+
+        // attach to events
+        this._planRouteNode.on(&quot;click&quot;, this._routeClick, this);
+        this._fromNode.on(&quot;keyup&quot;, this._inputKeyUp, this);
+        this._toNode.on(&quot;keyup&quot;, this._inputKeyUp, this);
+
+        // attach to date / time events
+        this._dayNode.on(&quot;change&quot;, this._dayChange, this);
+        this._leaveAtNode.on(&quot;change&quot;, this._leaveAtChange, this);
+
+        // add a class to the wrapper div
+        this._container.addClass(&quot;tt-route-control-wrapper&quot;);
+
+        return this._container;
+
+      },
+
+      /**
+       * Releases any resources the control is holding onto.
+       * @method destroy
+       */
+      destroy: function () {
+
+        this._planRouteNode.off(&quot;click&quot;, this._routeClick);
+        this._fromNode.off(&quot;keyup&quot;, this._inputKeyUp);
+        this._toNode.off(&quot;keyup&quot;, this._inputKeyUp);
+        this._dayNode.off(&quot;change&quot;, this._dayChange);
+        this._leaveAtNode.off(&quot;change&quot;, this._leaveAtChange);
+
+        this._fromAutoComplete.destroy();
+        this._toAutoComplete.destroy();
+
+      },
+
+      setMap: function (map) {
+
+        this.apiKey = map.apiKey;
+        this.map = map;
+
+        // make sure the map has a marker layer for the route control
+        this.markers = L.layerGroup().addTo(map);
+
+        // wire up the route end event
+        this.map.on(&quot;routeend&quot;, this._routeCallback, this);
+
+      },
+
+      _dayChange: function() {
+        var day = du.val(this._dayNode);
+        var leaveAtSelect = this._leaveAtNode;
+
+        if (day == &quot;today&quot;) {
+          du.val(leaveAtSelect, &quot;LATER_TODAY&quot;);
+        } else {
+          du.val(leaveAtSelect, &quot;SPECIFIC_TIME&quot;);
+        }
+      },
+
+      _leaveAtChange: function () {
+        var leaveAt = this._leaveAtNode.val();
+        var daySelect = this._dayNode;
+
+        if (leaveAt == &quot;NOW&quot; || leaveAt == &quot;NO_SPECIFIC_TIME&quot;) {
+          this._dayNode.attr(&quot;disabled&quot;, &quot;disabled&quot;);
+          this._timeNode.attr(&quot;disabled&quot;, &quot;disabled&quot;);
+        } else {
+          this._dayNode.removeAttr(&quot;disabled&quot;);
+          this._timeNode.removeAttr(&quot;disabled&quot;);
+
+          var date = new Date();
+
+          if (leaveAt == &quot;TOMORROW_AT&quot;) {
+            date.setDate(date.getDate() + 1);
+            daySelect.value = DAYS_OF_WEEK[date.getDay()];
+          } else if (leaveAt == &quot;LATER_TODAY&quot;) {
+            daySelect.value = &quot;today&quot;;
+          }
+        }
+
+      },
+
+      displayRoute: function () {
+
+        this._routeClick();
+
+      },
+
+      _routeClick: function () {
+
+        this._errorContainer.html(&quot;&quot;);
+        this._errorContainer.hide();
+
+        this._triggeredByControl = true;
+
+        var from = this._fromAutoComplete.value,
+          to = this._toAutoComplete.value;
+
+        if (!from) {
+          from = this._fromNode.val();
+        }
+
+        if (!to) {
+          to = this._toNode.val();
+        }
+
+        // make sure they have entered the start and finish
+        if (from &amp;&amp; to) {
+
+          var leaveOption = this._leaveAtNode.val(),
+            specificTime = leaveOption != &quot;NO_SPECIFIC_TIME&quot; &amp;&amp; leaveOption != &quot;NOW&quot;,
+            day = this._dayNode.val(),
+            time = this._timeNode.val(),
+          // check for additional options
+            options = {
+              includeTraffic: true,
+              avoidTraffic: this._avoidTrafficNode.get(0).checked,
+              iqRoutes: specificTime ? 2 : 0
+            };
+
+          if (specificTime) {
+            options.day = day;
+            options.time = time;
+          }
+
+          // check to see if the from / to are lat / lng pairs
+          if (from.indexOf(&quot;@&quot;) === 0) {
+            from = this._parseLatLngPair(from);
+          }
+
+          if (to.indexOf(&quot;@&quot;) === 0) {
+            to = this._parseLatLngPair(to);
+          }
+
+          // add the route to the map
+          this.map.displayRoute([ from, to ], options);
+        } else {
+          this._displayError(this._bundle.getString(&quot;planroute_noinput_error&quot;));
+        }
+
+      },
+
+      _displayError: function (error) {
+
+        this._errorContainer.html(error);
+        this._errorContainer.show();
+
+      },
+
+      _parseLatLngPair: function (latLng) {
+
+        var result = latLng.substring(1).split(&quot;,&quot;);
+        return new L.LatLng(parseFloat(result[0]), parseFloat(result[1]));
+
+      },
+
+      _routeCallback: function (response) {
+
+        var route = this._currentRoute = response;
+
+        // the route has been loaded, clear out the markers that were created
+        this.markers.clearLayers();
+
+        if (route) {
+          var instructionsNode = this._instructionsNode,
+            summaryNode = this._summaryNode,
+            instructions = route.instructions,
+            bundle = new tomtom.StringBundle(&quot;Controls&quot;),
+            summary = route.summary;
+
+          // make sure the route summary was returned
+          if (summary) {
+
+            var totalTime = utils.formatSeconds(summary.totalTimeSeconds),
+              totalDelay = utils.formatSeconds(summary.totalDelaySeconds),
+              summaryData = {
+                distance: tomtom.StringBundle.getString(&quot;units.distance&quot;, null, summary.totalDistanceMeters),
+                time: totalTime.value + &quot; &quot; + tomtom.StringBundle.getString(&quot;units.time.&quot; + totalTime.suffix, null, totalTime.value),
+                trafficDelay: totalDelay.value + &quot; &quot; + tomtom.StringBundle.getString(&quot;units.time.&quot; + totalDelay.suffix, null, totalDelay.value),
+                trafficDelayLabel: bundle.getString(&quot;route_trafficdelay&quot;)
+              };
+
+            // create the route summary
+            summaryNode.html(L.Util.template(routeSummaryTemplate, summaryData));
+          }
+
+          // clear previous instructions
+          instructionsNode.empty();
+
+          // add the instructions
+          if (instructions) {
+            var baseUrl = tomtom.baseImagePath,
+              totalDistance = 0;
+
+            for (var instructionIndex = 0; instructionIndex &lt; instructions.length; instructionIndex++) {
+
+              var instruction = instructions[instructionIndex],
+                node = du.create(&quot;li&quot;);
+
+              node.html(L.Util.template(instructionTemplate, {
+                instruction: instruction.text,
+                roadName: instruction.roadName,
+                roadNumber: instruction.roadNumber,
+                distance: tomtom.StringBundle.getString(&quot;units.distance&quot;, null, instruction.distanceMeters),
+                iconUrl: baseUrl + &quot;instructions/&quot; + instruction.iconPath,
+                roadNumberClass: instruction.roadNumber ? &quot; sign&quot; : &quot;&quot;
+              }));
+
+              instructionsNode.append(node);
+
+              // attach to the click event of the node
+              node.on(&quot;click&quot;, this._instructionClick(instruction), this);
+
+              // keep track of the total distance
+              // for some reason, each instruction point contains the total distance up to that point
+              totalDistance = instruction.distanceMeters;
+
+            }
+
+          }
+
+          // show the route information
+          this._routeInformationNode.show();
+
+          // if the route wasn&#x27;t triggered by the route control, update the control&#x27;s coordinates
+          if (!this._triggeredByControl) {
+
+            var routePoints = route.instructions;
+
+            this._fromNode.value = &quot;@&quot; + routePoints[0].point.latitude + &quot;,&quot; + routePoints[0].point.longitude;
+            this._toNode.value = &quot;@&quot; + routePoints[routePoints.length - 1].point.latitude + &quot;,&quot; + routePoints[routePoints.length - 1].point.longitude;
+
+          }
+
+        } else {
+          this._displayError(this._bundle.getString(&quot;route_unable_to_find&quot;));
+        }
+
+        this._triggeredByControl = false;
+
+      },
+
+      _instructionClick: function (instruction) {
+        return function () {
+          var instructions = this._currentRoute.instructions ? this._currentRoute.instructions.instruction : null;
+
+          if (instructions) {
+            var index = instructions.indexOf(instruction);
+
+            this.map.displayRouteInstruction(index);
+          }
+        };
+      },
+
+      _cancelEvent: function () {
+        return false;
+      },
+
+      _autoCompleteItemSelected: function (e) {
+        /*jshint unused: false*/
+        this.displayRoutePoints(true);
+      },
+
+      displayRoutePoints: function (changeZoom) {
+        this.markers.clearLayers();
+
+        var currentPoint = null;
+        var from = null;
+        var to = this._toAutoComplete.value;
+
+        if (this._fromNode.val().indexOf(&quot;@&quot;) === 0) {
+          from = this._parseLatLngPair(this._fromNode.val());
+        } else {
+          from = this._fromAutoComplete.value;
+        }
+
+        if (this._toNode.val().indexOf(&quot;@&quot;) === 0) {
+          to = this._parseLatLngPair(this._toNode.val());
+        } else {
+          to = this._toAutoComplete.value;
+        }
+
+        // add points to the map
+        if (from) {
+          currentPoint = from;
+
+          // add a marker
+          this.markers.addLayer(new tomtom.Marker(from, tomtom.Map.MARKER_OPTIONS_ROUTE_START));
+        }
+
+        if (to) {
+          currentPoint = to;
+
+          // add a marker
+          this.markers.addLayer(new tomtom.Marker(to, tomtom.Map.MARKER_OPTIONS_ROUTE_END));
+        }
+
+        // zoom to the route area
+        if (from &amp;&amp; to &amp;&amp; changeZoom) {
+          var bounds = new L.LatLngBounds();
+          bounds.extend(from);
+          bounds.extend(to);
+
+          this.map.fitBounds(bounds);
+          // zoom to the point the user entered
+        } else if (currentPoint &amp;&amp; changeZoom) {
+          this.map.setView(currentPoint, ZOOM_POINT);
+        }
+      },
+
+      _getAutocompleteResults: function (text, callback) {
+
+        // use the map&#x27;s geocoding service
+        var geo = this.map.geocodingService;
+
+        geo.geocode(text, function (response) {
+          var address;
+
+          if (response.geoResponse &amp;&amp; response.geoResponse.geoResult) {
+
+            var geoResult = response.geoResponse.geoResult;
+
+            // if more than one result was returned, display the auto complete drop down
+            if (geoResult.length) {
+              var results = [];
+
+              for (var i = 0; i &lt; geoResult.length; i++) {
+                address = geoResult[i].formattedAddress;
+
+                results.push({
+                  text: address,
+                  value: [geoResult[i].latitude, geoResult[i].longitude]
+                });
+              }
+
+              callback(results);
+
+            } else {
+              address = geoResult.formattedAddress;
+
+              callback([
+                { text: address, value: [geoResult.latitude, geoResult.longitude] }
+              ]);
+            }
+          }
+
+        });
+
+      },
+
+      _inputKeyUp: function (e) {
+        var keyCode = e.keyCode ? e.keyCode : e.which;
+
+        // handle the enter key
+        if (keyCode == 13) {
+          this._routeClick();
+        }
+      }
+
+    });
+
+    var ZOOM_POINT = 12;
+    var DAYS_OF_WEEK = [&quot;sunday&quot;, &quot;monday&quot;, &quot;tuesday&quot;, &quot;wednesday&quot;, &quot;thursday&quot;, &quot;friday&quot;, &quot;saturday&quot;];
+
+    // append to the default en-US language
+    /*jshint -W069*/
+    L.Util.extend(tomtom.languages[&quot;en_US&quot;], {
+      &quot;Controls&quot;: {
+        &quot;avoid_traffic_label_text&quot;: &quot;Traffic:&quot;,
+        &quot;button_find&quot;: &quot;Find location&quot;,
+        &quot;button_plan_trip&quot;: &quot;Plan route&quot;,
+        &quot;cal_friday&quot;: &quot;Friday&quot;,
+        &quot;cal_saturday&quot;: &quot;Saturday&quot;,
+        &quot;cal_sunday&quot;: &quot;Sunday&quot;,
+        &quot;cal_thursday&quot;: &quot;Thursday&quot;,
+        &quot;cal_today&quot;: &quot;Today&quot;,
+        &quot;cal_tomorrow&quot;: &quot;Tomorrow&quot;,
+        &quot;cal_monday&quot;: &quot;Monday&quot;,
+        &quot;cal_tuesday&quot;: &quot;Tuesday&quot;,
+        &quot;cal_wednesday&quot;: &quot;Wednesday&quot;,
+        &quot;departure_comment&quot;: &quot;e.g., \&quot;1600 Pennsylvania Ave NW, Washington, DC\&quot;&quot;,
+        &quot;departure_not_found&quot;: &quot;The starting point could not be found. Please check that the address has been entered correctly.&quot;,
+        &quot;destination_not_found&quot;: &quot;The destination could not be found. Please check that the address has been entered correctly.&quot;,
+        &quot;did_you_mean&quot;: &quot;Or did you mean...&quot;,
+        &quot;find_location_comment&quot;: &quot;e.g., \&quot;1600 Pennsylvania Ave NW, Washington, DC\&quot;&quot;,
+        &quot;findlocation_noinput_error&quot;: &quot;Please enter an address and then press Find location.&quot;,
+        &quot;hide_panel_message&quot;: &quot;Hide&quot;,
+        &quot;leavenow_text&quot;: &quot;Leave Now&quot;,
+        &quot;location_label&quot;: &quot;Location:&quot;,
+        &quot;planroute_noinput_error&quot;: &quot;Please enter an address for the starting point and/or destination and then press Plan Route.&quot;,
+        &quot;route_planner_label_for_departure&quot;: &quot;From:&quot;,
+        &quot;route_planner_label_for_destination&quot;: &quot;To:&quot;,
+        &quot;route_trafficdelay&quot;: &quot;Includes traffic delay:&quot;,
+        &quot;route_unable_to_find&quot;: &quot;Unable to calculate a route between these two locations&quot;,
+        &quot;tripAdvisor_avoid_traffic_text&quot;: &quot;Minimize delays&quot;,
+        &quot;tripAdvisor_leaving&quot;: &quot;Leave:&quot;,
+        &quot;tripAdvisor_nospecificdaytime&quot;: &quot;No specific day and time&quot;,
+        &quot;tripAdvisor_otherdatetime&quot;: &quot;Specific day and time...&quot;,
+        &quot;tripAdvisor_rightnow&quot;: &quot;Right now&quot;,
+        &quot;tripAdvisor_today&quot;: &quot;Later today&quot;,
+        &quot;tripAdvisor_tomorrow&quot;: &quot;Tomorrow at...&quot;,
+        &quot;units_hours&quot;: &quot;hrs&quot;,
+        &quot;units_kilometers&quot;: &quot;km&quot;,
+        &quot;units_meters&quot;: &quot;m&quot;,
+        &quot;units_miles&quot;: &quot;miles&quot;,
+        &quot;units_minutes&quot;: &quot;minutes&quot;,
+        &quot;units_yards&quot;: &quot;yds&quot;,
+        &quot;wronginput_error&quot;: &quot;The address could not be found. Please check that the address has been entered correctly.&quot;,
+        &quot;time_type&quot;: &quot;12&quot;
+      },
+      &quot;General&quot;: {
+        &quot;find_a_location&quot;: &quot;Find a Location&quot;,
+        &quot;plan_a_route&quot;: &quot;Plan a Route&quot;,
+        &quot;traffic&quot;: &quot;Traffic&quot;
+      }
+    });
+
+    return tomtom.controls.RouteControl;
+
+  }
+);
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

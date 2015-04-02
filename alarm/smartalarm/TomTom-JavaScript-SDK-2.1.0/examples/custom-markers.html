@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>TomTom JavaScript SDK - Map</title>
+		<link rel="stylesheet" type="text/css" href="../css/tomtom.map.min.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="../css/tomtom.map.ie.min.css" /><![endif]-->
+        <script type="text/javascript" src="../js/leaflet.js"></script>
+        <script type="text/javascript" src="../js/tomtom.map.js"></script>
+        <script type="text/javascript" src="apikey.js"></script>
+        <script>        
+        	window.onload = function() {
+        		
+        		// set the base image path used by tomtom.Marker
+				tomtom.setImagePath("../images/");
+        		
+        		// modify the default marker options to use a custom image
+        		tomtom.Marker.DEFAULT_MARKER_OPTIONS = {
+       				iconUrl: "photo.png", 
+       	   			iconSize: [32, 37],
+       	   			iconAnchor: [ 17, 34 ]
+        		};
+        		
+        		// create the map
+        		var map = new tomtom.Map({
+        			domNode: "map"
+        		});
+        		
+        		// add some markers
+        		map.addLayer(new tomtom.Marker([43.26456, -71.5702]));
+        		map.addLayer(new tomtom.Marker([39.73845, -104.98485]));
+        		map.addLayer(new tomtom.Marker([34.05224, -118.24334]));
+        		map.addLayer(new tomtom.Marker([37.78008, -122.42017]));
+        		
+        	};
+        </script>
+        <style type="text/css">
+        	html, body {
+        		width: 100%;
+        		height: 100%;
+        		margin: 0;
+        		padding: 0;
+        	}
+        </style>
+	</head>
+	<body>
+		<div style="width: 100%; height: 100%;" id="map"></div>
+	</body>
+</html>

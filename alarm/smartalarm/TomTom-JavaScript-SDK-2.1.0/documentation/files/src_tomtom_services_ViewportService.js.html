@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\tomtom\services\ViewportService.js - TomTom JavaScript SDK</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://www.tomtom.com/global/images/tomtom-logo_tcm166-3340.png" title="TomTom JavaScript SDK"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/L.Control.Pan.html">L.Control.Pan</a></li>
+            
+                <li><a href="../classes/L.Control.ZoomSlider.html">L.Control.ZoomSlider</a></li>
+            
+                <li><a href="../classes/tomtom.AjaxUtil.html">tomtom.AjaxUtil</a></li>
+            
+                <li><a href="../classes/tomtom.Animation.html">tomtom.Animation</a></li>
+            
+                <li><a href="../classes/tomtom.controls.AutoComplete.html">tomtom.controls.AutoComplete</a></li>
+            
+                <li><a href="../classes/tomtom.controls.ContextMenu.html">tomtom.controls.ContextMenu</a></li>
+            
+                <li><a href="../classes/tomtom.controls.FindLocationControl.html">tomtom.controls.FindLocationControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.PanZoomBar.html">tomtom.controls.PanZoomBar</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RouteControl.html">tomtom.controls.RouteControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RoutePlannerControl.html">tomtom.controls.RoutePlannerControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.TabContainer.html">tomtom.controls.TabContainer</a></li>
+            
+                <li><a href="../classes/tomtom.CustomDivIcon.html">tomtom.CustomDivIcon</a></li>
+            
+                <li><a href="../classes/tomtom.CustomMarker.html">tomtom.CustomMarker</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtil.html">tomtom.dom.DomUtil</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtilResult.html">tomtom.dom.DomUtilResult</a></li>
+            
+                <li><a href="../classes/tomtom.layers.MapLayer.html">tomtom.layers.MapLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficIncidentLayer.html">tomtom.layers.TrafficIncidentLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficLayer.html">tomtom.layers.TrafficLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.WMSLayer.html">tomtom.layers.WMSLayer</a></li>
+            
+                <li><a href="../classes/tomtom.LocaleManager.html">tomtom.LocaleManager</a></li>
+            
+                <li><a href="../classes/tomtom.Main.html">tomtom.Main</a></li>
+            
+                <li><a href="../classes/tomtom.Map.html">tomtom.Map</a></li>
+            
+                <li><a href="../classes/tomtom.Marker.html">tomtom.Marker</a></li>
+            
+                <li><a href="../classes/tomtom.MarkerManager.html">tomtom.MarkerManager</a></li>
+            
+                <li><a href="../classes/tomtom.services.GeocodingService.html">tomtom.services.GeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.HDTRegionsService.html">tomtom.services.HDTRegionsService</a></li>
+            
+                <li><a href="../classes/tomtom.services.InitializeService.html">tomtom.services.InitializeService</a></li>
+            
+                <li><a href="../classes/tomtom.services.LegacyGeocodingService.html">tomtom.services.LegacyGeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.RoutingService.html">tomtom.services.RoutingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.TrafficService.html">tomtom.services.TrafficService</a></li>
+            
+                <li><a href="../classes/tomtom.services.ViewportService.html">tomtom.services.ViewportService</a></li>
+            
+                <li><a href="../classes/tomtom.StringBundle.html">tomtom.StringBundle</a></li>
+            
+                <li><a href="../classes/tomtom.TrafficMarker.html">tomtom.TrafficMarker</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\tomtom\services\ViewportService.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+define([
+    &quot;./BaseService&quot;,
+    &quot;../AjaxUtil&quot;,
+    &quot;../Utils&quot;
+  ], function (base, ajax, utils) {
+
+    tomtom.services.ViewportService = base.extend({
+
+      /**
+       * A service which gets information about the current viewport.
+       * @constructor
+       * @class ViewportService
+       * @namespace tomtom.services
+       * @param {String} apiKey The API key used to access the Map Toolkit API.
+       */
+      initialize: function() {
+          base.prototype.initialize.apply(this, arguments);
+      },
+
+      /**
+       * Gets information about the current viewport including the current traffic model.
+       * This service call is used to synchronize different traffic components such as routing, traffic incidents and traffic flow using the
+       * traffic model id.
+       * @example
+       *  var window = {
+			 *		left: -78.40152658903608,
+			 *		bottom: 39.19651962955681,
+			 *		right: -59.054602760910434,
+			 *		top: 44.89325482670453
+			 *	}
+       *
+       *  var service = new tomtom.services.ViewportService(&quot;API Key&quot;);
+       *  service.getViewportModel(window, 7, window, 7, function(response) { ... });
+       *
+       * @method getViewportModel
+       * @param {Object} window An object which describes the current map bounds.  This object should have left, bottom, right and top properties.
+       * @param {Number} zoom The zoom level that the map is currently at.
+       * @param {Object} overviewWindow If an overview map is being used, this can be supplied to get viewport information for the
+       *  overview map&#x27;s bounds.  If an overview window is not used or copyright information isn&#x27;t needed, the same bounds can be supplied as the main window.
+       * @param {Number} overviewZoom The zoom level of the overview map.  If there is no overview map, or copyright info isn&#x27;t needed, the same zoom level as the main window
+       *  can be used.
+       * @param {Object} [options] Additional options to pass to the Viewport call.
+       * @param {String} [options.projection] The projection to be used for the bounding box.  Must be either EPSG4326 or EPSG900913.
+       * @param {Function} callback The callback to execute when the call to the Viewport service completes.
+       */
+      getViewportModel: function (window, zoom, overviewWindow, overviewZoom, options, callback) {
+
+        // make the options parameter optional
+        if (typeof(options) == &quot;function&quot;) {
+          callback = options;
+          options = {};
+        }
+
+        if (!options.projection) {
+          options.projection = &quot;EPSG4326&quot;;
+        }
+
+        var northEast = new L.LatLng(window.top, window.right, true);
+        var southWest = new L.LatLng(window.bottom, window.left, true);
+        var overviewNorthEast = new L.LatLng(overviewWindow.top, overviewWindow.right, true);
+        var overviewSouthWest = new L.LatLng(overviewWindow.bottom, overviewWindow.left, true);
+
+        // transform to EPSG900913
+        if (options.projection == &quot;EPSG4326&quot;) {
+
+          var crs = L.CRS.EPSG3857;
+
+          northEast = crs.project(northEast);
+          southWest = crs.project(southWest);
+          overviewNorthEast = crs.project(overviewNorthEast);
+          overviewSouthWest = crs.project(overviewSouthWest);
+
+        } else {
+
+          northEast = new L.Point(northEast.lng, northEast.lat);
+          southWest = new L.Point(southWest.lng, southWest.lat);
+          overviewNorthEast = new L.Point(overviewNorthEast.lng, overviewNorthEast.lat);
+          overviewSouthWest = new L.Point(overviewSouthWest.lng, overviewSouthWest.lat);
+
+        }
+
+        var mapMinX = southWest.x, mapMinY = southWest.y, mapMaxX = northEast.x, mapMaxY = northEast.y;
+
+        mapMinX = (mapMinX &lt; maximumBounds.minX) ? maximumBounds.minX : mapMinX;
+        mapMinY = (mapMinY &lt; maximumBounds.minY) ? maximumBounds.minY : mapMinY;
+        mapMaxX = (mapMaxX &gt; maximumBounds.maxX) ? maximumBounds.maxX : mapMaxX;
+        mapMaxY = (mapMaxY &gt; maximumBounds.maxY) ? maximumBounds.maxY : mapMaxY;
+
+        var ovMapMinX = (overviewSouthWest.x &lt; maximumBounds.minX) ? maximumBounds.minX : overviewSouthWest.x;
+        var ovMapMinY = (overviewSouthWest.y &lt; maximumBounds.minY) ? maximumBounds.minY : overviewSouthWest.y;
+        var ovMapMaxX = (overviewNorthEast.x &gt; maximumBounds.maxX) ? maximumBounds.maxX : overviewNorthEast.x;
+        var ovMapMaxY = (overviewNorthEast.y &gt; maximumBounds.maxY) ? maximumBounds.maxY : overviewNorthEast.y;
+
+        var urlParameters = {
+          box: mapMinY + &quot;,&quot; + mapMinX + &quot;,&quot; + mapMaxY + &quot;,&quot; + mapMaxX,
+          zoom: zoom,
+          overviewBox: ovMapMinY + &quot;,&quot; + ovMapMinX + &quot;,&quot; + ovMapMaxY + &quot;,&quot; + ovMapMaxX,
+          overviewZoom: overviewZoom,
+          copyright: typeof(options.copyright) == &quot;undefined&quot; ? true : options.copyright
+        };
+
+        // if an API key is specified, include it
+        // an API key can be ommitted if an API proxy is being used
+        if (this.apiKey) {
+          options.key = this.apiKey;
+        }
+
+        var url = tomtom.services.ViewportService.VIEWPORT_URL || VIEWPORT_URL;
+
+        // log the API call
+        tomtom.logApiCall(&quot;viewport&quot;);
+
+        // check to see if an API proxy is being used
+        // if so, use a regular XHR, JSONP will not work with a proxy
+        if (tomtom.proxyUrl) {
+          ajax.getJSON({
+            url: utils.getServiceUrl(L.Util.template(url, urlParameters), options),
+            callback: callback
+          });
+        } else {
+          ajax.getJSONP({
+            url: utils.getServiceUrl(L.Util.template(url + &quot;p&quot;, urlParameters), options),
+            callback: callback,
+            callbackParam: &quot;jsonp&quot;
+          });
+        }
+      }
+
+    });
+
+    var maximumBounds = {
+      &quot;minX&quot;: -40075016.6855784,
+      &quot;minY&quot;: -40075016.6855784,
+      &quot;maxX&quot;: 40075016.6855784,
+      &quot;maxY&quot;: 40075016.6855784
+    };
+
+    var VIEWPORT_URL = &quot;services/viewportDesc/3/{box}/{zoom}/{overviewBox}/{overviewZoom}/{copyright}/json&quot;;
+
+    return tomtom.services.ViewportService;
+  }
+);
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

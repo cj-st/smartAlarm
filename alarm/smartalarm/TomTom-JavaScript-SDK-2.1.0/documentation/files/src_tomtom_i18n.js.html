@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\tomtom\i18n.js - TomTom JavaScript SDK</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://www.tomtom.com/global/images/tomtom-logo_tcm166-3340.png" title="TomTom JavaScript SDK"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/L.Control.Pan.html">L.Control.Pan</a></li>
+            
+                <li><a href="../classes/L.Control.ZoomSlider.html">L.Control.ZoomSlider</a></li>
+            
+                <li><a href="../classes/tomtom.AjaxUtil.html">tomtom.AjaxUtil</a></li>
+            
+                <li><a href="../classes/tomtom.Animation.html">tomtom.Animation</a></li>
+            
+                <li><a href="../classes/tomtom.controls.AutoComplete.html">tomtom.controls.AutoComplete</a></li>
+            
+                <li><a href="../classes/tomtom.controls.ContextMenu.html">tomtom.controls.ContextMenu</a></li>
+            
+                <li><a href="../classes/tomtom.controls.FindLocationControl.html">tomtom.controls.FindLocationControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.PanZoomBar.html">tomtom.controls.PanZoomBar</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RouteControl.html">tomtom.controls.RouteControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RoutePlannerControl.html">tomtom.controls.RoutePlannerControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.TabContainer.html">tomtom.controls.TabContainer</a></li>
+            
+                <li><a href="../classes/tomtom.CustomDivIcon.html">tomtom.CustomDivIcon</a></li>
+            
+                <li><a href="../classes/tomtom.CustomMarker.html">tomtom.CustomMarker</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtil.html">tomtom.dom.DomUtil</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtilResult.html">tomtom.dom.DomUtilResult</a></li>
+            
+                <li><a href="../classes/tomtom.layers.MapLayer.html">tomtom.layers.MapLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficIncidentLayer.html">tomtom.layers.TrafficIncidentLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficLayer.html">tomtom.layers.TrafficLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.WMSLayer.html">tomtom.layers.WMSLayer</a></li>
+            
+                <li><a href="../classes/tomtom.LocaleManager.html">tomtom.LocaleManager</a></li>
+            
+                <li><a href="../classes/tomtom.Main.html">tomtom.Main</a></li>
+            
+                <li><a href="../classes/tomtom.Map.html">tomtom.Map</a></li>
+            
+                <li><a href="../classes/tomtom.Marker.html">tomtom.Marker</a></li>
+            
+                <li><a href="../classes/tomtom.MarkerManager.html">tomtom.MarkerManager</a></li>
+            
+                <li><a href="../classes/tomtom.services.GeocodingService.html">tomtom.services.GeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.HDTRegionsService.html">tomtom.services.HDTRegionsService</a></li>
+            
+                <li><a href="../classes/tomtom.services.InitializeService.html">tomtom.services.InitializeService</a></li>
+            
+                <li><a href="../classes/tomtom.services.LegacyGeocodingService.html">tomtom.services.LegacyGeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.RoutingService.html">tomtom.services.RoutingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.TrafficService.html">tomtom.services.TrafficService</a></li>
+            
+                <li><a href="../classes/tomtom.services.ViewportService.html">tomtom.services.ViewportService</a></li>
+            
+                <li><a href="../classes/tomtom.StringBundle.html">tomtom.StringBundle</a></li>
+            
+                <li><a href="../classes/tomtom.TrafficMarker.html">tomtom.TrafficMarker</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\tomtom\i18n.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+define([&quot;./Utils&quot;, &quot;./Main&quot;], function (utils) {
+
+  /**
+   * The Regular Expression used to match named parameters and bundle
+   * references in strings
+   */
+  var PARAM_REGEXP = /{([\w_]+)}/g;
+
+  /**
+   * The Regular Expression used to match language and locale ids
+   */
+  var LANG_LOCALE_REGEXP = /^([a-z]{2})([-_])([a-z]{2})/i;
+
+  /**
+   * The Regular Expression used to split the plural forms
+   */
+  var PLURALS_REGEXP = /;; ?/;
+
+  /**
+   * Contains all localized strings used by {@link StringBundle}
+   */
+  var Resources = null;
+
+  /**
+   * Contains locale rules used by {@link StringBundle}
+   */
+  var LocaleRules = {};
+
+  /**
+   * Contains the plural form rule used by {@link StringBundle}
+   */
+  var PluralFormRule = null;
+
+  var DEFAULT_LOCALE = &quot;en_US&quot;;
+
+  /**
+   * Contains the logic to obtain the proper plural form based for a specific logic.
+   *
+   * @see https://developer.mozilla.org/En/Localization_and_Plurals
+   */
+  var PluralForm = {
+    /**
+     * These are the available plural functions that give the appropriate index
+     * based on the plural rule number specified. The first element is the number
+     * of plural forms and the second is the function to figure out the index.
+     *
+     * @see https://developer.mozilla.org/En/Localization_and_Plurals
+     *
+     * @constant
+     * @type Array.&lt;Array&gt;
+     */
+    _rules: [
+      // 0: Asian (Chinese, Japanese, Korean, Vietnamese), Persian, Turkic/Altaic (Turkish), Thai, Lao
+      [1, function () {
+        return 0;
+      }],
+      // 1: Germanic (Danish, Dutch, English, Faroese, Frisian, German, Norwegian, Swedish),
+      //    Finno-Ugric (Estonian, Finnish, Hungarian), Language isolate (Basque),
+      //    Latin/Greek (Greek), Semitic (Hebrew), Romanic (Italian, Portuguese, Spanish, Catalan)
+      [2, function (n) {
+        return n != 1 ? 1 : 0;
+      }],
+      // 2: Romanic (French, Brazilian Portuguese)
+      [2, function (n) {
+        return n &gt; 1 ? 1 : 0;
+      }],
+      // 3: Baltic (Latvian)
+      [3, function (n) {
+        return n % 10 == 1 &amp;&amp; n % 100 != 11 ? 1 : n !== 0 ? 2 : 0;
+      }],
+      // 4: Celtic (Scottish Gaelic)
+      [4, function (n) {
+        return n == 1 || n == 11 ? 0 : n == 2 || n == 12 ? 1 : n &gt; 0 &amp;&amp; n &lt; 20 ? 2 : 3;
+      }],
+      // 5: Romanic (Romanian)
+      [3, function (n) {
+        return n == 1 ? 0 : n === 0 || n % 100 &gt; 0 &amp;&amp; n % 100 &lt; 20 ? 1 : 2;
+      }],
+      // 6: Baltic (Lithuanian)
+      [3, function (n) {
+        return n % 10 == 1 &amp;&amp; n % 100 != 11 ? 0 : n % 10 &gt;= 2 &amp;&amp; (n % 100 &lt; 10 || n % 100 &gt;= 20) ? 2 : 1;
+      }],
+      // 7: Slavic (Croatian, Serbian, Russian, Ukrainian)
+      [3, function (n) {
+        return n % 10 == 1 &amp;&amp; n % 100 != 11 ? 0 : n % 10 &gt;= 2 &amp;&amp; n % 10 &lt;= 4 &amp;&amp; ( n % 100 &lt; 10 || n % 100 &gt;= 20) ? 1 : 2;
+      }],
+      // 8: Slavic (Slovak, Czech)
+      [3, function (n) {
+        return n == 1 ? 0 : n &gt;= 2 &amp;&amp; n &lt;= 4 ? 1 : 2;
+      }],
+      // 9: Slavic (Polish)
+      [3, function (n) {
+        return n == 1 ? 0 : n % 10 &gt;= 2 &amp;&amp; n % 10 &lt;= 4 &amp;&amp; (n % 100 &lt; 10 || n % 100 &gt;= 20) ? 1 : 2;
+      }],
+      // 10: Slavic (Slovenian, Sorbian)
+      [4, function (n) {
+        return n % 100 == 1 ? 0 : n % 100 == 2 ? 1 : (n % 100 == 3) || n % 100 == 4 ? 2 : 3;
+      }],
+      // 11: Celtic (Irish Gaeilge)
+      [5, function (n) {
+        return n == 1 ? 0 : n == 2 ? 1 : n &gt;= 3 &amp;&amp; n &lt;= 6 ? 2 : n &gt;= 7 &amp;&amp; n &lt;= 10 ? 3 : 4;
+      }],
+      // 12: Semitic (Arabic)
+      [6, function (n) {
+        return n === 0 ? 5 : n == 1 ? 0 : n == 2 ? 1 : n % 100 &gt;= 3 &amp;&amp; n % 100 &lt;= 10 ? 2 : n % 100 &gt;= 11 &amp;&amp; n % 100 &lt;= 99 ? 3 : 4;
+      }],
+      // 13: Semitic (Maltese) s
+      [4, function (n) {
+        return n == 1 ? 0 : n === 0 || n % 100 &gt; 0 &amp;&amp; n % 100 &lt;= 10 ? 1 : n % 100 &gt; 10 &amp;&amp; n % 100 &lt; 20 ? 2 : 3;
+      }],
+      // 14: Slavic (Macedonian)
+      [3, function (n) {
+        return n % 10 == 1 ? 0 : n % 10 == 2 ? 1 : 2;
+      }],
+      // 15: Icelandic
+      [2, function (n) {
+        return n % 10 == 1 &amp;&amp; n % 100 != 11 ? 0 : 1;
+      }]
+    ],
+
+    /**
+     * The plural forms / languages map
+     *
+     * @constant
+     * @type Object.&lt;String, Number&gt;
+     */
+    _languages: {
+      &quot;hu-HU&quot;: 0,
+      &quot;id-ID&quot;: 0,
+      &quot;ms-MY&quot;: 0,
+      &quot;th-TH&quot;: 0,
+      &quot;tr-TR&quot;: 0,
+      &quot;zh-CN&quot;: 0,
+      &quot;zh-TW&quot;: 0,
+
+      &quot;de&quot;: 1,
+      &quot;en&quot;: 1,
+      &quot;es&quot;: 1,
+      &quot;it&quot;: 1,
+      &quot;nl&quot;: 1,
+      &quot;pt&quot;: 1,
+      &quot;af-ZA&quot;: 1,
+      &quot;ca-ES&quot;: 1,
+      &quot;da-DK&quot;: 1,
+      &quot;de-DE&quot;: 1,
+      &quot;en-GB&quot;: 1,
+      &quot;en-US&quot;: 1,
+      &quot;es-ES&quot;: 1,
+      &quot;es-MX&quot;: 1,
+      &quot;it-IT&quot;: 1,
+      &quot;nl-BE&quot;: 1,
+      &quot;nl-NL&quot;: 1,
+      &quot;no-NO&quot;: 1,
+      &quot;pt-BR&quot;: 1,
+      &quot;pt-PT&quot;: 1,
+      &quot;sv-SE&quot;: 1,
+      &quot;et-EE&quot;: 1,
+      &quot;fi-FI&quot;: 1,
+      &quot;bg-BG&quot;: 1,
+      &quot;el-GR&quot;: 1,
+
+      &quot;fr&quot;: 2,
+      &quot;fr-CA&quot;: 2,
+      &quot;fr-FR&quot;: 2,
+
+      &quot;lv-LV&quot;: 3,
+
+      &quot;lt-LT&quot;: 6,
+
+      &quot;hr-HR&quot;: 7,
+      &quot;ru-RU&quot;: 7,
+
+      &quot;cs-CZ&quot;: 8,
+      &quot;sk-SK&quot;: 8,
+
+      &quot;pl-PL&quot;: 9,
+
+      &quot;sl-SI&quot;: 10
+    },
+
+    /**
+     * Gets the Plural Form function for the language, or family, given.
+     *
+     * @param {Number|String} id The language or family
+     * @return Function
+     */
+    getPluralForm: function (id) {
+      var rules = PluralForm._rules;
+      var ruleNumber;
+
+      if (isNaN(id) &amp;&amp; &quot;string&quot; == typeof id) {
+        if (id in PluralForm._languages) {
+          ruleNumber = PluralForm._languages[id];
+        } else {
+          var m = id.match(LANG_LOCALE_REGEXP);
+          ruleNumber = m &amp;&amp; PluralForm._languages[m[1]];
+        }
+      } else {
+        ruleNumber = Number(id);
+      }
+
+      // Default to &quot;all plural&quot; if the value is out of bounds or invalid
+      if (ruleNumber === null || ruleNumber === undefined || isNaN(ruleNumber) || ruleNumber &lt; 0 || ruleNumber &gt; rules.length) {
+        ruleNumber = 0;
+      }
+
+      var pluralRule = rules[ruleNumber][1];
+
+      return function (value, count) {
+
+        if (&quot;string&quot; != typeof value) {
+          return;
+        }
+
+        // Assume 1 if |count| is NaN and 0 for negative numbers
+        count = isNaN(count) ? 1 : count &lt; 0 ? 0 : count;
+
+        // Figure out which index to use for the semi-colon separated words
+        var index = pluralRule(count);
+        var values = value ? value.split(PLURALS_REGEXP) : [&quot;&quot;];
+
+        // Explicitly check bounds to avoid strict warnings; if the
+        // index is out of range, we assume that we can use the &quot;last&quot;
+        // value instead
+        var pluralFormValue = index &lt; values.length ? values[index] : values[values.length - 1];
+
+        return pluralFormValue;
+      };
+    }
+  };
+
+  /**
+   * Manages locale information for all controls within the SDK.
+   * @static
+   * @class LocaleManager
+   * @namespace tomtom
+   */
+  var LocaleManager = {
+
+    /**
+     * The current locale.
+     *
+     * It is not set by default, it is the responsibility of the application
+     * to set this correctly.
+     * If it is not set, only the global locale rules will be applied.
+     *
+     * Note that calling {@link LocaleManager#requestLocalizedStrings} can
+     * override this value.
+     */
+    _locale: &quot;&quot;,
+
+    /**
+     * Gets the current locale id.
+     * @method getLocale
+     * @return {String} The locale id (e.g. &quot;en_GB&quot;)
+     */
+    getLocale: function () {
+      return this._locale;
+    },
+
+    /**
+     * Sets the current locale id.
+     * @method setLocale
+     * @param {String} locale The locale id (e.g &quot;en_GB&quot;)
+     */
+    setLocale: function (locale) {
+      this._locale = locale;
+
+      // Define the current Plural Form rule
+      PluralFormRule = PluralForm.getPluralForm(this._locale);
+
+      // set the resources based on the locale specified
+      Resources = tomtom.languages[this._locale];
+    },
+
+    /**
+     * Gets the country code
+     * @method getCountryCode
+     * @return {String} Two character country code or |null| if the current
+     *      locale is not valid
+     */
+    getCountryCode: function () {
+      var m = this._locale.match(LANG_LOCALE_REGEXP);
+
+      return (m &amp;&amp; m[3]) || null;
+    },
+
+    /**
+     * Gets the primary language subtag in accordance
+     * with RFC-3066.
+     * @method getPrimarylanguage
+     * @return {String} Two character language subtag
+     */
+    getPrimaryLanguage: function () {
+      return this._locale.substr(0, 2);
+    },
+
+    /**
+     * Checks that the localized strings are correctly set.
+     * @method hasLocalizedStrings
+     * @return {Boolean} |true| if the Localized strings are set, |false| otherwise.
+     */
+    hasLocalizedStrings: function () {
+      return &quot;object&quot; == typeof(Resources) &amp;&amp; Resources !== null &amp;&amp; Resources !== undefined;
+    },
+
+    /**
+     * Sets a locale rule for a specific resources key.
+     *
+     * @param {String} locale The locale or country code for the rule.
+     *      To add a default rule, use |&quot;*&quot;|.
+     * @param {String} key The resources key
+     * @param {Function} rule The function to be executed when the |key| is
+     *      requested by {@link StringBundle}. It has to return a string.
+     */
+    setLocaleRule: function (locales, key, rule) {
+
+      if (typeof(rule) == &quot;function&quot;) {
+
+        // make locale an array if it&#x27;s not
+        if (!utils.isArray(locales)) {
+          locales = [locales];
+        }
+
+        locales.forEach(function (locale) {
+
+          LocaleRules[locale + &quot;_&quot; + key] = rule;
+
+        }, this);
+
+      }
+
+    },
+
+    getLocaleRule: function (locale, key) {
+
+      if (typeof(key) == &quot;undefined&quot;) {
+        key = locale;
+        locale = this.getLocale();
+      }
+
+      // try and get the rule for the locale supplied
+      var rule = LocaleRules[locale + &quot;_&quot; + key];
+
+      // if the rule wasn&#x27;t found, see if there is a default
+      if (rule === null || rule === undefined) {
+        rule = LocaleRules[&quot;*_&quot; + key];
+      }
+
+      return rule;
+
+    }
+  };
+
+  /**
+   * Gets the property value of the object given
+   * resolving possible nested object.
+   *
+   * @example
+   *      var object = { foo : { bar : 42 } };
+   *
+   *      propertyWalker(&quot;foo&quot;, object); // returns object[&quot;foo&quot;]
+   *      propertyWalker(&quot;foo.bar&quot;, object); // returns object[&quot;foo&quot;][&quot;bar&quot;];
+   *      propertyWalker(&quot;foo.anything.bar&quot;, object); // returns |undefined|
+   *
+   * @param {String} key The name of the object&#x27;s property
+   * @param {Object} object The object that should contains the property given
+   *
+   * @return {Object} The value of the property
+   */
+  function propertyWalker(key, object) {
+    if (key &amp;&amp; key.indexOf(&quot;.&quot;) &gt; -1) {
+      var segments = key.split(&quot;.&quot;);
+      var len = segments.length - 1;
+
+      for (var i = 0; i &lt; len &amp;&amp; object; i++) {
+        object = object[segments[i]];
+      }
+
+      key = segments[i];
+
+      return object &amp;&amp; object[key] || undefined;
+    }
+
+    return object[key];
+  }
+
+  /**
+   * Creates a new StringBundle instance.
+   * See the tomtom.i18n.js file for all available keys / values.
+   * @class StringBundle
+   * @namespace tomtom
+   * @constructor
+   * @param {String} branchKey The branch we want use as the default for
+   *      this StringBundle
+   * @param {StringBundle} [rootBundle=StringBundle] The StringBundle to be used as the
+   *      root object to obtain strings
+   * @example
+   *  var stringBundle = new tomtom.StringBundle(&quot;General&quot;);
+   *  alert(stringBundle.getString(&quot;traffic&quot;));
+   */
+  var StringBundle = L.Class.extend({
+
+    initialize: function StringBundle(branchKey, rootBundle) {
+
+      var fallback = {}, branch, root;
+
+      if (rootBundle) {
+        root = rootBundle._branch;
+        this._pathKey = rootBundle._pathKey ? rootBundle._pathKey + &quot;.&quot; + branchKey : branchKey;
+      }
+
+      root = root || Resources || StringBundle._branch || fallback;
+
+      branch = root == fallback ? fallback : propertyWalker(branchKey, root);
+
+      this._branch = (&quot;object&quot; == typeof branch) ? branch : null;
+
+    }
+
+  });
+
+  /**
+   * The current branch of the resources
+   * @type Object
+   */
+  StringBundle._branch = null;
+
+  /**
+   * The path key of this StringBundle
+   * @type String
+   */
+  StringBundle._pathKey = &quot;&quot;;
+
+  /**
+   * The plural form rule for this StringBundle.
+   * @type Function
+   */
+  StringBundle._pluralFormRule = null;
+
+  /**
+   * Gets a branch
+   * @method getBranch
+   * @param {String} branchKey The key of the branch to get.
+   * @return {StringBundle} a new instance of StringBundle
+   */
+  StringBundle.getBranch = function (branchKey) {
+    return new StringBundle(branchKey, this);
+  };
+
+  /**
+   * Gets a string from resources
+   * @method getString
+   * @param {String} key The name of the string
+   * @param {Object.&lt;String, String&gt;} namedParams The named parameters
+   *      to applies to the string
+   * @param {Number} count The value used in plural rules to determine
+   *      the plural form to use
+   *
+   * @return {String} The value of the resource&#x27;s string
+   */
+  StringBundle.getString = function (key, namedParams, count) {
+    var branch = this._branch || Resources || {};
+
+    var value = propertyWalker(key, branch);
+
+    var fullKey = (this._pathKey ? this._pathKey + &quot;.&quot; : &quot;&quot;) + key;
+
+    var localeRule = tomtom.LocaleManager.getLocaleRule(fullKey);
+
+    if (localeRule) {
+      return localeRule.apply(this.getBranch(fullKey), [namedParams, count]);
+    }
+
+    var _pluralFormRule = this._pluralFormRule || PluralFormRule;
+
+    if (_pluralFormRule) {
+      value = _pluralFormRule(value, count);
+    }
+
+    if (&quot;string&quot; == typeof value) {
+      if (namedParams) {
+        value = value.replace(PARAM_REGEXP, function (match, keyMatched) {
+          return keyMatched in namedParams ? namedParams[keyMatched] : &quot;#&quot; + keyMatched + &quot;#&quot;;
+        });
+      }
+
+      return value;
+    }
+
+    return &quot;#&quot; + key + &quot;#&quot;;
+  };
+
+  StringBundle.prototype._pathKey = StringBundle._pathKey;
+  StringBundle.prototype._branch = StringBundle._branch;
+  StringBundle.prototype.getBranch = StringBundle.getBranch;
+  StringBundle.prototype.getString = StringBundle.getString;
+
+  // set the default language
+  LocaleManager.setLocale(DEFAULT_LOCALE);
+
+  // set default rules
+  LocaleManager.setLocaleRule(&quot;*&quot;, &quot;units.distance&quot;, function (namedParams, meter) {
+    var km = meter / 1000;
+
+    if (meter &lt; 500) {
+      return meter + &quot; &quot; + this.getString(&quot;meter&quot;, null, meter);
+    } else {
+      return km.toFixed(1) + &quot; &quot; + this.getString(&quot;km&quot;, null, km);
+    }
+  });
+
+  LocaleManager.setLocaleRule([&quot;en_GB&quot;, &quot;en_US&quot;], &quot;units.distance&quot;, function (namedParams, meter) {
+    // 1 meter = 1.0936133 yard
+    // 1 mile = 1760 yard
+
+    var yard = Math.round(meter * 0.10936133) * 10;
+    var mile = yard / 1760;
+
+    if (mile &lt; 0.5) {
+      return Math.round(yard) + &quot; &quot; + this.getString(&quot;yard&quot;, null, yard);
+    } else {
+      return mile.toFixed(1) + &quot; &quot; + this.getString(&quot;mile&quot;, null, mile);
+    }
+  });
+
+  LocaleManager.setLocaleRule(&quot;*&quot;, &quot;common.TomTom.HDTraffic&quot;, function () {
+    return &quot;HD Traffic&quot;;
+  });
+
+  // exports to TomTom.lbs.i18n
+  tomtom.LocaleManager = LocaleManager;
+  tomtom.StringBundle = StringBundle;
+  tomtom.PluralForm = PluralForm;
+});
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

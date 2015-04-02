@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\tomtom\controls\AutoComplete.js - TomTom JavaScript SDK</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://www.tomtom.com/global/images/tomtom-logo_tcm166-3340.png" title="TomTom JavaScript SDK"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/L.Control.Pan.html">L.Control.Pan</a></li>
+            
+                <li><a href="../classes/L.Control.ZoomSlider.html">L.Control.ZoomSlider</a></li>
+            
+                <li><a href="../classes/tomtom.AjaxUtil.html">tomtom.AjaxUtil</a></li>
+            
+                <li><a href="../classes/tomtom.Animation.html">tomtom.Animation</a></li>
+            
+                <li><a href="../classes/tomtom.controls.AutoComplete.html">tomtom.controls.AutoComplete</a></li>
+            
+                <li><a href="../classes/tomtom.controls.ContextMenu.html">tomtom.controls.ContextMenu</a></li>
+            
+                <li><a href="../classes/tomtom.controls.FindLocationControl.html">tomtom.controls.FindLocationControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.PanZoomBar.html">tomtom.controls.PanZoomBar</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RouteControl.html">tomtom.controls.RouteControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RoutePlannerControl.html">tomtom.controls.RoutePlannerControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.TabContainer.html">tomtom.controls.TabContainer</a></li>
+            
+                <li><a href="../classes/tomtom.CustomDivIcon.html">tomtom.CustomDivIcon</a></li>
+            
+                <li><a href="../classes/tomtom.CustomMarker.html">tomtom.CustomMarker</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtil.html">tomtom.dom.DomUtil</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtilResult.html">tomtom.dom.DomUtilResult</a></li>
+            
+                <li><a href="../classes/tomtom.layers.MapLayer.html">tomtom.layers.MapLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficIncidentLayer.html">tomtom.layers.TrafficIncidentLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficLayer.html">tomtom.layers.TrafficLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.WMSLayer.html">tomtom.layers.WMSLayer</a></li>
+            
+                <li><a href="../classes/tomtom.LocaleManager.html">tomtom.LocaleManager</a></li>
+            
+                <li><a href="../classes/tomtom.Main.html">tomtom.Main</a></li>
+            
+                <li><a href="../classes/tomtom.Map.html">tomtom.Map</a></li>
+            
+                <li><a href="../classes/tomtom.Marker.html">tomtom.Marker</a></li>
+            
+                <li><a href="../classes/tomtom.MarkerManager.html">tomtom.MarkerManager</a></li>
+            
+                <li><a href="../classes/tomtom.services.GeocodingService.html">tomtom.services.GeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.HDTRegionsService.html">tomtom.services.HDTRegionsService</a></li>
+            
+                <li><a href="../classes/tomtom.services.InitializeService.html">tomtom.services.InitializeService</a></li>
+            
+                <li><a href="../classes/tomtom.services.LegacyGeocodingService.html">tomtom.services.LegacyGeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.RoutingService.html">tomtom.services.RoutingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.TrafficService.html">tomtom.services.TrafficService</a></li>
+            
+                <li><a href="../classes/tomtom.services.ViewportService.html">tomtom.services.ViewportService</a></li>
+            
+                <li><a href="../classes/tomtom.StringBundle.html">tomtom.StringBundle</a></li>
+            
+                <li><a href="../classes/tomtom.TrafficMarker.html">tomtom.TrafficMarker</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\tomtom\controls\AutoComplete.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+define([
+    &quot;../BaseObject&quot;,
+    &quot;../Utils&quot;,
+    &quot;../dom/DomUtil&quot;,
+    &quot;../Main&quot;
+  ],
+
+  function (base, utils, du) {
+
+    tomtom.controls.AutoComplete = base.extend({
+
+      includes: L.Mixin.Events,
+
+      /**
+       * A simple auto complete control which can be wired into a text box.
+       * Please note that this class is only included in the tomtom.controls.js file, it is not a part of the main tomtom.map.js.
+       * @constructor
+       * @class AutoComplete
+       * @namespace tomtom.controls
+       * @param {DOM Node} textBox The text box to add auto complete functionality to.
+       * @param {Function} resultsCallback The callback to execute to retrieve the results.
+       * @param {Function} itemSelectedCallback The callback to execute when an item is selected.
+       */
+      initialize: function (textBox, resultsCallback, itemSelectedCallback) {
+
+        this.textBox = textBox;
+        this._timeoutId = 0;
+        this._resultsCallback = resultsCallback;
+        this._itemSelectedCallback = itemSelectedCallback;
+        this._listIndex = 0;
+        this._eventHandles = [];
+
+        base.prototype.initialize.apply(this, arguments);
+
+        // create the div
+        var div = document.createElement(&quot;div&quot;);
+
+        // register the input events
+        L.DomEvent.on(this.textBox, &quot;keyup&quot;, this._inputKeyUp, this);
+        L.DomEvent.on(this.textBox, &quot;keydown&quot;, this._inputKeyDown, this);
+        L.DomEvent.on(document, &quot;click&quot;, this._documentClick, this);
+
+        // attach the element to the parent of the textbox
+        this.textBox.parentNode.appendChild(div);
+
+        this.div = div;
+        this.list = document.createElement(&quot;ul&quot;);
+
+        du.addClass(this.div, &quot;tt-autocomplete&quot;);
+        div.appendChild(this.list);
+
+        // register the item selected event
+        if (itemSelectedCallback) {
+          this.on(&quot;itemSelected&quot;, itemSelectedCallback, this);
+        }
+
+      },
+
+      /**
+       * Releases any resources that the control is holding onto.
+       * @method destroy
+       */
+      destroy: function () {
+
+        base.prototype.destroy.apply(this, arguments);
+
+        L.DomEvent.off(this.textBox, &quot;keyup&quot;, this._inputKeyUp, this);
+        L.DomEvent.off(this.textBox, &quot;keydown&quot;, this._inputKeyDown, this);
+        L.DomEvent.off(document, &quot;click&quot;, this._documentClick, this);
+
+      },
+
+      /**
+       * Clears the auto complete list.
+       * @method clear
+       */
+      clear: function () {
+        while (this.list.children.length &gt; 0) {
+          this.list.removeChild(this.list.children[0]);
+        }
+      },
+
+      /**
+       * Processes the results and loads them into the auto complete list.
+       * @method processResults
+       * @param {Array} results The items to load into the auto complete list.
+       */
+      processResults: function (results) {
+
+        if (this._lostFocus) {
+
+          this._lostFocus = false;
+
+          return;
+
+        }
+
+        this.clear();
+
+        // check to see if only one result was returned
+        if (results.length == 1) {
+          this._itemSelected(false, results[0]);
+          return;
+        } else if (results.length === 0) {
+          return;
+        }
+
+        for (var i = 0; i &lt; results.length; i++) {
+          var result = results[i];
+          var listItem = document.createElement(&quot;li&quot;);
+
+          // set the displayed text
+          listItem.innerHTML = result.text;
+
+          // attach the result to the dom element
+          du.data(listItem, &quot;tt_autoComplete_result&quot;, result);
+          L.DomEvent.on(listItem, &quot;click&quot;, this._itemClicked(listItem), this);
+          L.DomEvent.on(listItem, &quot;mouseover&quot;, this._mouseOver(listItem), this);
+
+          this.list.appendChild(listItem);
+        }
+
+        // select the first child
+        du.addClass(this.list.childNodes[0], &quot;selected&quot;);
+
+        this.show();
+
+      },
+
+      /**
+       * Show&#x27;s the auto complete list.
+       * @method show
+       */
+      show: function () {
+        this.div.style.display = &quot;block&quot;;
+      },
+
+      /**
+       * Hides the auto complete list.
+       * @method hide
+       */
+      hide: function () {
+        this.div.style.display = &quot;none&quot;;
+      },
+
+      /**
+       * Stops the auto complete list from triggering a result query.
+       * @method cancel
+       */
+      cancel: function () {
+        clearTimeout(this._timeoutId);
+      },
+
+      _itemClicked: function (listItem) {
+        return function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this._itemSelected(true, du.data(listItem, &quot;tt_autoComplete_result&quot;));
+
+          return false;
+        };
+      },
+
+      _mouseOver: function (listeItem) {
+        return function () {
+          du.removeClass(this.list.childNodes, &quot;selected&quot;);
+          du.addClass(listeItem, &quot;selected&quot;);
+        };
+      },
+
+      _inputKeyDown: function (e) {
+        var keyCode = (e.keyCode ? e.keyCode : e.which);
+
+        if (keyCode == 9) { // tab
+          this.hide();
+        }
+      },
+
+      _inputKeyUp: function (e) {
+
+        this._lostFocus = false;
+
+        clearTimeout(this._timeoutId);
+
+        var keyCode = (e.keyCode ? e.keyCode : e.which),
+          currentItem = du.query(&quot;.selected&quot;, this.list);
+
+        if (keyCode == 38) { // up arrow
+          var prev = currentItem.prev().first();
+
+          if (prev) {
+            du.removeClass(this.list.childNodes, &quot;selected&quot;);
+            du.addClass(prev, &quot;selected&quot;);
+            this._updateSelected();
+          }
+
+          L.DomEvent.stop(e);
+          return false;
+        } else if (keyCode == 40) { // down arrow
+          var next = currentItem.next().first();
+
+          if (next) {
+            du.removeClass(this.list.childNodes, &quot;selected&quot;);
+            du.addClass(next, &quot;selected&quot;);
+            this._updateSelected();
+          }
+
+          L.DomEvent.stop(e);
+          return false;
+        } else if (keyCode == 13) { // enter key
+          currentItem = du.query(&quot;.selected&quot;, this.list);
+
+          if (currentItem.length()) {
+
+            this._itemSelected(true, currentItem.data(&quot;tt_autoComplete_result&quot;));
+
+          }
+
+          L.DomEvent.stop(e);
+          return false;
+        } else if (keyCode == 27) { // escape
+          this.hide();
+        } else {
+
+          // check to make sure the minimum amount of characters has been entered into the text box
+          if (du.val(this.textBox).length &gt; MIN_CHARACTER_COUNT) {
+
+            this._timeoutId = setTimeout(L.Util.bind(function () {
+              this._resultsCallback(this.textBox.value, L.Util.bind(this.processResults, this));
+            }, this), AUTOCOMPLETE_TIMEOUT);
+
+          } else {
+            this.hide();
+          }
+
+        }
+
+      },
+
+      _updateSelected: function () {
+
+        var currentItem = du.query(&quot;.selected&quot;, this.list);
+        var top = currentItem.get().offsetTop;
+
+        // check to see if the currently selected item is out of view
+        if (top + currentItem.offsetHeight() &gt;= (this.div.offsetHeight + this.div.scrollTop)) {
+          this.div.scrollTop = top + currentItem.offsetHeight() - this.div.offsetHeight;
+        } else if (top &lt; this.div.scrollTop) {
+          this.div.scrollTop = top;
+        }
+
+      },
+
+      _documentClick: function() {
+        this._lostFocus = true;
+        this.hide();
+      },
+
+      _itemSelected: function (replaceValue, dataItem) {
+
+        this.hide();
+
+        if (replaceValue) {
+          this.textBox.value = dataItem.text;
+        }
+
+        this.value = dataItem.value;
+
+        this.fire(&quot;itemSelected&quot;, { textBox: this.textBox, value: dataItem.value });
+
+      }
+
+    });
+
+    var AUTOCOMPLETE_TIMEOUT = 500;
+    var MIN_CHARACTER_COUNT = 3;
+
+    return tomtom.controls.RouteControl;
+
+  }
+);
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

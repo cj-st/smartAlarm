@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\tomtom\services\NavKitRoutingService.js - TomTom JavaScript SDK</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://www.tomtom.com/global/images/tomtom-logo_tcm166-3340.png" title="TomTom JavaScript SDK"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/L.Control.Pan.html">L.Control.Pan</a></li>
+            
+                <li><a href="../classes/L.Control.ZoomSlider.html">L.Control.ZoomSlider</a></li>
+            
+                <li><a href="../classes/tomtom.AjaxUtil.html">tomtom.AjaxUtil</a></li>
+            
+                <li><a href="../classes/tomtom.Animation.html">tomtom.Animation</a></li>
+            
+                <li><a href="../classes/tomtom.controls.AutoComplete.html">tomtom.controls.AutoComplete</a></li>
+            
+                <li><a href="../classes/tomtom.controls.ContextMenu.html">tomtom.controls.ContextMenu</a></li>
+            
+                <li><a href="../classes/tomtom.controls.FindLocationControl.html">tomtom.controls.FindLocationControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.PanZoomBar.html">tomtom.controls.PanZoomBar</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RouteControl.html">tomtom.controls.RouteControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RoutePlannerControl.html">tomtom.controls.RoutePlannerControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.TabContainer.html">tomtom.controls.TabContainer</a></li>
+            
+                <li><a href="../classes/tomtom.CustomDivIcon.html">tomtom.CustomDivIcon</a></li>
+            
+                <li><a href="../classes/tomtom.CustomMarker.html">tomtom.CustomMarker</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtil.html">tomtom.dom.DomUtil</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtilResult.html">tomtom.dom.DomUtilResult</a></li>
+            
+                <li><a href="../classes/tomtom.layers.MapLayer.html">tomtom.layers.MapLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficIncidentLayer.html">tomtom.layers.TrafficIncidentLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficLayer.html">tomtom.layers.TrafficLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.WMSLayer.html">tomtom.layers.WMSLayer</a></li>
+            
+                <li><a href="../classes/tomtom.LocaleManager.html">tomtom.LocaleManager</a></li>
+            
+                <li><a href="../classes/tomtom.Main.html">tomtom.Main</a></li>
+            
+                <li><a href="../classes/tomtom.Map.html">tomtom.Map</a></li>
+            
+                <li><a href="../classes/tomtom.Marker.html">tomtom.Marker</a></li>
+            
+                <li><a href="../classes/tomtom.MarkerManager.html">tomtom.MarkerManager</a></li>
+            
+                <li><a href="../classes/tomtom.services.GeocodingService.html">tomtom.services.GeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.HDTRegionsService.html">tomtom.services.HDTRegionsService</a></li>
+            
+                <li><a href="../classes/tomtom.services.InitializeService.html">tomtom.services.InitializeService</a></li>
+            
+                <li><a href="../classes/tomtom.services.LegacyGeocodingService.html">tomtom.services.LegacyGeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.RoutingService.html">tomtom.services.RoutingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.TrafficService.html">tomtom.services.TrafficService</a></li>
+            
+                <li><a href="../classes/tomtom.services.ViewportService.html">tomtom.services.ViewportService</a></li>
+            
+                <li><a href="../classes/tomtom.StringBundle.html">tomtom.StringBundle</a></li>
+            
+                <li><a href="../classes/tomtom.TrafficMarker.html">tomtom.TrafficMarker</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\tomtom\services\NavKitRoutingService.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+define([
+	&quot;./BaseService&quot;,
+	&quot;./NavKitRoutingResponse&quot;,
+	&quot;../AjaxUtil&quot;,
+	&quot;../Utils&quot;
+],
+
+	function(base, RoutingResponse, ajax, utils) {
+
+		tomtom.services.NavKitRoutingService = base.extend({
+
+			/**
+			 * A service which provides routing functionality.
+			 * @constructor
+			 * @class RoutingService
+			 * @namespace tomtom.services
+			 * @param {String} apiKey The API key used to access the Map Toolkit API.
+			 */
+			initialize: function() {
+				base.prototype.initialize.apply(this, arguments);
+			},
+
+      /**
+       * Gets routing information for the specified points.
+       * @example
+       *  var points = [
+       *    [ 43.20846, -71.53686 ],
+       *    [ 42.35779, -71.05976 ]
+       *  ];
+       *  var service = new tomtom.services.RoutingService(&quot;API Key&quot;);
+       *  service.getRoute(points, function(response) { ... });
+       *
+       * @method getRoute
+       * @param {Array} points An array of L.LatLng objects.
+       * @param {Object} [options] Additional options to pass to the routing call.
+       * @param {boolean} [options.avoidTraffic=false] Indicates if traffic information is used to plan the route.
+       *  Only relevant for routeType of Quickest and AvoidMotorway.
+       *  When includeTraffic is set to false this flag is ignored.
+       * @param {boolean} [options.includeTraffic=false] Indicates if traffic information is used to describe delays in the route.
+       *  Not relevant where routeType is Walk or Bicycle.
+       * @param {String} [options.language=en] The two character ISO code of the output language to use for the route instructions. Supported languages are ca, cs, da, de, en, es, fi, fr, hu, it, nl, no, pl, pt, sk, sv, tr.
+       * @param {String} [options.day=today] The day of departure. Valid options are today, tomorrow, monday, tuesday, wednesday, thursday, friday, saturday, sunday.
+       * @param {String} [options.time=now] Time of departure, either now or the number of minutes since midnight.  Note that now (default value) is only valid when day=today (default).
+       * @param {String} [options.trafficModelId] Traffic model ID to use in the route calculation. The Traffic Model ID can be obtained from the Viewport service.
+       *  If this is omitted, then the most recent ID will be used.
+       * @param {boolean} [options.avoidTolls=false] Indicates whether toll roads have to be avoided during route planning.
+       * @param {boolean} [options.includeInstructions=true] Indicates if turn-by-turn instructions should be returned in the response.
+       * @param {String} [options.projection=EPSG4326] The projection used to specify the coordinates in the request and response.  Supported values are
+       *  EPSG900913 and EPSG4326.
+       * @param {Function} callback A function to be called when the routing call returns a response.
+       */
+			getRoute: function(points, options, callback) {
+
+				// make the options parameter optional
+				if (typeof(options) == &quot;function&quot;) {
+					callback = options;
+					options = {};
+				}
+
+				// if an API key is specified, include it
+				// an API key can be ommitted if an API proxy is being used
+				if (this.apiKey) {
+          options.key = this.apiKey;
+        }
+
+				// default route type
+				if (!options.routeType) {
+          options.routeType = DEFAULT_ROUTE_TYPE;
+        }
+
+				if (typeof(options.includeTraffic) != &quot;undefined&quot;) {
+          options.traffic = options.includeTraffic;
+        }
+
+				// set up the query string parameters
+				var queryParameters = { key: options.key },
+					avoid = queryParameters.avoid || [];
+
+				if (typeof(avoid) != &quot;undefined&quot; &amp;&amp; typeof(avoid.length) == &quot;undefined&quot;) {
+          avoid = avoid.split(&quot;,&quot;);
+        }
+
+				var formattedPoints = [];
+
+				// format the points so that the API can interpret them
+				for (var pointIndex = 0; pointIndex &lt; points.length; pointIndex++) {
+					var point = L.latLng(points[pointIndex]);
+
+					formattedPoints.push(point.lat + &quot;,&quot; + point.lng);
+				}
+
+				// set up the parameters which will be replaced in the URL
+				var urlParameters = {
+					points: formattedPoints.join(&quot;:&quot;)
+				};
+
+				var url = tomtom.services.RoutingService.URL || TRAFFIC_MODEL_URL;
+
+				// log the API call
+				tomtom.logApiCall(&quot;route&quot;);
+
+				// check to see if an API proxy is being used
+				// if so, use a regular XHR, JSONP will not work with a proxy
+				if (tomtom.proxyUrl) {
+					ajax.getJSON({
+						url: utils.getServiceUrl(L.Util.template(url, urlParameters), queryParameters, false, true, tomtom.API_BASE_URL),
+						callback: function(response) {
+
+							callback(new RoutingResponse(response));
+
+						}
+					});
+				} else {
+					ajax.getJSONP({
+						url: utils.getServiceUrl(L.Util.template(url + &quot;p&quot;, urlParameters), queryParameters, false, true, tomtom.API_BASE_URL),
+						callback: function(response) {
+
+							callback(new RoutingResponse(response));
+
+						},
+						callbackParam: &quot;callback&quot;
+					});
+				}
+
+			}
+
+		});
+
+		var TRAFFIC_MODEL_URL = &quot;routing/1/calculateRoute/{points}/json&quot;;
+		var DEFAULT_ROUTE_TYPE = &quot;fastest&quot;;
+
+		return tomtom.services.NavKitRoutingService;
+	}
+);
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

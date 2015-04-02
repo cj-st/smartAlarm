@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>TomTom JavaScript SDK - Context Menus</title>
+		<link rel="stylesheet" type="text/css" href="../css/tomtom.map.min.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="../css/tomtom.map.ie.min.css" /><![endif]-->
+        <script type="text/javascript" src="../js/leaflet.js"></script>
+        <script type="text/javascript" src="../js/tomtom.map.js"></script>
+        <script type="text/javascript" src="apikey.js"></script>
+        <script>
+        	window.onload = function() {
+        		
+        		// set the base image path used by tomtom.Marker
+				tomtom.setImagePath("../images/");
+        		
+        		// this function will be called when the show address context menu is clicked on the map
+        		function showAddress(e) {
+        			
+					var lonlat = map.mouseEventToLatLng(e);
+        			
+        			// reverse geocode
+        			var geocoder = new tomtom.services.GeocodingService();
+        			
+        			// since the lonlat returned is in EPSG 900913, and also adding the popup needs to be done in EPSG 900913
+        			// specify EPSG 900913 as the projection
+        			geocoder.reverseGeocode(lonlat.lat, lonlat.lng, { projection: "EPSG4326" }, function(response) {
+        				
+        				var content = "No address found.";
+        				
+        				if (response && response.reverseGeoResponse && response.reverseGeoResponse.reverseGeoResult
+        						&& response.reverseGeoResponse.reverseGeoResult[0]
+        						&& response.reverseGeoResponse.reverseGeoResult[0].formattedAddress)
+        					content = response.reverseGeoResponse.reverseGeoResult[0].formattedAddress;
+        				
+						L.popup().setLatLng(lonlat).setContent(content).openOn(map);
+        				
+        			});
+        		}
+        		
+        		// this will be called when the remove marker menu is clicked on the marker
+        		function removeMarker(e) {
+        			
+        			map.removeLayer(e.targetObject);
+        			
+        		}
+        		
+        		// create the marker
+        		var map = new tomtom.Map({
+        			domNode: "map",
+        			cookie: true,
+        			scale: true
+        		});
+        		
+        		// create a context menu for the map
+        		var contextMenu = new tomtom.controls.ContextMenu({
+       				menuItems: [
+       						{ label: "Help", onClick: function() { alert("HELP!"); } },
+       						{ label: "Lookup Address", onClick: showAddress }
+       					]
+               		});
+        		
+        		// attach to the onclick of the menu items
+        		contextMenu.on("menuitemclick", function(e) {
+        			if (console)
+        				console.log(e.x, e.y, e.menuItem);
+        		});
+        		
+        		// set the context menu for the map
+        		map.setContextMenu(contextMenu);
+        			
+        		// create a context menu for the markers
+       			var markerContextMenu = new tomtom.controls.ContextMenu({
+       				menuItems: [
+     						{ label: "Marker Help", onClick: function() { alert("MARKER HELP!"); } },
+     						{ label: "Remove", onClick: removeMarker }
+     					]
+             		});
+       			
+        		// add markers to the map, setting the context menu as well
+       			var marker = new tomtom.Marker([43.26456, -71.5702]);
+       			marker.setContextMenu(markerContextMenu);
+        		map.addLayer(marker);
+        		
+        		marker = new tomtom.Marker([39.73845, -104.98485]);
+       			marker.setContextMenu(markerContextMenu);
+       			map.addLayer(marker);
+        		
+        		marker = new tomtom.Marker([34.05224, -118.24334]);
+       			marker.setContextMenu(markerContextMenu);
+       			map.addLayer(marker);
+        		
+        		marker = new tomtom.Marker([37.78008, -122.42017]);
+       			marker.setContextMenu(markerContextMenu);
+       			map.addLayer(marker);
+        		
+        	};
+        </script>
+        <style type="text/css">
+        	html, body {
+        		width: 100%;
+        		height: 100%;
+        		margin: 0;
+        		padding: 0;
+        	}
+        </style>
+	</head>
+	<body>
+		<div style="width: 100%; height: 100%;" id="map"></div>
+	</body>
+</html>

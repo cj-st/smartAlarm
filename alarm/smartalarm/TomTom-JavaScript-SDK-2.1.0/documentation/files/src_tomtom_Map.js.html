@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\tomtom\Map.js - TomTom JavaScript SDK</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://www.tomtom.com/global/images/tomtom-logo_tcm166-3340.png" title="TomTom JavaScript SDK"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/L.Control.Pan.html">L.Control.Pan</a></li>
+            
+                <li><a href="../classes/L.Control.ZoomSlider.html">L.Control.ZoomSlider</a></li>
+            
+                <li><a href="../classes/tomtom.AjaxUtil.html">tomtom.AjaxUtil</a></li>
+            
+                <li><a href="../classes/tomtom.Animation.html">tomtom.Animation</a></li>
+            
+                <li><a href="../classes/tomtom.controls.AutoComplete.html">tomtom.controls.AutoComplete</a></li>
+            
+                <li><a href="../classes/tomtom.controls.ContextMenu.html">tomtom.controls.ContextMenu</a></li>
+            
+                <li><a href="../classes/tomtom.controls.FindLocationControl.html">tomtom.controls.FindLocationControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.PanZoomBar.html">tomtom.controls.PanZoomBar</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RouteControl.html">tomtom.controls.RouteControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RoutePlannerControl.html">tomtom.controls.RoutePlannerControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.TabContainer.html">tomtom.controls.TabContainer</a></li>
+            
+                <li><a href="../classes/tomtom.CustomDivIcon.html">tomtom.CustomDivIcon</a></li>
+            
+                <li><a href="../classes/tomtom.CustomMarker.html">tomtom.CustomMarker</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtil.html">tomtom.dom.DomUtil</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtilResult.html">tomtom.dom.DomUtilResult</a></li>
+            
+                <li><a href="../classes/tomtom.layers.MapLayer.html">tomtom.layers.MapLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficIncidentLayer.html">tomtom.layers.TrafficIncidentLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficLayer.html">tomtom.layers.TrafficLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.WMSLayer.html">tomtom.layers.WMSLayer</a></li>
+            
+                <li><a href="../classes/tomtom.LocaleManager.html">tomtom.LocaleManager</a></li>
+            
+                <li><a href="../classes/tomtom.Main.html">tomtom.Main</a></li>
+            
+                <li><a href="../classes/tomtom.Map.html">tomtom.Map</a></li>
+            
+                <li><a href="../classes/tomtom.Marker.html">tomtom.Marker</a></li>
+            
+                <li><a href="../classes/tomtom.MarkerManager.html">tomtom.MarkerManager</a></li>
+            
+                <li><a href="../classes/tomtom.services.GeocodingService.html">tomtom.services.GeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.HDTRegionsService.html">tomtom.services.HDTRegionsService</a></li>
+            
+                <li><a href="../classes/tomtom.services.InitializeService.html">tomtom.services.InitializeService</a></li>
+            
+                <li><a href="../classes/tomtom.services.LegacyGeocodingService.html">tomtom.services.LegacyGeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.RoutingService.html">tomtom.services.RoutingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.TrafficService.html">tomtom.services.TrafficService</a></li>
+            
+                <li><a href="../classes/tomtom.services.ViewportService.html">tomtom.services.ViewportService</a></li>
+            
+                <li><a href="../classes/tomtom.StringBundle.html">tomtom.StringBundle</a></li>
+            
+                <li><a href="../classes/tomtom.TrafficMarker.html">tomtom.TrafficMarker</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\tomtom\Map.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * The map widget allows a user to add a map to the page.
+ * @author Kyle Pinette
+ */
+define([
+    &quot;./Utils&quot;,
+    &quot;./dom/DomUtil&quot;,
+    &quot;./Logger&quot;,
+    &quot;./services/InitializeService&quot;,
+    &quot;./services/ViewportService&quot;,
+    &quot;./services/RoutingService&quot;,
+    &quot;./services/GeocodingService&quot;,
+    &quot;./layers/MapLayer&quot;,
+    &quot;./layers/TrafficLayer&quot;,
+    &quot;./layers/TrafficIncidentLayer&quot;,
+    &quot;./lib/leaflet.minimap&quot;,
+    &quot;./controls/PanZoomBar&quot;,
+    &quot;./controls/ContextMenu&quot;
+  ],
+
+  function(utils, du) {
+
+    tomtom.Map = L.Map.extend({
+
+      options: {
+        displayTrafficMarkers: true
+      },
+
+      /**
+       * Creates a new instance of a TomTom Map.  The map can be embedded multiple times on the same page.
+       * To create a map, supply an API key and a domNode for the map to append its markup to.  See the options parameter for all
+       * available options.
+       *
+       * For documentation about the base Leaflet Map and other objects, see &lt;a href=&quot;http://leafletjs.com/reference.html&quot;&gt;http://leafletjs.com/reference.html&lt;/a&gt;.
+       *
+       * @example
+       *  // a basic map
+       *  var map = new tomtom.Map({
+			 *    apiKey: &quot;123456&quot;,
+			 *    domNode: &quot;map&quot;
+			 *	});
+       *
+       * @constructor
+       * @class Map
+       * @namespace tomtom
+       * @extends L.Map
+       * @param {Object} options Options to supply to the map.
+       * @param {String|DOM Node} options.domNode The id of the DOM node, or the DOM node itself to use as the map container.
+       * @param {String} options.apiKey The API Key issued from &lt;a href=&quot;http://developer.tomtom.com&quot;&gt;http://developer.tomtom.com&lt;/a&gt;.  This is optional if
+       *  tomtom.apiKey has been set already.
+       * @param {Object|boolean} [options.cookie] pass true or false to enable or disable the use of a cookie to keep the map
+       *  state across page views.
+       *  Supply an object to customize cookie options.
+       * @param {String} [options.cookie.name] The name of the cookie to be written.
+       * @param {Number} [options.cookie.expirationDays] The number of days before the cookie will expire.
+       * @param {Array|L.LatLng} [options.center]The point where the map will be centered upon startup.  Please note that this option is
+       *  overridden if the cookie option is enabled.
+       * @param {Number} [options.zoom] The zoom level the map will go to at startup.  The default is to zoom out to the lowest zoom level available.
+       * @param {Array} [options.layers] The layers to be added to the map at startup.  Any Leaflet layer / TomTom layer can be used.
+       *  By default, the tomtom.layers.MapLayer is added as the base layer.
+       * @param {Object|boolean} [options.overviewMap] If any non-false value is passed as this option, an overview map will be displayed.  If an Object is passed,
+       *  the object will be passed as options to the overviewMap&#x27;s constructor constructor. See &lt;a href=&quot;https://github.com/Norkart/Leaflet-MiniMap&quot;&gt;https://github.com/Norkart/Leaflet-MiniMap&lt;/a&gt; for available options.
+       * @param {Boolean} [options.scale] Determines whether or not to add the L.Control.Scale control to the map.  This control
+       *  displays basic scale information on the map.
+       * @param {Boolean} [options.zoomControl] If any non-false value is passed as this option, a leaflet zoom control is added.
+       * @param {Boolean} [options.panZoomBar] If any non-false value is passed, the tomtom PanZoomBar control is added.
+       *  If an Object is passed, the object will be passed to the {{#crossLink &quot;tomtom.controls.PanZoomBar&quot;}}tomtom.controls.PanZoomBar{{/crossLink}} control&#x27;s constructor.
+       * @param {Boolean} [options.displayTraffic] Determines whether or not traffic incidents and flow information is included on the map.
+       * @param {Object} [options.baseLayerOptions] Options that will be passed to the base map layer.  Note that if options.layers is supplied, this option is not used.
+       */
+      initialize: function (options) {
+
+        if (!options) {
+          options = {};
+        }
+
+        // set up the logger
+        this.log = new tomtom.Logger();
+
+        // get the API key
+        this.apiKey = tomtom.apiKey;
+
+        this._copyrightInfo = {};
+        this._displayRouteId = 0;
+        this._currentAttribution = &quot;&quot;;
+        this._routeCallQueue = [];
+        this._routeWaypoints = [];
+        this._attributionClickHandlers = [];
+
+        this.routeStyle = L.Util.extend({
+          color: &quot;#0f0&quot;,
+          weight: 8,
+          opacity: 0.6
+        }, options.routeStyle);
+
+        if (options.apiKey) {
+          this.apiKey = options.apiKey;
+        }
+
+        // initialize the geocoding service
+        if (options.geocodingService) {
+          this.geocodingService = options.geocodingService;
+        } else {
+          this.geocodingService = new tomtom.services.GeocodingService(this.apiKey);
+        }
+
+        if (options.routingService) {
+          this.routingService = options.routingService;
+        } else {
+          this.routingService = new tomtom.services.RoutingService(this.apiKey);
+        }
+
+        if (options.viewportService) {
+          this._viewportService = options.viewportService;
+        }
+
+        if (!options.minZoom) {
+          options.minZoom = 2;
+        }
+
+        if (!options.maxZoom) {
+          options.maxZoom = 17;
+        }
+
+        // check to see if a center position was supplied
+        if (!options.center) {
+          options.center = [0, 0];
+        }
+
+        if (!options.zoom) {
+          options.zoom = 2;
+        }
+
+        // we want to add a custom attribution control
+        options.attributionControl = false;
+
+        // restore the location of the map if cookies are enabled
+        if (options.cookie) {
+
+          if (typeof(options.cookie) != &quot;object&quot;) {
+            options.cookie = {};
+          }
+
+          // check to see if a cookie name was supplied
+          if (!options.cookie.name) {
+            options.cookie.name = &quot;tomtom-map-extent&quot;;
+          }
+
+          // check to see if the cookie name is defined
+          var cookie = utils.getCookie(options.cookie.name);
+
+          // make sure the cookie was found
+          if (cookie) {
+            var cookieVals = cookie.split(&quot;,&quot;);
+
+            // make sure the cookie is valid
+            if (cookieVals.length &gt;= 3) {
+
+              var lat = cookieVals[0].trim();
+              var lng = cookieVals[1].trim();
+
+              if (!isNaN(lat) &amp;&amp; !isNaN(lng)) {
+                options.center = new L.LatLng(parseFloat(lat), parseFloat(lng));
+                options.zoom = cookieVals[2].trim();
+              }
+
+            }
+
+          }
+
+        }
+
+        if (typeof(options.zoomControl) == &quot;undefined&quot;) {
+          options.zoomControl = false;
+        }
+
+        L.Map.prototype.initialize.apply(this, [options.domNode, options]);
+
+        // set up the attribution control
+        this.attributionControl = new L.Control.Attribution({ position: &quot;bottomleft&quot;, prefix: &quot;&quot; }).addTo(this);
+
+        // make a call to the initialize API
+        var initialize = new tomtom.services.InitializeService(this.apiKey);
+
+        initialize.getCopyrightInfo(L.Util.bind(function (response) {
+
+          var copyrights = response.initializeResponse.copyright;
+
+          for (var copyrightIndex = 0; copyrightIndex &lt; copyrights.length; copyrightIndex++) {
+
+            var info = copyrights[copyrightIndex];
+
+            if (info) {
+              this._copyrightInfo[info[&quot;@id&quot;]] = info;
+            }
+
+          }
+
+          // create the traffic layers
+          if (options.displayTraffic) {
+            this.setDisplayTraffic(true);
+          } else {
+            // make sure the initial viewport is loaded
+            this._updateViewport(false);
+          }
+
+        }, this));
+
+        if (!options.layers) {
+
+          var layerOptions = L.Util.extend({ apiKey: this.apiKey }, options.baseLayerOptions || {});
+
+          // add the base map layer
+          this._baseLayer = new tomtom.layers.MapLayer(layerOptions);
+          this._baseLayer.on(&quot;load&quot;, this._fireLoad, this);
+          this.addLayer(this._baseLayer);
+
+        }
+
+        // check for scale option
+        if (options.scale) {
+          L.control.scale().addTo(this);
+        }
+
+        // check for overviewMap option
+        if (options.overviewMap) {
+
+          var minimapOptions = { toggleDisplay: true };
+
+          if (typeof(options.overviewMap) == &quot;object&quot;) {
+            minimapOptions = options.overviewMap;
+          }
+
+          this._miniMap = new L.Control.MiniMap(new tomtom.layers.MapLayer({ apiKey: this.apiKey }), minimapOptions).addTo(this);
+        }
+
+        // check to see if the pan zoom bar needs to be added
+        if (options.panZoomBar) {
+
+          var panZoomOptions = {};
+
+          if (typeof(options.panZoomBar) == &quot;object&quot;) {
+            panZoomOptions = options.panZoomBar;
+          }
+
+          this._panZoomBar = new tomtom.controls.PanZoomBar(panZoomOptions);
+          this._panZoomBar.addTo(this);
+
+        }
+
+        // create a context menu for route waypoints
+        this._waypointContextMenu = new tomtom.controls.ContextMenu({
+          menuItems: [
+            { label: &quot;Remove waypoint&quot;, onClick: L.Util.bind(this._removeWaypoint, this) }
+          ]
+        });
+        this._waypointContextMenu.onAdd(this);
+
+        // wire up events
+        this.on(&quot;move&quot;, this._handleMapMove, this);
+        this.on(&quot;zoomend&quot;, this._handleZoomChange, this);
+        this.on(&quot;mousemove&quot;, this._handleMouseMove, this);
+        this.on(&quot;mouseup&quot;, this._handleMouseUp, this);
+
+      },
+
+      /**
+       * Enables or disables live traffic display.
+       * @method setDisplayTraffic
+       * @param {Boolean} value Whether or not to display live traffic information on the map.
+       */
+      setDisplayTraffic: function (value) {
+
+        this._displayTraffic = value;
+
+        if (value) {
+
+          // clear the update interval
+          clearInterval(this._trafficUpdateIntervalId);
+
+          this._updateViewport(true);
+
+          // update the traffic at a given interval
+          this._trafficUpdateIntervalId = setInterval(L.Util.bind(function () {
+            this._updateViewport(true);
+          }, this), TRAFFIC_UPDATE_INTERVAL);
+
+        } else {
+
+          if (this._trafficLayer) {
+            this.removeLayer(this._trafficLayer);
+            this._trafficLayer = null;
+          }
+
+          if (this._trafficIncidentLayer) {
+            this.removeLayer(this._trafficIncidentLayer);
+            this._trafficIncidentLayer = null;
+          }
+
+          // clear the update interval
+          clearInterval(this._trafficUpdateIntervalId);
+
+        }
+      },
+
+      /**
+       * Destroys the map and any resources it is holding onto.  This method will remove the Map&#x27;s inner contents from the DOM.
+       * @method destroy
+       */
+      destroy: function () {
+
+        // clear any timeouts / intervals
+        clearTimeout(this._viewportUpdateTimeoutId);
+        clearInterval(this._trafficUpdateIntervalId);
+
+        // remove any layers
+        for (var layerId in this._layers) {
+
+          this.removeLayer(this._layers[layerId]);
+
+        }
+
+        // clean up any context menus
+        if (this._contextMenus) {
+
+          this._contextMenus.forEach(function (contextMenu) {
+            contextMenu.onRemove(this);
+          }, this);
+
+          this._contextMenus = [];
+          this._waypointContextMenu = null;
+
+        }
+
+        var handlers = [
+          &quot;dragging&quot;,
+          &quot;scrollWheelZoom&quot;,
+          &quot;touchZoom&quot;,
+          &quot;keyboard&quot;,
+          &quot;doubleClickZoom&quot;,
+          &quot;boxZoom&quot;
+        ];
+
+        handlers.forEach(function (name) {
+          if (this[name]) {
+            this[name].removeHooks();
+          }
+        }, this);
+
+        this._container._leaflet = null;
+
+        /* jshint -W106 */
+        // detach all events
+        var events = this._leaflet_events;
+
+        for (var eventType in events) {
+
+          var event = events[eventType];
+          this.off(eventType, event.action, event.context);
+
+        }
+
+        // detach MORE events
+        L.DomEvent.off(this._container, &#x27;click&#x27;, this._onMouseClick, this);
+
+        events = [&#x27;dblclick&#x27;, &#x27;mousedown&#x27;, &#x27;mouseup&#x27;, &#x27;mouseenter&#x27;, &#x27;mouseleave&#x27;, &#x27;mousemove&#x27;, &#x27;contextmenu&#x27;];
+        var i, len;
+
+        for (i = 0, len = events.length; i &lt; len; i++) {
+          L.DomEvent.off(this._container, events[i], this._fireMouseEvent, this);
+        }
+
+        if (this.options.trackResize) {
+          L.DomEvent.off(window, &#x27;resize&#x27;, this._onResize, this);
+        }
+
+        if (L.DomUtil.TRANSITION_END) {
+          L.DomEvent.off(this._mapPane, L.DomUtil.TRANSITION_END, this._catchTransitionEnd);
+        }
+
+        // make sure the attribution control cleans itself up
+        this._destroyAttribution();
+
+        // clean up the container
+        var container = du.create(this._container);
+        container.empty();
+
+        var classNames = this._container.className.split(&quot; &quot;);
+
+        classNames.forEach(function (className) {
+          if (className.indexOf(&quot;leaflet&quot;) === 0) {
+            container.removeClass(className);
+          }
+        });
+
+        container.css(&quot;position&quot;, &quot;&quot;);
+
+      },
+
+      /**
+       * Displays a route on the map using the TomTom Map Toolkit&#x27;s Routing call.
+       * @method displayRoute
+       * @param {Array} points The points which make up the route.  There must be at least 2 points, and at most 5 points specified.
+       *  If the points are specified as strings, the Map will assume they are addresses and apply geocoding.  Leaflet L.LatLng objects can also be passed to
+       * use points instead of addresses.  Addresses and L.LatLng Objects can be intermixed within the points.
+       * @param {Object} [options] Options to pass to the Map Toolkit Routing call.
+       * @param {String} [options.key] The API key to use.
+       * @param {String} [options.routeType=Quickest] The route type to use.  Must be one of the following:
+       * Quickest, Shortest, AvoidMotorway, Walk, Bicycle, SpeedLimited, Green.
+       * @param {Boolean} [options.avoidTraffic=false] Whether or not to avoid traffic when calculating the route.
+       * @param {String} [options.day=today] The day of departure.  Must be one of the following: today, tomorrow, monday, tuesday, wednesday, thursday, friday, saturday, sunday
+       * @param {String|Number} [options.time=now] Time of departure, either now or the number of minutes since midnight.
+       *  Note that now (default value) is only valid when day=today (default).
+       * @param {Boolean} [options.avoidTolls=false] Whether or not to avoid tolls when calculating the route.
+       * @param {Function} [callback] A callback to execute once the route has been executed.  The routing response is passed as the only argument to the callback
+       *  once the routing call has been completed.
+       */
+      displayRoute: function (points, options, callback) {
+
+        // check to see if a routing call is active
+        if (this._isRoutingExecuting) {
+
+          this._routeCallQueue.push({ points: points, options: options, callback: callback });
+
+        } else {
+
+          this._isRoutingExecuting = true;
+
+          if (typeof(options) == &quot;function&quot;) {
+            callback = options;
+            options = {};
+          }
+
+          // make sure the options are not null
+          options = options ? options : {};
+
+          // keep the original options
+          this._currentRouteOptions = options;
+
+          // show a loading message
+          if (typeof(options.showLoading) == &quot;undefined&quot; || options.showLoading) {
+            this.displayLoadingMessage(&quot;Calculating route...&quot;);
+          }
+
+          this._displayRouteId++;
+
+          if (typeof(options.checkPoints) == &quot;undefined&quot; || options.checkPoints) {
+            this._originalRoutePoints = points;
+            this._routePoints = [];
+            this._waypointsNeedUpdate = true;
+            this._checkRoutePoints(this._displayRouteId, 0, options, callback);
+          } else {
+            this._getRoute(this._displayRouteId, options, typeof(options.updateBounds) == &quot;undefined&quot; ? true : options.updateBounds, callback);
+          }
+
+        }
+
+      },
+
+      /**
+       * Highlights a route instruction for the currently displayed route.  This can be used to display a directional arrow at the instruction index specified.
+       * @method displayRouteInstruction
+       * @param {Number} instructionIndex The index of the instruction that should be highlighted.
+       */
+      displayRouteInstruction: function (instructionIndex) {
+
+        if (this._routeLayer) {
+          var instruction = this._currentRoute.instructions.instruction[instructionIndex];
+
+          // zoom to the instruction
+          this.setView([instruction.point.latitude, instruction.point.longitude], INSTRUCTION_ZOOM_LEVEL);
+
+          L.popup().setLatLng([instruction.point.latitude, instruction.point.longitude])
+            .setContent(L.Util.template(&quot;&lt;div class=\&quot;tt-instruction-popup\&quot;&gt;&lt;img src=\&quot;{iconUrl}\&quot; /&gt;&lt;span class=\&quot;road\&quot;&gt;{text} {roadNumber} {roadName}&lt;/span&gt;&lt;/div&gt;&quot;, {
+              iconUrl: tomtom.baseImagePath + &quot;instructions/&quot; + instruction.iconPath,
+              roadName: instruction.roadName,
+              roadNumber: instruction.roadNumber,
+              text: instruction.text
+            })).openOn(this);
+        }
+
+      },
+
+      /**
+       * Removes the current route from the map.
+       * @method clearRouting
+       */
+      clearRouting: function () {
+
+        if (this._routeLayer) {
+          this.removeLayer(this._routeLayer);
+          this._routeLayer = null;
+        }
+
+        if (this._routeMarkerLayer) {
+          this.removeLayer(this._routeMarkerLayer);
+          this._routeMarkerLayer = null;
+        }
+
+        this._startMarker = null;
+        this._endMarker = null;
+        this._currentRoute = null;
+
+        // clear the list of route calls
+        this._routeCallQueue = [];
+
+        // clear route waypoints
+        this._routeWaypoints.forEach(function (element) {
+          this.removeLayer(element);
+        }, this);
+
+        this._routeWaypoints = [];
+
+        // clear the context menu targets
+        this._waypointContextMenu.clearTargets();
+
+      },
+
+      /**
+       * Gets the current route information.
+       * @method getCurrentRoute
+       * @returns {Object} The route response from the routing call.
+       */
+      getCurrentRoute: function () {
+        return this._currentRoute;
+      },
+
+      /**
+       * Sets the context menu for the map.
+       * The context menu will be displayed when the user right clicks the map.
+       * @param {tomtom.ContextMenu} contextMenu The context menu to display when the map is right clicked.
+       */
+      setContextMenu: function (contextMenu) {
+
+        // get rid of the old context menu
+        if (this.contextMenu) {
+          this.contextMenu.onRemove(this);
+        }
+
+        this.contextMenu = contextMenu;
+
+        contextMenu.addTarget(this._container, this);
+
+        if (!contextMenu.map) {
+          contextMenu.onAdd(this);
+        }
+
+      },
+
+      /**
+       * Displays a modal loading message which will prevent the user from performing any action until hideLoadingMessage is called.
+       * @method displayLoadingMessage
+       * @param {String} message The message to be displayed along with the loading graphic.
+       */
+      displayLoadingMessage: function (message) {
+
+        if (!this._loadingBackdrop) {
+          this._loadingBackdrop = L.DomUtil.create(&quot;div&quot;, &quot;loadingBackdrop&quot;);
+          this._container.appendChild(this._loadingBackdrop);
+        }
+
+        if (!this._loadingMessage) {
+          this._loadingMessage = L.DomUtil.create(&quot;div&quot;, &quot;loadingMessage&quot;);
+          this._container.appendChild(this._loadingMessage);
+
+          var image = L.DomUtil.create(&quot;div&quot;, &quot;image&quot;);
+          this._loadingMessage.appendChild(image);
+
+          var messageDiv = L.DomUtil.create(&quot;div&quot;, &quot;message&quot;);
+          this._loadingMessage.appendChild(messageDiv);
+        }
+
+        du.query(&quot;.message&quot;, this._loadingMessage).html(message);
+        this._loadingBackdrop.style.display = &quot;block&quot;;
+        this._loadingMessage.style.display = &quot;block&quot;;
+
+        // position the message based on its dimensions
+        this._loadingMessage.style.top = ((this._container.offsetHeight - this._loadingMessage.offsetHeight) / 2) + &quot;px&quot;;
+        this._loadingMessage.style.left = ((this._container.offsetWidth - this._loadingMessage.offsetWidth) / 2) + &quot;px&quot;;
+
+      },
+
+      /**
+       * Hides the loading message which is created by calling displayLoadingMessage.
+       * @method hideLoadingMessage
+       */
+      hideLoadingMessage: function () {
+
+        if (this._loadingBackdrop) {
+          this._loadingBackdrop.style.display = &quot;none&quot;;
+        }
+
+        if (this._loadingMessage) {
+          this._loadingMessage.style.display = &quot;none&quot;;
+        }
+
+      },
+
+      /**
+       * Gets the current traffic incidents that are being displayed.
+       * @method getTrafficIncidents
+       */
+      getTrafficIncidents: function () {
+
+        if (this._trafficIncidentLayer &amp;&amp; this._trafficIncidentLayer.incidents) {
+          return this._trafficIncidentLayer.incidents;
+        } else {
+          return null;
+        }
+
+      },
+
+      /**
+       * Gets a traffic marker by the specified incident id.
+       * @method getTrafficMarkerByIncidentId
+       * @param id The incident id of the marker to retrieve.
+       * @returns The marker with the specified incident id.
+       */
+      getTrafficMarkerByIncidentId: function (id) {
+
+        var trafficLayer = this._trafficIncidentLayer;
+
+        // make sure traffic is loaded
+        if (trafficLayer) {
+
+          // loop through each marker
+          for (var layerId in trafficLayer._layers) {
+
+            var layer = trafficLayer._layers[layerId];
+
+            // if the incident ids match, we found it
+            if (layer._incident.id == id) {
+              return layer;
+            }
+
+          }
+
+        }
+
+        return null;
+
+      },
+
+      _checkRoutePoints: function (displayRouteId, pointIndex, options, callback) {
+
+        // make sure the route id still matches
+        if (this._displayRouteId != displayRouteId) {
+          return;
+        }
+
+        var currentPoint = this._originalRoutePoints[pointIndex];
+
+        // check to see if the current point is a string
+        if (typeof(currentPoint) == &quot;string&quot;) {
+
+          var geocodingService = this.geocodingService;
+
+          // call the geocoding service to get the latitude / longitude
+          geocodingService.geocode(currentPoint, L.Util.bind(function (response) {
+
+            // make sure the route id still matches
+            if (this._displayRouteId != displayRouteId) {
+              return;
+            }
+
+            // make sure the point was located
+            if (response.geoResponse &amp;&amp; response.geoResponse.geoResult) {
+
+              var result = response.geoResponse.geoResult;
+              var point = null;
+
+              // check to see if multiple results were returned
+              if (result.length !== null &amp;&amp; result.length !== undefined) {
+                point = L.latLng([
+                  result[0].latitude,
+                  result[0].longitude
+                ]);
+              } else {
+                point = L.latLng([
+                  result.latitude,
+                  result.longitude
+                ]);
+              }
+
+              this._routePoints.push(point);
+
+              // add intermediate points to the waypoints collection
+              if (pointIndex &gt; 0 &amp;&amp; pointIndex + 1 &lt; this._originalRoutePoints.length) {
+                this._addRouteWaypoint(point);
+              }
+
+              pointIndex++;
+
+              if (pointIndex &gt;= this._originalRoutePoints.length) {
+                this._getRoute(displayRouteId, options, callback);
+              } else {
+                this._checkRoutePoints(displayRouteId, pointIndex, options, callback);
+              }
+
+            } else if (options.callback) {
+              options.callback({ error: &quot;Geocode failed for point &quot; + pointIndex });
+            }
+
+          }, this));
+
+        } else { // if the point is not a string, then it must be a lat / lng pair, which doesn&#x27;t need processing
+
+          if (pointIndex &gt;= this._originalRoutePoints.length) {
+            this._getRoute(displayRouteId, options, true, callback);
+          } else {
+
+            var point = L.latLng(this._originalRoutePoints[pointIndex]);
+
+            this._routePoints.push(point);
+
+            // add intermediate points to the waypoints collection
+            if (pointIndex &gt; 0 &amp;&amp; pointIndex + 1 &lt; this._originalRoutePoints.length) {
+              this._addRouteWaypoint(point);
+            }
+
+            this._checkRoutePoints(displayRouteId, pointIndex + 1, options, callback);
+          }
+        }
+
+      },
+
+      _getRoute: function (displayRouteId, options, changeExtent, callback) {
+
+        if (typeof(changeExtent) == &quot;undefined&quot;) {
+          changeExtent = true;
+        }
+
+        // make sure the route id still matches
+        if (this._displayRouteId != displayRouteId) {
+          return;
+        }
+
+        var routingSerive = this.routingService;
+
+        // use the map&#x27;s traffic model
+        if (this.trafficModel) {
+          options.trafficModelId = this.trafficModel;
+        }
+
+        // set the path points to get vector information
+        options.includeVectorData = true;
+
+        // get the route
+        routingSerive.getRoute(this._getUpdatedRoutePoints(), options, L.Util.bind(function (response) {
+
+          this._displayingRoute = true;
+
+          if (response) {
+
+            this._currentRoute = response;
+
+            if (changeExtent &amp;&amp; (typeof(options.updateBounds) == &quot;undefined&quot; || options.updateBounds)) {
+
+              // get the route&#x27;s bounding box
+              var box = response.bounds;
+
+              if (box) {
+                // zoom to the route&#x27;s bounds
+                this.fitBounds([
+                  [box.getSouthWest().lat, box.getSouthWest().lng],
+                  [box.getNorthEast().lat, box.getNorthEast().lng]
+                ]);
+              }
+
+            }
+
+            // add the route layer
+            this._addRouteLayer();
+
+          } else {
+
+            this.log.error(&quot;An error occurred during routing&quot;, response);
+
+            this.hideLoadingMessage();
+
+          }
+
+          // call the user&#x27;s route callback
+          if (callback) {
+            callback(response);
+          }
+
+          // fire the route end event
+          this.fire(&quot;routeend&quot;, response);
+
+          this._displayingRoute = false;
+
+        }, this));
+
+      },
+
+      _addRouteLayer: function () {
+
+        // make sure a route has been created
+        if (this._currentRoute) {
+
+          // check to see if the route layer already exists
+          if (this._routeLayer) {
+            this.removeLayer(this._routeLayer);
+            this._routeLayer = null;
+          }
+
+          // check to see if the traffic marker layer exists
+          if (!this._routeMarkerLayer) {
+            this._routeMarkerLayer = L.layerGroup().addTo(this);
+          }
+
+          // add the route layer
+          this._routeLayer = L.polyline([], this.routeStyle).addTo(this);
+
+          var points = this._currentRoute.vectorPoints;
+
+          if (points &amp;&amp; points.length &gt; 0) {
+
+            // leaflet automatically simplifies poly lines, no need to do that here
+            this._routeLayer.setLatLngs(points);
+
+            // make sure the waypoints snap onto the route
+            this._updateWaypoints();
+
+          }
+
+          // handle route line dragging
+          this._routeLayer.on(&quot;mousedown&quot;, function (e) {
+
+            if (e.originalEvent.button == 2) {
+              return;
+            }
+
+            this._currentWaypoint = this._addRouteWaypoint(e.latlng);
+
+          }, this);
+
+          this._updateRouteMarkers();
+
+        }
+
+        this._isRoutingExecuting = false;
+
+        // check the queue of routing requests
+        if (this._routeCallQueue.length &gt; 0) {
+
+          // get only the last route requested
+          var routeParameters = this._routeCallQueue.pop();
+
+          // call the display route function
+          this.displayRoute(routeParameters.points, routeParameters.options, routeParameters.callback);
+
+          // clear out the queue
+          this._routeCallQueue = [];
+
+        } else {
+
+          this.hideLoadingMessage();
+
+        }
+
+      },
+
+      _addRouteWaypoint: function (latLng, checkPointIndex) {
+
+        if (typeof(checkPointIndex) == &quot;undefined&quot;) {
+          checkPointIndex = true;
+        }
+
+        if (this._routeWaypoints.length &lt; 3) {
+
+          var circle = new tomtom.Marker(latLng, WAYPOINT_MARKER_OPTIONS);
+
+          this.addLayer(circle);
+          circle.setContextMenu(this._waypointContextMenu);
+
+          // make the circle movable
+          L.DomEvent.on(circle._icon, &quot;mousedown&quot;, function (e) {
+
+            L.DomEvent.stop(e);
+
+            this._currentWaypoint = circle;
+
+            return false;
+
+          }, this);
+
+          L.DomEvent.on(circle._icon, &quot;dragstart&quot;, function (e) {
+
+            L.DomEvent.stop(e);
+            return false;
+
+          });
+
+          var waypointIndex = 0;
+          var minDistance = null;
+          var routePoints = this._getUpdatedRoutePoints();
+
+          if (checkPointIndex) {
+            // figure out where in the array the waypoint should be added
+            routePoints.forEach(function (currentLatLng, index) {
+
+              if (index + 1 &lt; routePoints.length) {
+
+                var nextLatLng = routePoints[index + 1];
+
+                // check the distance from the current segment
+                var distance = L.LineUtil.pointToSegmentDistance(
+                  new L.Point(latLng.lat, latLng.lng),
+                  new L.Point(currentLatLng.lat, currentLatLng.lng),
+                  new L.Point(nextLatLng.lat, nextLatLng.lng)
+                );
+
+                if (minDistance === null || minDistance === undefined || distance &lt; minDistance) {
+                  minDistance = distance;
+                  waypointIndex = index + 1;
+                }
+
+              }
+
+            }, this);
+
+            // subtract one, as the waypoints are stored in a separate array from the start / end
+            if (waypointIndex &gt; 0) {
+              waypointIndex--;
+            }
+
+            this._routeWaypoints.splice(waypointIndex, 0, circle);
+          } else {
+            this._routeWaypoints.push(circle);
+          }
+
+          return circle;
+
+        }
+
+      },
+
+      _removeWaypoint: function (e) {
+
+        // remove the marker
+        this.removeLayer(e.targetObject);
+
+        // remove the waypoint
+        this._routeWaypoints.splice(this._routeWaypoints.indexOf(e.targetObject), 1);
+
+        var options = L.Util.extend({ showLoading: false, updateMarkers: false, updateBounds: false, checkPoints: false }, this._currentRouteOptions);
+
+        // re-display the route
+        this.displayRoute([], options);
+
+        // remove the context menu targets
+        this._waypointContextMenu.removeTarget(e.targetElement);
+
+      },
+
+      _handleMouseMove: function (e) {
+
+        if (this._currentWaypoint !== null &amp;&amp; this._currentWaypoint !== undefined) {
+
+          // update the waypoint&#x27;s latlng
+          this._currentWaypoint.setLatLng(e.latlng);
+
+          var options = {};
+
+          options = L.Util.extend({ showLoading: false, updateMarkers: false, updateBounds: false, checkPoints: false }, this._currentRouteOptions);
+
+          // display the route
+          this.displayRoute([], options);
+
+          L.DomEvent.stop(e);
+
+          return false;
+
+        }
+
+      },
+
+      _getUpdatedRoutePoints: function () {
+
+        var routePoints = [];
+
+        // add the start
+        routePoints.push(this._routePoints[0]);
+
+        // add each waypoint
+        this._routeWaypoints.forEach(function (waypoint) {
+          routePoints.push(waypoint.getLatLng());
+        }, this);
+
+        // add the end point
+        routePoints.push(this._routePoints[this._routePoints.length - 1]);
+
+        return routePoints;
+
+      },
+
+      _handleMouseUp: function () {
+
+        this._currentWaypoint = null;
+
+        if (this._waypointsNeedUpdate &amp;&amp; !this._isRoutingExecuting) {
+          this._updateWaypoints();
+        }
+
+      },
+
+      _updateWaypoints: function () {
+
+        // wait untilthe user has dropped the waypoint
+        if (this._currentWaypoint !== null &amp;&amp; this._currentWaypoint !== undefined) {
+          return;
+        }
+
+        this._waypointsNeedUpdate = false;
+
+        // update waypoint markers, snap them onto the route
+        this._routeWaypoints.forEach(function (waypoint) {
+
+          var minDistance = 99999999;
+          var closestLatLng = null;
+
+          // find the closest point on the route
+          this._routeLayer.getLatLngs().some(function (point) {
+
+            var distance = point.distanceTo(waypoint.getLatLng());
+
+            if (distance &lt; minDistance) {
+              minDistance = distance;
+              closestLatLng = point;
+            }
+
+          });
+
+          // snap to the route
+          waypoint.setLatLng(closestLatLng);
+
+        }, this);
+
+      },
+
+      _updateRouteMarkers: function () {
+
+        var options = this._currentRouteOptions,
+          instructions = this._currentRoute.instructions;
+
+        if (instructions) {
+          var start = instructions[0],
+            end = instructions[instructions.length - 1],
+            markersExist = false;
+
+          var updateRouteFromMarkers = function () {
+
+            var options = L.Util.extend({
+              showLoading: false,
+              updateMarkers: false,
+              updateBounds: false
+            }, this._currentRouteOptions);
+
+            this.displayRoute(
+              [this._startMarker.getLatLng(), this._endMarker.getLatLng()],
+              options
+            );
+
+          };
+
+          // create the start marker if it doesn&#x27;t already exist
+          if (!this._startMarker) {
+            this._startMarker = new tomtom.Marker([start.point.latitude, start.point.longitude], tomtom.Map.MARKER_OPTIONS_ROUTE_START, { draggable: true });
+            this._startMarker.on(&quot;drag&quot;, updateRouteFromMarkers, this);
+          } else {
+            markersExist = true;
+          }
+
+          // create the end marker if it doesn&#x27;t already exist
+          if (!this._endMarker) {
+            this._endMarker = new tomtom.Marker([end.point.latitude, end.point.longitude], tomtom.Map.MARKER_OPTIONS_ROUTE_END, { draggable: true });
+            this._endMarker.on(&quot;drag&quot;, updateRouteFromMarkers, this);
+          } else {
+            markersExist = true;
+          }
+
+          // if the markers should be moved
+          if (markersExist &amp;&amp; typeof(options.updateMarkers) == &quot;undefined&quot; || options.updateMarkers) {
+            this._startMarker.setLatLng([start.point.latitude, start.point.longitude]);
+            this._endMarker.setLatLng([end.point.latitude, end.point.longitude]);
+          }
+
+          // add the route markers
+          this._routeMarkerLayer.addLayer(this._startMarker);
+          this._routeMarkerLayer.addLayer(this._endMarker);
+        }
+
+      },
+
+      _updateViewport: function (updateTraffic) {
+
+        var viewportService = this._viewportService;
+
+        if (viewportService === null || viewportService === undefined) {
+          viewportService = this._viewportService = new tomtom.services.ViewportService(this.apiKey);
+        }
+
+        var bounds = this.getBounds();
+        var extent = {
+          top: bounds.getNorthEast().lat,
+          right: bounds.getNorthEast().lng,
+          bottom: bounds.getSouthWest().lat,
+          left: bounds.getSouthWest().lng
+        };
+
+        // make a call to the viewport API to get the traffic model
+        viewportService.getViewportModel(extent, this.getZoom(), extent, this.getZoom(),
+          { projection: &quot;EPSG4326&quot;, copyright: false },
+          L.Util.bind(function (response) {
+
+            if (response.viewpResp) {
+
+              this._updateAttribution(response.viewpResp);
+
+              // if traffic should be displayed and a traffic model was returned update the traffic layers
+              if (this._displayTraffic &amp;&amp; response.viewpResp.trafficState &amp;&amp; response.viewpResp.trafficState[&quot;@trafficModelId&quot;]) {
+                var trafficModelId = this.trafficModel = response.viewpResp.trafficState[&quot;@trafficModelId&quot;];
+
+                if (updateTraffic) {
+
+                  // check to see if vector traffic is being used
+                  if (this.options.useVectorTrafficIncidents) {
+
+                    if (this._trafficLayer) {
+                      this.removeLayer(this._trafficLayer);
+                    }
+
+                  } else {
+
+                    // make sure the traffic layer hasn&#x27;t already been added
+                  if (this._trafficLayer === null || this._trafficLayer === undefined) {
+                      // create the traffic layer
+                      this._trafficLayer = this._getNewTrafficLayer(trafficModelId);
+                      this.addLayer(this._trafficLayer);
+                    } else {
+                      this._trafficLayer.update(trafficModelId);
+                    }
+
+                  }
+
+                  // make sure the traffic incident layer hasn&#x27;t already been created
+                  if (this._trafficIncidentLayer === null || this._trafficIncidentLayer === undefined) {
+                    // create the traffic incident layer
+                    this._trafficIncidentLayer = this._getNewTrafficIncidentLayer(trafficModelId);
+                    this.addLayer(this._trafficIncidentLayer);
+                    this._trafficIncidentLayer.update(true, trafficModelId);
+                  } else {
+                    this._trafficIncidentLayer.update(true, trafficModelId);
+                  }
+                } else if (this._trafficLayer) {
+                  this._trafficLayer.setTrafficModel(trafficModelId);
+                  this._trafficIncidentLayer.setTrafficModel(trafficModelId);
+                }
+              }
+
+            }
+
+          }, this));
+
+      },
+
+      _getNewTrafficIncidentLayer: function (trafficModelId) {
+
+        return new tomtom.layers.TrafficIncidentLayer(this.apiKey, trafficModelId);
+
+      },
+
+      _getNewTrafficLayer: function (trafficModelId) {
+
+        return new tomtom.layers.TrafficLayer(this.apiKey, trafficModelId);
+
+      },
+
+      _registerViewportUpdateTimeout: function () {
+
+        clearTimeout(this._viewportUpdateTimeoutId);
+
+        this._viewportUpdateTimeoutId = setTimeout(L.Util.bind(function () {
+
+          // update the traffic incidents
+          if (this._trafficIncidentLayer) {
+            this._trafficIncidentLayer.update(true, this.trafficModelId);
+          }
+
+          // update the viewport, but do not update the traffic
+          this._updateViewport(false);
+
+        }, this), 500);
+
+      },
+
+      _fireLoad: function () {
+
+        this._baseLayer.off(&quot;load&quot;, this._fireLoad);
+        this.fire(&quot;load&quot;);
+
+      },
+
+      _handleZoomChange: function () {
+
+        this._addRouteLayer();
+
+      },
+
+      _handleMapMove: function() {
+
+        var center = this.getCenter();
+
+        // keep the map location in a cookie
+        if (this.options.cookie) {
+          utils.setCookie(this.options.cookie.name, center.lat + &quot;,&quot; + center.lng + &quot;,&quot; + this.getZoom(), this.options.cookieExpirationDays);
+        }
+
+        // update the viewport
+        this._registerViewportUpdateTimeout();
+
+      },
+
+      _destroyAttribution: function () {
+
+        this._attributionClickHandlers.forEach(function (clickHandler) {
+          du.off(clickHandler.element, &quot;click&quot;, clickHandler.handler);
+        });
+
+        this._attributionClickHandlers = [];
+
+      },
+
+      _updateAttribution: function (viewport) {
+
+        this._destroyAttribution();
+
+        // remove the current TomTom attribution
+        if (this._currentAttribution) {
+          this.attributionControl.removeAttribution(this._currentAttribution);
+        }
+
+        this._currentAttribution = &quot;&quot;;
+
+        // split up the returned copyright info
+        var copyrightIds = viewport.copyrightIds.toString().split(&quot;^&quot;);
+
+        for (var copyrightIndex = 0; copyrightIndex &lt; copyrightIds.length; copyrightIndex++) {
+
+          var info = this._copyrightInfo[copyrightIds[copyrightIndex]];
+
+          if (info) {
+            this._currentAttribution += &quot;&lt;a href=\&quot;javascript:void(0);\&quot; data-id=\&quot;&quot; + info[&quot;@id&quot;] + &quot;\&quot;&gt;&quot; + info.label + &quot;&lt;/a&gt; &quot;;
+          }
+
+        }
+
+        // add the attribution to the attribution control
+        this.attributionControl.addAttribution(this._currentAttribution);
+
+        // connect to click events on attribution links
+        du.query(&quot;a&quot;, this.attributionControl._container).each(function (element) {
+
+          var clickHandler = function (e) {
+            this._attributionClick(du.attr(element, &quot;data-id&quot;), element, e);
+          };
+
+          this._attributionClickHandlers.push({ element: element, handler: clickHandler });
+
+          du.on(element, &quot;click&quot;, clickHandler, this);
+
+        }, this);
+
+      },
+
+      _attributionClick: function (id, element, e) {
+
+        // if an id was not supplied, don&#x27;t bother looking up the copyright info
+        if (id) {
+
+          // get the copyright info which was loaded by the initialize call
+          var copyrightInfo = this._copyrightInfo[id];
+
+          // make sure the copyright info was found, in case the viewport API returns something the initialize API doesn&#x27;t know about
+          if (copyrightInfo) {
+
+            // pre load the image
+            var image = document.createElement(&quot;img&quot;);
+
+            // create the popup once the image finishes loading
+            L.DomEvent.on(image, &quot;load&quot;, function () {
+
+              var container = du.create(&quot;div&quot;, &quot;leaflet-popup&quot;);
+
+              var closeButton = du.create(&quot;a&quot;, &quot;leaflet-popup-close-button&quot;).html(&quot;x&quot;).attr(&quot;href&quot;, &quot;#close&quot;);
+              container.append(closeButton);
+              container.css(&quot;opacity&quot;, 1);
+
+              var contentWrapper = du.create(&quot;div&quot;, &quot;leaflet-popup-content-wrapper&quot;);
+              container.append(contentWrapper);
+
+              var content = du.create(&quot;div&quot;, &quot;leaflet-popup-content&quot;)
+                .html(&quot;&lt;div class=\&quot;copyrightInfo\&quot;&gt;&lt;img src=\&quot;&quot; +
+                  copyrightInfo.logo + &quot;\&quot; class=\&quot;copyrightLogo\&quot; /&gt;&quot; +
+                  copyrightInfo.description + &quot;&lt;/div&gt;&quot;);
+
+              contentWrapper.append(content);
+
+              this._container.appendChild(container.get());
+
+              // place the popup in the center of the screen
+              var dimensions = du.dimensions(this._container);
+
+              container.css(&quot;top&quot;, ((dimensions.height - container.offsetHeight()) / 2) + &quot;px&quot;);
+              container.css(&quot;left&quot;, ((dimensions.width - container.offsetWidth()) / 2) + &quot;px&quot;);
+
+              // handle the close button
+              closeButton.on(&quot;click&quot;, function (e) {
+                this._container.removeChild(container.get());
+                L.DomEvent.stop(e);
+              }, this);
+
+            }, this);
+
+            image.src = copyrightInfo.logo;
+            L.DomEvent.stop(e || event);
+
+          }
+
+        }
+
+      }
+
+    });
+
+    // ** Other documentation items that aren&#x27;t a part of the class ** //
+
+    /**
+     * Adds the given control to the map.
+     * @method addControl
+     * @param {L.IControl} control The control to add to the map.
+     */
+
+    /**
+     * Removes the given control from the map.
+     * @method removeControl
+     * @param {L.IControl} control The control to remove from the map.
+     */
+
+    /**
+     * Sets the view of the map (geographical center and zoom). If forceReset is set to true, the map is reloaded even if it&#x27;s eligible for pan or zoom animation (false by default).
+     * @method setView
+     * @param {L.LatLng} center The center location to pan the map to.
+     * @param {Number} zoom The zoom level to set the map to.
+     * @param {Boolean} [forceReset=false] If true, the map is reloaded even if it&#x27;s eligible for pan or zoom animation.
+     */
+
+    /**
+     * Sets the zoom level of the map.
+     * @method setZoom
+     * @param {Number} zoom The zoom level to set the map to.
+     */
+
+    /**
+     * Increases the zoom of the map by delta (1 by default).
+     * @method zoomIn
+     * @param {Number} [delta=1] The amount to zoom by.
+     */
+
+    /**
+     * Decreases the zoom of the map by delta (1 by default).
+     * @method zoomOut
+     * @param {Number} [delta=1] The amount to zoom by.
+     */
+
+    /**
+     * Sets a map view that contains the given geographical bounds with the maximum zoom level possible.
+     * @method fitBounds
+     * @param {L.LatLngBounds} bounds The bounds to fit the map view to.
+     */
+
+    /**
+     * Sets a map view that mostly contains the whole world with the maximum zoom level possible.
+     * @method fitWorld
+     */
+
+    /**
+     * Pans the map to a given center. Makes an animated pan if new center is not more than one screen away from the current one.
+     * @method panTo
+     * @param {L.LatLng} latlng The lat / lng to pan to.
+     */
+
+    /**
+     * Pans the map to the closest view that would lie inside the given bounds (if it&#x27;s not already).
+     * @method panInsideBounds
+     * @param {L.LatLngBounds} bounds The bounds to try and pan to.
+     */
+
+    /**
+     * Pans the map by a given number of pixels (animated).
+     * @method panBy
+     * @param {L.Point} point The number of x / y units to pan the map by.
+     */
+
+    /**
+     * Checks if the map container size changed and updates the map if so — call it after you&#x27;ve changed the map size dynamically. If animate is true, map animates the update.
+     * @method invalidateSize
+     * @param {Boolean} [animate=false] If true, the resize will be animated.
+     */
+
+    /**
+     * Restricts the map view to the given bounds (see map maxBounds option).
+     * @method setMaxBounds
+     * @param {L.LatLngBound} bounds The bounds to restrict the map to.
+     */
+
+    /**
+     * Tries to locate the user using Geolocation API, firing locationfound event with location data on success or locationerror event on failure, and optionally sets the map view to the user location with respect to detection accuracy (or to the world view if geolocation failed). See Locate options for more details.
+     * @method locate
+     * @param {L.LocateOptions} [options] The options to use when locating the user.
+     * @param {Boolean} [options.watch=false] If true, starts continous watching of location changes (instead of detecting it once) using W3C watchPosition method. You can later stop watching using map.stopLocate() method.
+     * @param {Boolean} [options.setView=false] If true, automatically sets the map view to the user location with respect to detection accuracy, or to world view if geolocation failed.
+     * @param {Number} [options.maxZoom=Infinity] The maximum zoom for automatic view setting when using &#x60;setView&#x60; option.
+     * @param {Number} [options.timeout=10000] Number of millisecond to wait for a response from geolocation before firing a locationerror event.
+     * @param {Number} [options.maximumAge=0] Maximum age of detected location. If less than this amount of milliseconds passed since last geolocation response, locate will return a cached location.
+     * @param {Boolean} [options.enableHighAccuracy=false] Enables high accuracy, see http://dev.w3.org/geo/api/spec-source.html#high-accuracydescription.
+     */
+
+    /**
+     * Stops watching location previously initiated by map.locate({watch: true}).
+     * @method stopLocate
+     */
+
+    /**
+     * Returns the geographical center of the map view.
+     * @method getCenter
+     */
+
+    /**
+     * Returns the current zoom of the map view.
+     * @method getZoom
+     */
+
+    /**
+     * Returns the minimum zoom level of the map.
+     * @method getMinZoom
+     */
+
+    /**
+     * Returns the maximum zoom level of the map.
+     * @method getMaxZoom
+     */
+
+    /**
+     * Returns the LatLngBounds of the current map view.
+     * @method getBounds
+     */
+
+    /**
+     * Returns the maximum zoom level on which the given bounds fit to the map view in its entirety. If inside (optional) is set to true, the method instead returns the minimum zoom level on which the map view fits into the given bounds in its entirety.
+     * @getBoundsZoom
+     * @param {L.LatLngBounds} bounds The bounds to get the zoom level for.
+     * @param {Boolean} [inside=false] If true, determines the minimum zoom in which the map view will fit.
+     */
+
+    /**
+     * Returns the current size of the map container.
+     * @method getSize
+     */
+
+    /**
+     * Adds the given layer to the map. If optional insertAtTheBottom is set to true, the layer is inserted under all others (useful when switching base tile layers).
+     * @method addLayer
+     * @param {Boolean} [insertAtTheBottom=false]
+     */
+
+    /**
+     * Removes the given layer from the map.
+     * @method removeLayer
+     * @param {L.ILayer} layer The layer to remove.
+     */
+
+    /**
+     * Returns true if the given layer is currently added to the map.
+     * @method hasLayer
+     * @param {L.ILayer} layer The layer to check.
+     */
+
+    /**
+     * Opens the specified popup while closing the previously opened (to make sure only one is opened at one time for usability).
+     * @method openPopup
+     * @param {Popup} popup The popup to open.
+     */
+
+    /**
+     * Closes the popup opened with openPopup.
+     * @method closePopup
+     */
+
+    /**
+     * Registers an event handler for the map.
+     * @method on
+     * @param {String} eventName The name of the event to attach to.
+     * @param {Function} callback The function to call when the event is Fired.
+     * @param {Object} [scope] The scope to execute the callback in.
+     */
+
+    /**
+     * Returns the map layer point that corresponds to the given geographical coordinates (useful for placing overlays on the map).
+     * @method latLngToLayerPoint
+     * @param {L.LatLng} latlng
+     * @returns L.Point
+     */
+
+    /**
+     * Returns the geographical coordinates of a given map layer point.
+     * @method layerPointToLatLng
+     * @param {L.Point} point
+     * @returns L.LatLng
+     */
+
+    /**
+     * Converts the point relative to the map container to a point relative to the map layer.
+     * @method containerPointToLayerPoint
+     * @param {L.Point} point
+     * @returns L.Point
+     */
+
+    /**
+     * Converts the point relative to the map layer to a point relative to the map container.
+     * @method layerPointToContainerPoint
+     * @param {L.Point} point
+     * @returns L.Point
+     */
+
+    /**
+     * Returns the map container point that corresponds to the given geographical coordinates.
+     * @method latLngToContainerPoint
+     * @param {L.LatLng} latlng
+     * @returns L.Point
+     */
+
+    /**
+     * Returns the geographical coordinates of a given map container point.
+     * @method containerPointToLatLng
+     * @param {L.Point} point
+     * @returns L.LatLng
+     */
+
+    /**
+     * Projects the given geographical coordinates to absolute pixel coordinates for the given zoom level (current zoom level by default).
+     * @method project
+     * @param {L.LatLng} latlng
+     * @param {Number} [zoom]
+     * @returns L.Point
+     */
+
+    /**
+     * Projects the given absolute pixel coordinates to geographical coordinates for the given zoom level (current zoom level by default).
+     * @method unproject
+     * @param {L.Point} point
+     * @param {Number} [zoom]
+     * @returns L.LatLng
+     */
+
+    /**
+     * Returns the pixel coordinates of a mouse click (relative to the top left corner of the map) given its event object.
+     * @method mouseEventToContainerPoint
+     * @param {L.MouseEvent} event
+     * @returns L.Point
+     */
+
+    /**
+     * Returns the pixel coordinates of a mouse click relative to the map layer given its event object.
+     * @method mouseEventToLayerPoint
+     * @param {L.MouseEvent} event
+     * @returns L.Point
+     */
+
+    /**
+     * Returns the geographical coordinates of the point the mouse clicked on given the click&#x27;s event object.
+     * @method mouseEventToLatLng
+     * @param {L.MouseEvent} event
+     * @returns L.LatLng
+     */
+
+    /**
+     * Fired when the map and its base layer have completed loading.
+     * @event load
+     */
+
+    /**
+     * Fired when a new layer is added to the map.
+     * @event layeradd
+     */
+
+    /**
+     * Fired when some layer is removed from the map.
+     * @event layerremove
+     */
+
+    /**
+     * Fired when the base layer is changed through the layer control.
+     * @event baselayerchange
+     */
+
+    /**
+     * Fired after the start of a drag, pan, or zoom.
+     * @event movestart
+     */
+
+    /**
+     * Fired after each drag, pan, or zoom
+     * @event move
+     */
+
+    /**
+     * Fired after a drag, pan, or zoom completes
+     * @event moveend
+     */
+
+    /**
+     * Fired after a zoom completes
+     * @event zoomend
+     */
+
+    /**
+     * Fired after a zoom completes
+     * @event zoomstart
+     */
+
+    /**
+     * Fired after mouseover the map
+     * @event mouseover
+     */
+
+    /**
+     * Fired after mouseout the map
+     * @event mouseout
+     */
+
+    /**
+     * Fired after mousemove the map
+     * @event mousemove
+     */
+
+    /**
+     * Fired when the user clicks the mouse button.
+     * @event mousedown
+     */
+
+    /**
+     * Fired when the user releases the mouse button.
+     * @event mouseup
+     */
+
+    /**
+     * Fired when the user releases the mouse button.
+     * @event click
+     */
+
+    /**
+     * Fired when the user double clicks the map.
+     * @event dblclick
+     */
+
+    /**
+     * Fired after the base layer changes
+     * @event changebaselayer
+     */
+
+    /**
+     * Fired when geolocation (using locate method) went successfully.
+     * @event locationfound
+     */
+
+    /**
+     * Fired when geolocation (using locate method) failed.
+     * @event locationerror
+     */
+
+    /**
+     * Fired when a popup is opened (using openPopup method).
+     * @event popupopen
+     */
+
+    /**
+     * Fired when a popup is closed (using closePopup method).
+     * @event popupclose
+     */
+
+    // ** end  ** //
+
+    var TRAFFIC_UPDATE_INTERVAL = 120000;
+    var INSTRUCTION_ZOOM_LEVEL = 16;
+    var WAYPOINT_MARKER_OPTIONS = { iconUrl: &quot;waypoint.png&quot;, iconSize: [10, 10], iconAnchor: [5, 5] };
+
+    /**
+     * The name of the default marker layer.
+     */
+    tomtom.Map.MARKER_LAYER_DEFAULT = &quot;DEFAULT&quot;;
+
+    /**
+     * The name of the traffic layer.
+     */
+    tomtom.Map.MARKER_LAYER_TRAFFIC = &quot;TRAFFIC&quot;;
+
+    /**
+     * Defines the marker options for the route start point.
+     * @static
+     * @property MARKER_OPTIONS_ROUTE_START
+     */
+    tomtom.Map.MARKER_OPTIONS_ROUTE_START = {
+      iconUrl: &quot;marker_start.png&quot;,
+      iconSize: [ 43, 49 ],
+      iconAnchor: [ 11, 40 ],
+      popupAnchor: [ 0, 0 ]
+    };
+
+    /**
+     * Defines the marker options for the route end point.
+     * @static
+     * @property MARKER_OPTIONS_ROUTE_END
+     */
+    tomtom.Map.MARKER_OPTIONS_ROUTE_END = {
+      iconUrl: &quot;marker_finish.png&quot;,
+      iconSize: [ 43, 49 ],
+      iconAnchor: [ 11, 40 ],
+      popupAnchor: [ 0, 0 ]
+    };
+
+    return tomtom.Map;
+  }
+);
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

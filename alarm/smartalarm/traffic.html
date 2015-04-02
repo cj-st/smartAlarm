@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Traffic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <link rel="stylesheet" href="traffic.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+
+
+    <script type="text/javascript"
+         src="https://maps.google.com/maps/api/js?
+                       key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8&sensor=false">
+    </script>
+
+<script type="text/javascript" src="TomTom-JavaScript-SDK-2.1.0/js/leaflet.js"></script>
+<link rel="stylesheet" type="text/css" href="TomTom-JavaScript-SDK-2.1.0/css/tomtom.map.min.css">
+    <link rel="stylesheet" type="text/css" href="TomTom-JavaScript-SDK-2.1.0/css/tomtom.controls.min.css">
+<script type="text/javascript" src="TomTom-JavaScript-SDK-2.1.0/js/tomtom.map.js"></script>
+    <script type="text/javascript" src="TomTom-JavaScript-SDK-2.1.0/js/tomtom.controls.js"></script>
+</head>
+<body>
+
+<!-- tomtom has its own css might not work well with bootstrap-->
+<div style="color:white;float:left" id="route" ></div>
+<div style="width: 50%; height:50%; float: left;" id="map"></div>
+<script src="traffic.js"></script>
+</body>
+</html>

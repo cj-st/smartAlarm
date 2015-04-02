@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\tomtom\Animation.js - TomTom JavaScript SDK</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://www.tomtom.com/global/images/tomtom-logo_tcm166-3340.png" title="TomTom JavaScript SDK"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/L.Control.Pan.html">L.Control.Pan</a></li>
+            
+                <li><a href="../classes/L.Control.ZoomSlider.html">L.Control.ZoomSlider</a></li>
+            
+                <li><a href="../classes/tomtom.AjaxUtil.html">tomtom.AjaxUtil</a></li>
+            
+                <li><a href="../classes/tomtom.Animation.html">tomtom.Animation</a></li>
+            
+                <li><a href="../classes/tomtom.controls.AutoComplete.html">tomtom.controls.AutoComplete</a></li>
+            
+                <li><a href="../classes/tomtom.controls.ContextMenu.html">tomtom.controls.ContextMenu</a></li>
+            
+                <li><a href="../classes/tomtom.controls.FindLocationControl.html">tomtom.controls.FindLocationControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.PanZoomBar.html">tomtom.controls.PanZoomBar</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RouteControl.html">tomtom.controls.RouteControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RoutePlannerControl.html">tomtom.controls.RoutePlannerControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.TabContainer.html">tomtom.controls.TabContainer</a></li>
+            
+                <li><a href="../classes/tomtom.CustomDivIcon.html">tomtom.CustomDivIcon</a></li>
+            
+                <li><a href="../classes/tomtom.CustomMarker.html">tomtom.CustomMarker</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtil.html">tomtom.dom.DomUtil</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtilResult.html">tomtom.dom.DomUtilResult</a></li>
+            
+                <li><a href="../classes/tomtom.layers.MapLayer.html">tomtom.layers.MapLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficIncidentLayer.html">tomtom.layers.TrafficIncidentLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficLayer.html">tomtom.layers.TrafficLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.WMSLayer.html">tomtom.layers.WMSLayer</a></li>
+            
+                <li><a href="../classes/tomtom.LocaleManager.html">tomtom.LocaleManager</a></li>
+            
+                <li><a href="../classes/tomtom.Main.html">tomtom.Main</a></li>
+            
+                <li><a href="../classes/tomtom.Map.html">tomtom.Map</a></li>
+            
+                <li><a href="../classes/tomtom.Marker.html">tomtom.Marker</a></li>
+            
+                <li><a href="../classes/tomtom.MarkerManager.html">tomtom.MarkerManager</a></li>
+            
+                <li><a href="../classes/tomtom.services.GeocodingService.html">tomtom.services.GeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.HDTRegionsService.html">tomtom.services.HDTRegionsService</a></li>
+            
+                <li><a href="../classes/tomtom.services.InitializeService.html">tomtom.services.InitializeService</a></li>
+            
+                <li><a href="../classes/tomtom.services.LegacyGeocodingService.html">tomtom.services.LegacyGeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.RoutingService.html">tomtom.services.RoutingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.TrafficService.html">tomtom.services.TrafficService</a></li>
+            
+                <li><a href="../classes/tomtom.services.ViewportService.html">tomtom.services.ViewportService</a></li>
+            
+                <li><a href="../classes/tomtom.StringBundle.html">tomtom.StringBundle</a></li>
+            
+                <li><a href="../classes/tomtom.TrafficMarker.html">tomtom.TrafficMarker</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\tomtom\Animation.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+define([
+    &quot;./dom/DomUtil&quot;,
+    &quot;./Utils&quot;,
+    &quot;./Main&quot;
+  ],
+
+  function (du) {
+
+    tomtom.Animation = L.Class.extend({
+
+      /**
+       * Creates an animation object which can be used to play animations for DOM Nodes.
+       * @constructor
+       * @class Animation
+       * @namespace tomtom
+       * @param {String | DOM Node} element The element the animation should be performed on.
+       * @param {String} effect The effect used to play the animation.  Should be one of &quot;bounce&quot;, &quot;dropIn&quot;, &quot;fadeIn&quot;, &quot;fadeOut&quot;.
+       * @param {Object} [options] Additional options for the animation.
+       * @param {Number} [options.duration=500] The duration the animation should be played for.
+       * @param {Number} [options.delay=0] The time to wait before starting the animation.
+       * @param {Function} [options.callback] The callback to be executed when the animation has completed.
+       * @example
+       *  new tomtom.Animation(document.getElementById(&quot;test&quot;), &quot;fadeIn&quot;).play();
+       */
+      initialize: function (element, effect, options) {
+        this.element = L.DomUtil.get(element);
+        this.effect = effect;
+        this.options = options;
+
+        if (!this.options) {
+          this.options = {};
+        }
+
+        // apply defaults
+        if (!this.options.duration) {
+          this.options.duration = DEFAULT_DURATION;
+        }
+
+        this._originalPosition = L.DomUtil.getPosition(element);
+      },
+
+      dropIn: function () {
+        var element = this.element;
+        var position = L.DomUtil.getPosition(element);
+        var height = this.options.height;
+
+        // default the drop in height
+        if (!height) {
+          height = element.offsetHeight * 10;
+        }
+
+        L.DomUtil.setPosition(element, { x: position.x, y: position.y - height });
+
+        du.css(element, &quot;display&quot;, &quot;none&quot;);
+
+        return function () {
+          du.css(element, &quot;display&quot;, &quot;block&quot;);
+
+          this.animate({
+            delta: makeEaseOut(bounce),
+            step: function (delta) {
+              L.DomUtil.setPosition(element, { x: position.x, y: position.y * delta });
+            }
+          });
+        };
+      },
+
+      bounce: function () {
+        var element = this.element;
+        var position = L.DomUtil.getPosition(element);
+        var height = this.options.height;
+
+        // the animation has two parts, cut the duration in half
+        this.options.duration = this.options.duration / 2;
+
+        // default the drop in height
+        if (!height) {
+          height = element.offsetHeight * 5;
+        }
+
+        du.css(element, &quot;display&quot;, &quot;none&quot;);
+
+        return function () {
+          du.css(element, &quot;display&quot;, &quot;block&quot;);
+
+          this.animate({
+            delta: makeEaseOut(quad),
+            step: function (delta) {
+              L.DomUtil.setPosition(element, { x: position.x, y: position.y - Math.abs(position.y - (position.y - height)) * delta });
+            },
+            callback: L.Util.bind(function () {
+
+              if (this._cancel) {
+                return;
+              }
+
+              L.DomUtil.setPosition(element, { x: position.x, y: position.y - height });
+
+              // re-get the position
+              position = L.DomUtil.getPosition(element);
+
+              this.animate({
+                delta: makeEaseOut(bounce),
+                step: L.Util.bind(function (delta) {
+
+                  if (this._cancel) {
+                    return;
+                  }
+
+                  L.DomUtil.setPosition(element, { x: position.x, y: position.y + Math.abs(position.y - (position.y + height)) * delta });
+
+                }, this)
+              });
+
+            }, this)
+          });
+        };
+      },
+
+      fadeIn: function () {
+        var element = this.element;
+
+        L.DomUtil.setOpacity(element, 0);
+
+        return function () {
+          this.animate({
+            delta: makeEaseOut(linear),
+            step: L.Util.bind(function (delta) {
+
+              if (this._cancel) {
+                return;
+              }
+
+              L.DomUtil.setOpacity(element, delta);
+
+            }, this)
+          });
+        };
+      },
+
+      fadeOut: function () {
+        var element = this.element;
+
+        L.DomUtil.setOpacity(element, 1);
+
+        return function () {
+          this.animate({
+            delta: makeEaseOut(linear),
+            step: L.Util.bind(function (delta) {
+
+              if (this._cancel) {
+                return;
+              }
+
+              L.DomUtil.setOpacity(element, 1 - delta);
+
+            }, this)
+          });
+        };
+      },
+
+      /**
+       * Starts the animation.
+       * @method play
+       */
+      play: function () {
+        var animationFunction = this[this.effect];
+
+        if (animationFunction &amp;&amp; typeof(animationFunction) == &quot;function&quot;) {
+          // don&#x27;t bother animating if the element isn&#x27;t visible
+          if (this.element.style.display == &quot;none&quot;) {
+            return;
+          }
+
+          // clear the previous timeout
+          if (this.animationTimeoutId) {
+            clearTimeout(this.animationTimeoutId);
+          }
+
+          var callback = animationFunction.apply(this, []);
+
+          if (this.options.delay) {
+            this.animationTimeoutId = setTimeout(L.Util.bind(function () {
+              callback.apply(this, []);
+            }, this), this.options.delay);
+          } else {
+            callback.apply(this, []);
+          }
+        }
+      },
+
+      /**
+       * Cancels the animation and returns the elements to their original position.
+       */
+      stop: function() {
+
+        this._cancel = true;
+
+        clearInterval(this._animationInterval);
+        clearTimeout(this.animationTimeoutId);
+
+        // make sure the element is displayed again
+        this.element.style.display = &quot;block&quot;;
+
+        // return the element to it&#x27;s original position
+        L.DomUtil.setPosition(this.element, this._originalPosition);
+
+      },
+
+      animate: function (options) {
+        var start = new Date();
+
+        var id = setInterval(L.Util.bind(function () {
+
+          var timePassed = new Date() - start;
+          var progress = timePassed / this.options.duration;
+
+          if (progress &gt; 1) {
+            progress = 1;
+          }
+
+          var delta = options.delta(progress);
+          options.step(delta);
+
+          if (progress == 1) {
+
+            clearInterval(id);
+
+            if (options.callback) {
+              options.callback();
+            } else if (this.options.callback) {
+              this.options.callback();
+            }
+
+          }
+
+        }, this), ANIMATION_INTERVAL);
+
+        this._animationInterval = id;
+      }
+
+    });
+
+    // animation functions
+
+    function linear(progress) {
+      return progress;
+    }
+
+    function quad(progress) {
+      return Math.pow(progress, 2);
+    }
+
+    function bounce(progress) {
+      for (var a = 0, b = 1; 1; a += b, b /= 2) {
+        if (progress &gt;= (7 - 4 * a) / 11) {
+          return -Math.pow((11 - 6 * a - 11 * progress) / 4, 2) + Math.pow(b, 2);
+        }
+      }
+    }
+
+
+    function makeEaseOut(delta) {
+      return function (progress) {
+        return 1 - delta(1 - progress);
+      };
+    }
+
+
+    var DEFAULT_DURATION = 500;
+    var ANIMATION_INTERVAL = 25;
+
+    return tomtom.Animation;
+
+  }
+);
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

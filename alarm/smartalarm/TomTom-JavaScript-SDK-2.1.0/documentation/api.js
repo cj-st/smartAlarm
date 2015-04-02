@@ -1,0 +1,41 @@
+YUI.add("yuidoc-meta", function(Y) {
+   Y.YUIDoc = { meta: {
+    "classes": [
+        "L.Control.Pan",
+        "L.Control.ZoomSlider",
+        "tomtom.AjaxUtil",
+        "tomtom.Animation",
+        "tomtom.CustomDivIcon",
+        "tomtom.CustomMarker",
+        "tomtom.LocaleManager",
+        "tomtom.Main",
+        "tomtom.Map",
+        "tomtom.Marker",
+        "tomtom.MarkerManager",
+        "tomtom.StringBundle",
+        "tomtom.TrafficMarker",
+        "tomtom.controls.AutoComplete",
+        "tomtom.controls.ContextMenu",
+        "tomtom.controls.FindLocationControl",
+        "tomtom.controls.PanZoomBar",
+        "tomtom.controls.RouteControl",
+        "tomtom.controls.RoutePlannerControl",
+        "tomtom.controls.TabContainer",
+        "tomtom.dom.DomUtil",
+        "tomtom.dom.DomUtilResult",
+        "tomtom.layers.MapLayer",
+        "tomtom.layers.TrafficIncidentLayer",
+        "tomtom.layers.TrafficLayer",
+        "tomtom.layers.WMSLayer",
+        "tomtom.services.GeocodingService",
+        "tomtom.services.HDTRegionsService",
+        "tomtom.services.InitializeService",
+        "tomtom.services.LegacyGeocodingService",
+        "tomtom.services.RoutingService",
+        "tomtom.services.TrafficService",
+        "tomtom.services.ViewportService"
+    ],
+    "modules": [],
+    "allModules": []
+} };
+});

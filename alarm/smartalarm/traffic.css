@@ -1,0 +1,24 @@
+
+//hard-coded css need to change to fit all backgrounds
+.tt-route-control-parameters{
+	width:50%;
+	height:100%;
+}
+.tt-control-data{
+	color:white;
+}
+.tt-route-control-planRoute{
+	background-color: grey;
+}
+.tt-control-text{
+	background-color:grey;
+}
+select[name="routeLeaveAt"]{
+	background-color:grey;
+}
+select[name="routeDay"]{
+	background-color:grey;
+}
+select[name="routeTime"]{
+	background-color:grey;
+}

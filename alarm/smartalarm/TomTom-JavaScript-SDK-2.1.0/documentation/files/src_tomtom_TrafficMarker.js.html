@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src\tomtom\TrafficMarker.js - TomTom JavaScript SDK</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="http://www.tomtom.com/global/images/tomtom-logo_tcm166-3340.png" title="TomTom JavaScript SDK"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 2.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/L.Control.Pan.html">L.Control.Pan</a></li>
+            
+                <li><a href="../classes/L.Control.ZoomSlider.html">L.Control.ZoomSlider</a></li>
+            
+                <li><a href="../classes/tomtom.AjaxUtil.html">tomtom.AjaxUtil</a></li>
+            
+                <li><a href="../classes/tomtom.Animation.html">tomtom.Animation</a></li>
+            
+                <li><a href="../classes/tomtom.controls.AutoComplete.html">tomtom.controls.AutoComplete</a></li>
+            
+                <li><a href="../classes/tomtom.controls.ContextMenu.html">tomtom.controls.ContextMenu</a></li>
+            
+                <li><a href="../classes/tomtom.controls.FindLocationControl.html">tomtom.controls.FindLocationControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.PanZoomBar.html">tomtom.controls.PanZoomBar</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RouteControl.html">tomtom.controls.RouteControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.RoutePlannerControl.html">tomtom.controls.RoutePlannerControl</a></li>
+            
+                <li><a href="../classes/tomtom.controls.TabContainer.html">tomtom.controls.TabContainer</a></li>
+            
+                <li><a href="../classes/tomtom.CustomDivIcon.html">tomtom.CustomDivIcon</a></li>
+            
+                <li><a href="../classes/tomtom.CustomMarker.html">tomtom.CustomMarker</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtil.html">tomtom.dom.DomUtil</a></li>
+            
+                <li><a href="../classes/tomtom.dom.DomUtilResult.html">tomtom.dom.DomUtilResult</a></li>
+            
+                <li><a href="../classes/tomtom.layers.MapLayer.html">tomtom.layers.MapLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficIncidentLayer.html">tomtom.layers.TrafficIncidentLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.TrafficLayer.html">tomtom.layers.TrafficLayer</a></li>
+            
+                <li><a href="../classes/tomtom.layers.WMSLayer.html">tomtom.layers.WMSLayer</a></li>
+            
+                <li><a href="../classes/tomtom.LocaleManager.html">tomtom.LocaleManager</a></li>
+            
+                <li><a href="../classes/tomtom.Main.html">tomtom.Main</a></li>
+            
+                <li><a href="../classes/tomtom.Map.html">tomtom.Map</a></li>
+            
+                <li><a href="../classes/tomtom.Marker.html">tomtom.Marker</a></li>
+            
+                <li><a href="../classes/tomtom.MarkerManager.html">tomtom.MarkerManager</a></li>
+            
+                <li><a href="../classes/tomtom.services.GeocodingService.html">tomtom.services.GeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.HDTRegionsService.html">tomtom.services.HDTRegionsService</a></li>
+            
+                <li><a href="../classes/tomtom.services.InitializeService.html">tomtom.services.InitializeService</a></li>
+            
+                <li><a href="../classes/tomtom.services.LegacyGeocodingService.html">tomtom.services.LegacyGeocodingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.RoutingService.html">tomtom.services.RoutingService</a></li>
+            
+                <li><a href="../classes/tomtom.services.TrafficService.html">tomtom.services.TrafficService</a></li>
+            
+                <li><a href="../classes/tomtom.services.ViewportService.html">tomtom.services.ViewportService</a></li>
+            
+                <li><a href="../classes/tomtom.StringBundle.html">tomtom.StringBundle</a></li>
+            
+                <li><a href="../classes/tomtom.TrafficMarker.html">tomtom.TrafficMarker</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src\tomtom\TrafficMarker.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+define([&quot;./CustomMarker&quot;, &quot;sizzle&quot;],
+
+  function (customMarker, q) {
+
+    tomtom.TrafficMarker = tomtom.CustomMarker.extend({
+
+      /**
+       * A marker which is used to mark traffic incidents and clusters of traffic incidents.
+       * @constructor
+       * @class TrafficMarker
+       * @namespace tomtom
+       * @extends tomtom.CustomMarker
+       * @param {L.LatLng} latlng The lat / lng the marker should be added at.  Can either pass an array, [lat, lng] or a L.LatLng object.
+       * @param {Object} incident The incident information returned from the traffic service.
+       */
+      initialize: function (latlng, incident) {
+
+        this.incidentType = tomtom.TrafficMarker.getTypeString(incident.ty);
+        this.iconCategory = tomtom.TrafficMarker.getCategoryString(incident.ic);
+        this.clusterSize = incident.cs;
+        this._incident = incident;
+
+        // sometimes, clusters aren&#x27;t returned as category == 13
+        if (this.clusterSize &amp;&amp; this.iconCategory != &quot;region&quot;) {
+          this.iconCategory = &quot;cluster&quot;;
+        }
+
+        tomtom.CustomMarker.prototype.initialize.apply(this, [latlng, &quot;trafficIcon&quot;]);
+
+      },
+
+      onAdd: function (map) {
+        /* jshint unused:false */
+        tomtom.CustomMarker.prototype.onAdd.apply(this, arguments);
+
+        this.configureIcon();
+
+        this.off(&quot;mouseover&quot;, this._onMouseOver);
+        this.off(&quot;mouseout&quot;, this._onMouseOut);
+        this.on(&quot;mouseover&quot;, this._onMouseOver, this);
+        this.on(&quot;mouseout&quot;, this._onMouseOut, this);
+
+      },
+
+      onRemove: function (map) {
+        /* jshint unused:false */
+
+        tomtom.CustomMarker.prototype.onRemove.apply(this, arguments);
+
+        this.off(&quot;mouseover&quot;, this._onMouseOver);
+        this.off(&quot;mouseout&quot;, this._onMouseOut);
+
+      },
+
+      configureIcon: function () {
+
+        var category = this.iconCategory,
+          type = this.incidentType;
+
+        // set up the background
+        this.setBackgroundImage(&quot;traffic-icons/&quot; + category + &quot;-&quot; + type + &quot;.png&quot;);
+
+        // set up the element&#x27;s id
+        this._icon.id = &quot;traffic_incident_&quot; + this._incident.id;
+
+        // set up the offset
+        if (category == &quot;cluster&quot; || category == &quot;region&quot;) {
+
+          L.DomUtil.addClass(this._icon, &quot;trafficIcon-cluster&quot;);
+
+          this._icon.innerHTML = this.clusterSize;
+
+          if (category == &quot;region&quot;) {
+            L.DomUtil.addClass(this._icon, &quot;trafficIcon-region&quot;);
+          }
+
+          this._configureClusterPopup();
+
+        } else {
+
+          this._configurePopup();
+
+        }
+
+      },
+
+      setBackgroundImage: function (image) {
+
+        this._icon.style.backgroundImage = &quot;url(\&quot;&quot; + tomtom.baseImagePath + image + &quot;\&quot;)&quot;;
+
+      },
+
+      _onMouseOut: function () {
+
+        L.DomUtil.removeClass(this._icon, &quot;trafficIcon-hover&quot;);
+
+      },
+
+      _onMouseOver: function () {
+
+        L.DomUtil.addClass(this._icon, &quot;trafficIcon-hover&quot;);
+
+      },
+
+      _configurePopup: function () {
+
+        this.bindPopup(this._getIncidentMarkup(this._incident));
+
+      },
+
+      _getIncidentMarkup: function (incident) {
+        var baseUrl = tomtom.baseImagePath;
+        var bundle = new tomtom.StringBundle(&quot;IncidentItem&quot;);
+
+        // default properties to empty
+        var data = L.Util.extend({
+          r: &quot;&quot;,
+          dl: &quot;--&quot;,
+          l: &quot;--&quot;,
+          d: &quot;&quot;,
+          f: &quot;--&quot;,
+          t: &quot;--&quot;,
+          icon: &quot;url(&quot; + baseUrl + &quot;traffic-icons/&quot; + tomtom.TrafficMarker.getCategoryString(incident.ic) + &quot;-&quot; + tomtom.TrafficMarker.getTypeString(incident.ty) + &quot;.png)&quot;,
+          &quot;labelDelay&quot;: bundle.getString(&quot;delay&quot;),
+          &quot;labelLength&quot;: bundle.getString(&quot;length&quot;),
+          &quot;labelFrom&quot;: bundle.getString(&quot;from&quot;),
+          &quot;labelTo&quot;: bundle.getString(&quot;to&quot;)
+        }, incident);
+
+        // format the delay time
+        if (data.dl &amp;&amp; !isNaN(data.dl)) {
+          data.dl = Math.round(data.dl / 60);
+          data.dl += &quot; &quot; + tomtom.StringBundle.getString(&quot;units.time.minute&quot;, null, data.dl);
+        }
+
+        // format the distance
+        if (data.l &amp;&amp; !isNaN(data.l)) {
+          data.l = tomtom.StringBundle.getString(&quot;units.distance&quot;, null, data.l);
+        }
+
+        return L.Util.template(INCIDENT_MARKUP, data);
+      },
+
+      _configureClusterPopup: function () {
+
+        var baseUrl = tomtom.baseImagePath;
+        var poiCount = 0;
+        var poiMarkup = &quot;&quot;;
+        var bundle = new tomtom.StringBundle(&quot;IncidentBalloon.Cluster&quot;);
+        var incident = this._incident;
+
+        // sort the POIs by the longest delay
+        var pois = this.pois = incident.cpoi.sort(function (a, b) {
+          if (a.dl &gt; b.dl) {
+            return -1;
+          } else if (a.dl == b.dl) {
+            return 0;
+          } else {
+            return 1;
+          }
+        });
+
+        this._pois = pois;
+
+        // generate the markup for the top 4 POIs
+        for (var poiIndex = 0; poiIndex &lt; pois.length &amp;&amp; poiIndex &lt; 4; poiIndex++) {
+          var poi = pois[poiIndex];
+          var className = &quot;&quot;;
+
+          // trim the from / to fields
+          if (poi.f &amp;&amp; poi.f.length &gt; CLUSTER_ROAD_NAME_MAX_LENGTH) {
+            poi.f = poi.f.substring(0, CLUSTER_ROAD_NAME_MAX_LENGTH) + &quot;...&quot;;
+          }
+
+          if (poi.t &amp;&amp; poi.t.length &gt; CLUSTER_ROAD_NAME_MAX_LENGTH) {
+            poi.t = poi.t.substring(0, CLUSTER_ROAD_NAME_MAX_LENGTH) + &quot;...&quot;;
+          }
+
+          if (poiIndex + 1 == pois.length) {
+            className = &quot;last&quot;;
+          }
+
+          var data = L.Util.extend({
+            r: &quot;&quot;,
+            dl: &quot;--&quot;,
+            l: &quot;--&quot;,
+            d: &quot;&quot;,
+            f: &quot;--&quot;,
+            t: &quot;--&quot;,
+            index: poiIndex,
+            className: className,
+            icon: &quot;url(&quot; + baseUrl + &quot;traffic-icons/&quot; + tomtom.TrafficMarker.getCategoryString(poi.ic) + &quot;-&quot; + tomtom.TrafficMarker.getTypeString(poi.ty) + &quot;.png)&quot;
+          }, poi);
+
+          // format the delay time
+          if (data.dl &amp;&amp; !isNaN(data.dl)) {
+            data.dl = Math.round(data.dl / 60);
+            data.dl += &quot; &quot; + tomtom.StringBundle.getString(&quot;units.time.minute&quot;, null, data.dl);
+          }
+
+          // format the distance
+          if (data.l &amp;&amp; !isNaN(data.l)) {
+            data.l = tomtom.StringBundle.getString(&quot;units.distance&quot;, null, data.l);
+          }
+
+          poiMarkup += L.Util.template(CLUSTER_ROW_MARKUP, data);
+
+          poiCount++;
+        }
+
+        // generate the main markup
+        var markup = L.Util.template(CLUSTER_MARKUP, {
+          incidentCount: this._incident.cs,
+          labelIncidents: bundle.getString(&quot;title&quot;),
+          mostSevereIncidents: bundle.getString(&quot;listHeader&quot;, { count: poiCount }, poiCount),
+          orderedBy: bundle.getString(&quot;orderedByDelay&quot;),
+          incidents: poiMarkup
+        });
+
+        this.bindPopup(markup);
+
+      },
+
+      openPopup: function () {
+        /* jshint -W083*/
+        tomtom.CustomMarker.prototype.openPopup.apply(this, arguments);
+
+        // create a function to handle the click event for clusters
+        var clusterRowClick = L.Util.bind(function (e, element) {
+
+          var poiIndex = parseInt(element.getAttribute(&quot;data-poi-index&quot;), 10),
+            incident = null,
+            pois = this._pois;
+
+          if (!isNaN(poiIndex)) {
+            incident = pois[poiIndex];
+          }
+
+          if (incident) {
+            this._showIncidentPopup(incident);
+          }
+
+          // make sure the event doesn&#x27;t bubble up, if it did the popup would close instantly
+          L.DomEvent.stopPropagation(e);
+
+        }, this);
+
+        // bind to the click events of the cluster rows
+        var elements = q(&quot;.trafficInfo-cluster tr&quot;, this._popup._contentNode);
+
+        for (var elementIndex = 0; elementIndex &lt; elements.length; elementIndex++) {
+
+          var element = elements[elementIndex];
+
+          L.DomEvent.on(element, &quot;click&quot;, function (e) {
+            clusterRowClick(e, this);
+          });
+
+        }
+
+      },
+
+      _showIncidentPopup: function (incident) {
+        var anchor = L.point(this.options.popupAnchor) || new L.Point(0, 0);
+
+        anchor = anchor.add(L.Popup.prototype.options.offset);
+
+        var options = {offset: anchor};
+        var popup = new L.Popup(options, this).setContent(this._getIncidentMarkup(incident));
+        popup.setLatLng(this._latlng);
+        this._map.openPopup(popup);
+
+        return popup;
+      }
+
+    });
+
+    tomtom.TrafficMarker.getTypeString = function (incidentType) {
+      // determine the name of the severity
+      switch (incidentType) {
+        case 1:
+          return &quot;minor&quot;;
+        case 2:
+          return &quot;moderate&quot;;
+        case 3:
+          return &quot;major&quot;;
+        default:
+          return &quot;unknown&quot;;
+      }
+    };
+
+    tomtom.TrafficMarker.getCategoryString = function (incidentCategory) {
+
+      // determine the name of the incident category
+      switch (incidentCategory) {
+        case 1:
+          return &quot;accdnt&quot;;
+        case 4:
+          return &quot;rain&quot;;
+        case 5:
+          return &quot;ice&quot;;
+        case 2:
+        case 3:
+        case 10:
+        case 11:
+        case 12:
+          return &quot;block&quot;;
+        case 7:
+        case 8:
+          return &quot;closed&quot;;
+        case 9:
+          return &quot;rworks&quot;;
+        case 13:
+          return &quot;cluster&quot;;
+        case 999:
+          return &quot;region&quot;;
+        default:
+          return &quot;traffic&quot;;
+      }
+    };
+
+    var INCIDENT_MARKUP = &quot;&lt;div class=\&quot;trafficInfo\&quot;&gt;&quot; +
+      &quot;&lt;div class=\&quot;header\&quot;&gt;&quot; +
+      &quot;&lt;div style=\&quot;background-image: {icon}\&quot; class=\&quot;icon\&quot;&gt;&lt;/div&gt;&quot; +
+      &quot;&lt;div class=\&quot;road\&quot;&gt;{r}&lt;/div&gt;&quot; +
+      &quot;&lt;div class=\&quot;delay\&quot;&gt;&lt;label&gt;{labelDelay}:&lt;/label&gt;{dl}&lt;/div&gt;&quot; +
+      &quot;&lt;div class=\&quot;length\&quot;&gt;&lt;label&gt;{labelLength}:&lt;/label&gt;{l}&lt;/div&gt;&quot; +
+      &quot;&lt;/div&gt;&quot; +
+      &quot;&lt;div class=\&quot;body\&quot;&gt;&quot; +
+      &quot;&lt;div class=\&quot;description\&quot;&gt;{d}&lt;/div&gt;&quot; +
+      &quot;&lt;div class=\&quot;location\&quot;&gt;&quot; +
+      &quot;&lt;div class=\&quot;line\&quot;&gt;&lt;label&gt;{labelFrom}:&lt;/label&gt;&lt;div&gt;{f}&lt;/div&gt;&lt;/div&gt;&quot; +
+      &quot;&lt;div class=\&quot;line\&quot;&gt;&lt;label&gt;{labelTo}:&lt;/label&gt;&lt;div&gt;{t}&lt;/div&gt;&lt;/div&gt;&quot; +
+      &quot;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&quot;;
+
+    var CLUSTER_MARKUP = &quot;&lt;div class=\&quot;trafficInfo trafficInfo-cluster\&quot;&gt;&quot; +
+      &quot;&lt;div class=\&quot;header\&quot;&gt;{labelIncidents} {incidentCount}&lt;/div&gt;&quot; +
+      &quot;&lt;h3&gt;{mostSevereIncidents} &lt;span&gt;{orderedBy}&lt;/span&gt;&lt;/h3&gt;&quot; +
+      &quot;&lt;table&gt;{incidents}&lt;/table&gt;&quot; +
+      &quot;&lt;/div&gt;&quot;;
+
+    var CLUSTER_ROW_MARKUP = &quot;&lt;tr class=\&quot;{className}\&quot; data-poi-index=\&quot;{index}\&quot;&gt;&quot; +
+      &quot;&lt;td&gt;&lt;div class=\&quot;icon\&quot; style=\&quot;background-image: {icon}\&quot;&gt;&lt;/div&gt;&lt;/td&gt;&quot; +
+      &quot;&lt;td class=\&quot;location\&quot;&gt;&lt;div class=\&quot;from\&quot;&gt;{f}&lt;/div&gt;&lt;div class=\&quot;to\&quot;&gt;{t}&lt;/div&gt;&lt;/td&gt;&quot; +
+      &quot;&lt;td class=\&quot;delay\&quot;&gt;{dl}&lt;/td&gt;&quot; +
+      &quot;&lt;td class=\&quot;length\&quot;&gt;{l}&lt;/td&gt;&quot;;
+
+    var CLUSTER_ROAD_NAME_MAX_LENGTH = 18;
+
+    return tomtom.TrafficMarker;
+
+  }
+);
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
