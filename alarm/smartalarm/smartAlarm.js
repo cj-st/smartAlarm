@@ -1,20 +1,30 @@
 //every page load
 $(document).ready( function() {
-    tomtom.apiKey = "pw7q86ngkxnqw37exmyrxsje";
+//     tomtom.apiKey = "pw7q86ngkxnqw37exmyrxsje";
 
-    if (!tomtom.apiKey)
-        alert("Please edit apikey.js and enter your API key. The examples will not function until an API key has been entered.");
+//     if (!tomtom.apiKey)
+//         alert("Please edit apikey.js and enter your API key. The examples will not function until an API key has been entered.");
 
-    tomtom.setImagePath("TomTom-JavaScript-SDK-2.1.0/images/");
+//     tomtom.setImagePath("TomTom-JavaScript-SDK-2.1.0/images/");
+// // show the map with traffic, center on NYC
+//                 // var map = new tomtom.Map({
+//                 //     domNode: "map",
+//                 //     displayTraffic: true,
+//                 //     center: [49.2827,-123.1207],
+//                 //     zoom: 12
+//                 // });
+// var map = new tomtom.Map({
+//                     domNode: "map",
+//                     displayTraffic: true,
+//                     center: [49.260605,-123.245994],
+//                     zoom:10
+//                 });
 
-                // show the map with traffic, center on NYC
-                var map = new tomtom.Map({
-                    domNode: "map",
-                    displayTraffic: true,
-                    center: [49.2827,-123.1207],
-                    zoom: 12
-                });
-
+//                 // create the route control
+//                 var routeControl = new tomtom.controls.RouteControl({
+//                     map: map,
+//                     domNode: "route"
+//                 });
     var clockDiv;
     var currentMode=0;
     var modeArr;
@@ -248,7 +258,7 @@ $(document).ready( function() {
 
             //taking into account user can remove button that is not ringing
             if(document.getElementById("aud")!==null){
-                var audio = document.getElementById("aud"+number);
+                var audio = document.getElementById("aud"+showAlarm.id);
                 audio.parentNode.removeChild(audio);
             }
 
@@ -256,8 +266,8 @@ $(document).ready( function() {
             childRef.remove();
             var child = document.getElementById(showAlarm.id);
             child.parentNode.removeChild(child);
-            child = document.getElementById('aud'+showAlarm.id);
-            child.parentNode.removeChild(child);
+            // child = document.getElementById('aud'+showAlarm.id);
+            // child.parentNode.removeChild(child);
             number--;
             };
 
@@ -315,6 +325,9 @@ $(document).ready( function() {
                     alert('Enter a valid address!');
                 }
             },
+            error:function(data){
+                console.log(error);
+            }
 
         });
 
