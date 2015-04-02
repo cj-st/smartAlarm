@@ -7,7 +7,7 @@ body{
 .top-buffer { margin-top:400px; }
 
 
-/*overwriting bootstrap(kinda bad)*/
+/*overwriting bootstrap(can change)*/
 #clock{
     font-size:50px;
     text-align: center;
@@ -16,4 +16,9 @@ body{
 #weather{
     font-size:30px;
     text-align: center;
+}
+#report{
+    font-size:50px;
+    text-align: center;
+    font-weight: bold;
 }

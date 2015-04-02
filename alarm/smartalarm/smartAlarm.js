@@ -6,6 +6,9 @@ $(document).ready( function() {
     var alarmCount=0;
     var number=0;
     var storeId=[];
+    var address1;
+    var address2;
+
     //display time on webpage(bug: am pm has some issues)
     function displayTime() {
         var currentTime = new Date();
@@ -60,12 +63,12 @@ $(document).ready( function() {
         });
 
     }
-
+    //location: 49.260605,-123.245994 -UBC
     //display weather info and load weather background on webpage
     function weather(){
         //get weather data from forecast.io
         $.ajax({
-        url: "https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/49.2611,-123.2531",
+        url: "https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/49.260605,-123.245994",
         dataType: "jsonp",
         success: function (data) {
             var icon=data.currently.icon;
@@ -244,29 +247,67 @@ $(document).ready( function() {
             };
 
     });
+    //draw map(not needed)
+    // function GetMap() {
+    //     var myOptions = {
+    //         zoom: 8,
+    //         center: { lat: 49.2611, lng: -123.2531},
+    //     };
+    //     map = new google.maps.Map(document.getElementById("mapContainer"),myOptions);
+    // }
+    // google.maps.event.addDomListener(window, 'load', GetMap);
 
-    function GetMap() {
-        var myOptions = {
-            zoom: 8,
-            center: { lat: -34.397, lng: 150.644},
-        };
-        map = new google.maps.Map(document.getElementById("mapContainer"),myOptions);
-    }
-    google.maps.event.addDomListener(window, 'load', GetMap);
+    //address to lat lng(not needed)
+    // var geocoder = new google.maps.Geocoder();
+    // var address = "UBC,Vancouver,CA";
+    // var address1 = "SFU,Burnaby,CA";
 
-    //use of proxy to encode into jsonp format
-    var mapsUrl    = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&mode=bicycling&language=en&key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
-    var encodedUrl = encodeURIComponent(mapsUrl);
-    var proxyUrl   = 'https://jsonp.afeld.me/?url=' + encodedUrl;
+    // geocoder.geocode( { 'address': address1}, function(results, status) {
 
-    $.ajax({
-        url: proxyUrl,
-        dataType: 'jsonp',
-        cache: false,
-        success: function (data) {
-            console.log(data);
-        }
-    });
+    //     if (status == google.maps.GeocoderStatus.OK) {
+    //         latlng= results[0].geometry.location.lat()+','+results[0].geometry.location.lng();
+    //     console.log(latlng);
+    //     }
+    // });
+
+
+
+    //might want to call window.unload/refresh after ajax finishes
+    document.getElementById("submit").onclick= function()
+    {
+        address1 =document.getElementById("origin").value;
+        address2 =document.getElementById("destination").value;
+
+        //traffic data only valid for business customer(find other means)
+
+        //origin:49.260605,-123.245994 -UBC
+        //dest:  49.278094,-122.919883 -SFU
+        //mode: default to driving
+        //language: en -English
+        //use of proxy to encode into jsonp format
+        var mapsUrl    = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+address1+'&destinations='+address2+'&mode=driving&language=en&key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
+        var encodedUrl = encodeURIComponent(mapsUrl);
+        var proxyUrl   = 'https://jsonp.afeld.me/?url=' + encodedUrl;
+        $.ajax({
+            url: proxyUrl,
+            dataType: 'jsonp',
+            cache: false,
+            success: function (data) {
+                if(data.length>0){
+                    document.getElementById("report").innerText="Distance:"+data.rows[0].elements[0].distance.text+"\nTime:"+data.rows[0].elements[0].duration.text;
+                    document.getElementById("report").style.color='white';
+                }else{
+                    alert('Enter a valid address!');
+                }
+            },
+
+        });
+
+
+    };
+
+
+
 
 
 });

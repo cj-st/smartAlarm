@@ -19,23 +19,32 @@
 
 </head>
 <body >
-
 <!-- alarms -->
 <div class="container">
     <div class="row" id="alarms"></div>
 </div>
 <div class="container">
-    <div id="mapContainer" style="width:500px;height:500px"></div>
-</div>
-
-
-<div class="container">
     <div class="row" id="myAudio">
     </div>
 </div>
+<!-- <div class="container">
+    <div id="mapContainer" style="width:500px;height:500px"></div>
+</div> -->
+<div class="container">
+  <p style="color:red">Enter your location and your destination. (ie burnaby,ca/vancouver,ca)</p>
+  <form style="color:red">
+    Location: <input type="text" id="origin" style="color:black"> Destination: <input type="text" id="destination" style="color:black">
+    <input type="button" value="run" id="submit" style="color:black">
+  </form>
+</div>
 
-<!-- add space to top of clock
- --><div class="row top-buffer">
+<div class="row top-buffer">
+<div class="container">
+    <div class="row" id="report"></div>
+</div>
+
+
+<!-- add space to top of clock-->
 
 
 <!-- clock -->
