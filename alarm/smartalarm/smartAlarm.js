@@ -1,30 +1,5 @@
 //every page load
 $(document).ready( function() {
-//     tomtom.apiKey = "pw7q86ngkxnqw37exmyrxsje";
-
-//     if (!tomtom.apiKey)
-//         alert("Please edit apikey.js and enter your API key. The examples will not function until an API key has been entered.");
-
-//     tomtom.setImagePath("TomTom-JavaScript-SDK-2.1.0/images/");
-// // show the map with traffic, center on NYC
-//                 // var map = new tomtom.Map({
-//                 //     domNode: "map",
-//                 //     displayTraffic: true,
-//                 //     center: [49.2827,-123.1207],
-//                 //     zoom: 12
-//                 // });
-// var map = new tomtom.Map({
-//                     domNode: "map",
-//                     displayTraffic: true,
-//                     center: [49.260605,-123.245994],
-//                     zoom:10
-//                 });
-
-//                 // create the route control
-//                 var routeControl = new tomtom.controls.RouteControl({
-//                     map: map,
-//                     domNode: "route"
-//                 });
     var clockDiv;
     var currentMode=0;
     var modeArr;
@@ -255,10 +230,11 @@ $(document).ready( function() {
             //store id to be remove in array
             currentId=showAlarm.id;
             storeId.push(currentId);
-
+            console.log(showAlarm.id);
+            console.log(number);
             //taking into account user can remove button that is not ringing
-            if(document.getElementById("aud")!==null){
-                var audio = document.getElementById("aud"+showAlarm.id);
+            if(document.getElementById("aud"+showAlarm.id)!==null){
+                var audio = document.getElementById('aud'+showAlarm.id);
                 audio.parentNode.removeChild(audio);
             }
 
@@ -266,8 +242,7 @@ $(document).ready( function() {
             childRef.remove();
             var child = document.getElementById(showAlarm.id);
             child.parentNode.removeChild(child);
-            // child = document.getElementById('aud'+showAlarm.id);
-            // child.parentNode.removeChild(child);
+
             number--;
             };
 
@@ -302,7 +277,7 @@ $(document).ready( function() {
     {
         address1 =document.getElementById("origin").value;
         address2 =document.getElementById("destination").value;
-
+        console.log(address1);
         //traffic data only valid for business customer(find other means)
 
         //origin:49.260605,-123.245994 -UBC
@@ -313,21 +288,20 @@ $(document).ready( function() {
         var mapsUrl    = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+address1+'&destinations='+address2+'&mode=driving&language=en&key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
         var encodedUrl = encodeURIComponent(mapsUrl);
         var proxyUrl   = 'https://jsonp.afeld.me/?url=' + encodedUrl;
+        console.log(mapsUrl);
         $.ajax({
             url: proxyUrl,
             dataType: 'jsonp',
             cache: false,
             success: function (data) {
-                if(data.length>0){
+                console.log(data.status);
+                if(data.status!=='INVALID_REQUEST'){
                     document.getElementById("report").innerText="Distance:"+data.rows[0].elements[0].distance.text+"\nTime:"+data.rows[0].elements[0].duration.text;
                     document.getElementById("report").style.color='white';
                 }else{
                     alert('Enter a valid address!');
                 }
             },
-            error:function(data){
-                console.log(error);
-            }
 
         });
 

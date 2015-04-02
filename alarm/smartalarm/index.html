@@ -17,19 +17,10 @@
                        key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8&sensor=false">
     </script>
 
-<!-- 
-<script type="text/javascript" src="TomTom-JavaScript-SDK-2.1.0/js/leaflet.js"></script>
-    <link rel="stylesheet" type="text/css" href="TomTom-JavaScript-SDK-2.1.0/css/tomtom.map.min.css" />
-    <link rel="stylesheet" type="text/css" href="TomTom-JavaScript-SDK-2.1.0/css/tomtom.control.min.css" />
-
-
-    <script type="text/javascript" src="TomTom-JavaScript-SDK-2.1.0/js/tomtom.map.js"></script>
-    <script type="text/javascript" src="TomTom-JavaScript-SDK-2.1.0/js/tomtom.controls.js"></script> -->
 </head>
 <body >
-<div class="container">
-<p id="link"><a href="TomTom-JavaScript-SDK-2.1.0/examples/route-planner.html">Trip planner</a></p>
-</div>
+<p id="link"><a style="color:magenta" href="TomTom-JavaScript-SDK-2.1.0/examples/route-planner.html">Trip planner</a></p>
+
 <!-- alarms -->
 <div class="container">
     <div class="row" id="alarms"></div>
@@ -38,13 +29,9 @@
     <div class="row" id="myAudio">
     </div>
 </div>
-
-<!-- tomtom has its own css might not work well with bootstrap-->
-<!-- <div style="color:white;float:left" id="route" ></div>
-<div style="width: 50%; height:50%; float: left;" id="map"></div> -->
-
-
-<div class="row top-buffer">
+<!-- <div class="container">
+    <div id="mapContainer" style="width:500px;height:500px"></div>
+</div> -->
 <div class="container">
   <p style="color:turquoise;font-size:50px">Enter your location and your destination. (ie burnaby,ca/vancouver,ca)</p>
   <form style="color:turquoise;font-size:30px">
@@ -53,7 +40,7 @@
   </form>
 </div>
 
-
+<div class="row top-buffer">
 <div class="container">
     <div class="row" id="report"></div>
 </div>
