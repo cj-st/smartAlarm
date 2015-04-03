@@ -9,16 +9,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-
     <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
 
     <script type="text/javascript"
          src="https://maps.google.com/maps/api/js?
                        key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8&sensor=false">
     </script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+
+    <script>
+		//Autocomplete drop down options for addresses
+	function initialize() {
+		var autocomplete1,autocomplete2;
+		// Create the autocomplete object, restricting the search
+		// to geographical location types.
+	  autocomplete1 = new google.maps.places.Autocomplete(
+	  /** @type {HTMLInputElement} */(document.getElementById('origin')),
+	  { types: ['geocode'] });
+	  autocomplete2 = new google.maps.places.Autocomplete(
+	  /** @type {HTMLInputElement} */(document.getElementById('destination')),
+	  { types: ['geocode'] });
+	}
+	</script>
 
 </head>
-<body >
+<body  onload="initialize()">
 <p id="link"><a style="color:magenta" href="TomTom-JavaScript-SDK-2.1.0/examples/route-planner.html">Trip planner</a></p>
 
 <!-- alarms -->
@@ -35,8 +50,8 @@
 <div class="container">
   <p style="color:turquoise;font-size:50px">Enter your location and your destination. (ie burnaby,ca/vancouver,ca)</p>
   <form style="color:turquoise;font-size:30px">
-    Location: <input type="text" id="origin" style="color:black"> 
-    Destination: <input type="text" id="destination" style="color:black">
+    Location: <input type="text"  id="origin" placeholder="Enter your origin address" style="color:black" > </input>
+    Destination: <input type="text"  id="destination" placeholder="Enter your destination address" style="color:black"></input>
     Transit Mode: 
     <select id="transitMode">
     	<option value="driving">Driving</option>
@@ -68,7 +83,8 @@
 <!-- alarms options -->
 <div class="container">
     <div class="row row-centered">
-        <div class="col-sm-4 col-centered"><select class="form-control col-centered" id='alarmDate'></select></div>
+        <!--<div class="col-sm-4 col-centered"><select class="form-control col-centered" id='alarmDate'></select></div>-->
+        <div class="col-sm-4 col-centered"><input class="form-control col-centered" type="date" id='alarmDate' ></div>
         <div class="col-sm-2 col-centered"><select class="form-control col-centered" id='alarmHour'></select></div>
         <div class="col-sm-2 col-centered"><select class="form-control col-centered" id='alarmMinute'></select>
 </div>
@@ -81,8 +97,6 @@
 
 
 </div>
-
-
 
     <script src="smartAlarm.js"></script>
 

@@ -8,6 +8,8 @@ $(document).ready( function() {
     var storeId=[];
     var address1;
     var address2;
+	initialize();
+
 
     //display time on webpage(bug: am pm has some issues)
     function displayTime() {
@@ -122,7 +124,7 @@ $(document).ready( function() {
     weather();  //display weather
     var auto=setInterval(displayTime,1000); //display time every second
 
-
+/*
     var alarmDate=document.getElementById("alarmDate");
     var option=document.createElement("option");
     var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -138,7 +140,13 @@ $(document).ready( function() {
         option1.text=days[optionDate.getDay()]+", "+optionDate.getDate()+'/'+ (optionDate.getMonth()+1) +'/'+optionDate.getFullYear();
         alarmDate.add(option1,alarmDate[i+1]);
     }
-
+*/
+	// Set the minimum date to be today
+	var today = new Date().toISOString().split('T')[0];
+    document.getElementById("alarmDate").setAttribute('min', today);
+	var alarmDate=document.getElementById("alarmDate");
+	
+	
     var alarmHour=document.getElementById("alarmHour");
     var optionHour=document.createElement("option");
     optionHour.text="hr";
@@ -195,7 +203,8 @@ $(document).ready( function() {
         var currentId;
         //send valid alarm data to firebase
         //could check if alarm has been set(more work)
-        if(alarmdate!='DD/MM/YY'&&alarmhour!='hr'&&alarmminute!='min'){
+       // if(alarmdate!='DD/MM/YY'&&alarmhour!='hr'&&alarmminute!='min'){
+		  if(alarmdate!=""&&alarmhour!='hr'&&alarmminute!='min'){
             console.log(storeId);
             //repopulate removed ids first
             if(number <= 10) {
@@ -227,24 +236,27 @@ $(document).ready( function() {
 
         //remove alarm data and alarm object upon click
         showAlarm.onclick=function(){
-            //store id to be remove in array
-            currentId=showAlarm.id;
-            storeId.push(currentId);
-            console.log(showAlarm.id);
-            console.log(number);
-            //taking into account user can remove button that is not ringing
-            if(document.getElementById("aud"+showAlarm.id)!==null){
-                var audio = document.getElementById('aud'+showAlarm.id);
-                audio.parentNode.removeChild(audio);
-            }
-
-            var childRef = messagesRef.child('alarm' + showAlarm.id);
-            childRef.remove();
-            var child = document.getElementById(showAlarm.id);
-            child.parentNode.removeChild(child);
-
-            number--;
+			if (confirm("Press OK to REMOVE the alarm") == true) {
+				//store id to be remove in array
+				currentId=showAlarm.id;
+				storeId.push(currentId);
+				console.log(showAlarm.id);
+				console.log(number);
+				//taking into account user can remove button that is not ringing
+				if(document.getElementById("aud"+showAlarm.id)!==null){
+					var audio = document.getElementById('aud'+showAlarm.id);
+					audio.parentNode.removeChild(audio);
+				}
+	
+				var childRef = messagesRef.child('alarm' + showAlarm.id);
+				childRef.remove();
+				var child = document.getElementById(showAlarm.id);
+				child.parentNode.removeChild(child);
+	
+				number--;
+				}
             };
+			
 
     });
     //draw map(not needed)
@@ -270,6 +282,8 @@ $(document).ready( function() {
     //     }
     // });
 
+
+	
 
 
     //might want to call window.unload/refresh after ajax finishes
