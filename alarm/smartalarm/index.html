@@ -35,7 +35,15 @@
 <div class="container">
   <p style="color:turquoise;font-size:50px">Enter your location and your destination. (ie burnaby,ca/vancouver,ca)</p>
   <form style="color:turquoise;font-size:30px">
-    Location: <input type="text" id="origin" style="color:black"> Destination: <input type="text" id="destination" style="color:black">
+    Location: <input type="text" id="origin" style="color:black"> 
+    Destination: <input type="text" id="destination" style="color:black">
+    Transit Mode: 
+    <select id="transitMode">
+    	<option value="driving">Driving</option>
+        <option value="walking">Walking</option>
+        <option value="bicycling">Bicycling</option>
+        <option value="transit">Transit</option>
+    </select> 
     <input type="button" value="run" id="submit" style="color:black">
   </form>
 </div>
