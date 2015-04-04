@@ -1,0 +1,17 @@
+{
+  "name": "smartAlarm",
+  "version": "1.0.0",
+  "description": "smartAlarm is a nodejs alarm clock designed to run on Raspberry Pi.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Edwin Lai",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^2.2.3",
+    "lame": "^1.2.0",
+    "lcd": "^1.1.1",
+    "speaker": "^0.2.4"
+  }
+}
