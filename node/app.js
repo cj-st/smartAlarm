@@ -65,7 +65,7 @@ setInterval(function() {
 //			tts.speak("Wake up dumb fuck");
 			mp3.play("./audio/ThisLove.mp3"); // because Maroon 5
 			setTimeout(function(){ // just for testing, for now
-				mp3.stop();
+				snooze();
 			}, 10000);
 			console.log("alarm now");
 			if(!data.alarmdata[alarm].isRepeating) { // if this is NOT a repeating alarm, remove it after it's been sounded
@@ -118,6 +118,7 @@ function updateWeather(){
                 info = JSON.parse(data);
                 temp = info.main.temp;
                 forecast = info.weather[0].main;
+		forecastDetails = info.weather[0].description;
                 console.log('Temperature: ' + temp);
                 console.log('Forecast: ' + forecast);
 
@@ -125,4 +126,12 @@ function updateWeather(){
         console.log("Got error: " + e.message);
         });
         });
+}
+
+function snooze() {
+	mp3.stop();
+	var currentTime = new Date();
+	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	var information = "The time is currently " + currentTime.getHours() + " " + currentTime.getMinutes() + " on " + months[currentTime.getMonth()] + " " + currentTime.getDate() + ", " + currentTime.getFullYear() + ". The weather is currently " + temp + " degrees with " + forecastDetails;
+	tts.speak(information);
 }
