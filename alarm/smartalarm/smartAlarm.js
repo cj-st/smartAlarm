@@ -299,7 +299,7 @@ $(document).ready( function() {
         //mode: default to driving
         //language: en -English
         //use of proxy to encode into jsonp format
-		var transitMode = document.getElementById("transitMode").value;
+	var transitMode = document.getElementById("transitMode").value;
         var mapsUrl    = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+address1+'&destinations='+address2+'&mode='+transitMode+'&language=en&key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
         var encodedUrl = encodeURIComponent(mapsUrl);
         var proxyUrl   = 'https://jsonp.afeld.me/?url=' + encodedUrl;
