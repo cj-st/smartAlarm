@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ringing</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+     <link rel="stylesheet" href="smartAlarm.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+
+    <script type="text/javascript"
+         src="https://maps.google.com/maps/api/js?
+                       key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8&sensor=false&libraries=places">
+    </script>
+
+</head>
+<body>
+<div class="container" style="display:none">
+    <div class="row" id="myAudio">
+    </div>
+</div>
+<a href="index.html" style="color:white;background-color:red;" id="stop" class="btn btn-primary btn-lg btn-block">
+Stop
+</a>
+
+<!-- todo? -->
+<a href="index.html" id="snooze" class="btn btn-primary btn-lg btn-block">
+Snooze
+</a>
+
+<script type="text/javascript">
+    document.body.onload=function(){
+        var aud =document.createElement("audio");
+        aud.setAttribute("id","aud");
+        aud.setAttribute("src","alarm.mp3");
+        document.getElementById("myAudio").appendChild(aud);
+       //http://www.orangefreesounds.com/mp3-alarm-clock
+        aud.play();
+        aud.loop=true;
+    };
+    document.getElementById('stop').onclick=function(){
+        document.getElementById('aud').parentNode.removeChild(audio);
+    };
+    document.getElementById('snooze').onclick=function(){
+        document.getElementById('aud').parentNode.removeChild(audio);
+    };
+</script>
+
+</body>
+</html>
