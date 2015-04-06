@@ -13,9 +13,9 @@
 
     <script type="text/javascript"
          src="https://maps.google.com/maps/api/js?
-                       key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8&sensor=false">
+                       key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8&sensor=false&libraries=places">
     </script>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+]
 
     <script>
 		//Autocomplete drop down options for addresses
@@ -34,8 +34,86 @@
 
 </head>
 <body  onload="initialize()">
-<p id="link"><a style="color:magenta" href="TomTom-JavaScript-SDK-2.1.0/examples/route-planner.html">Trip planner</a></p>
+<button id="logout" style="color:black">Logout<button>
 
+<!-- http://googleappsdeveloper.blogspot.ca/2011/12/using-new-js-library-to-unlock-power-of.html -->
+<div style="color:turquoise" id='content'>
+      <h1 style="color:turquoise">Events</h1>
+      <ul style="color:turquoise" id='events'></ul>
+</div>
+    <a style="color:turquoise" href='#' id='authorize-button' onclick='handleAuthClick();'>Login</a>
+
+
+<script>
+
+var clientId = '301696899552-vpergd22gr7jkod4b4o9q9osb237t94h.apps.googleusercontent.com';
+var apiKey = 'AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
+var scopes = 'https://www.googleapis.com/auth/calendar';
+function handleClientLoad() {
+  gapi.client.setApiKey(apiKey);
+  window.setTimeout(checkAuth,1);
+}
+
+function checkAuth() {
+  gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true},
+      handleAuthResult);
+}
+
+function handleAuthResult(authResult) {
+  var authorizeButton = document.getElementById('authorize-button');
+  console.log(authResult);
+  if (authResult && !authResult.error) {
+    authorizeButton.style.visibility = 'hidden';
+    makeApiCall();
+  } else {
+    authorizeButton.style.visibility = '';
+    authorizeButton.onclick = handleAuthClick;
+   }
+}
+
+function handleAuthClick(event) {
+  gapi.auth.authorize(
+      {client_id: clientId, scope: scopes, immediate: false},
+      handleAuthResult);
+  return false;
+}
+
+function makeApiCall() {
+  gapi.client.load('calendar', 'v3', function() {
+    var request = gapi.client.calendar.events.list({
+      'calendarId': 'primary'
+    });
+
+    request.execute(function(resp) {
+                console.log(resp);
+      for (var i = 0; i < resp.items.length; i++) {
+        var li = document.createElement('li');
+        var start=resp.items[i].start.dateTime.slice(0,-6);
+        start=start.substring(0, 10) + '   ' + start.substring(11);
+        var end= resp.items[i].end.dateTime.slice(0,-6);
+        end=end.substring(0, 10) + '   ' + end.substring(11);
+        var userEvent= start+" : "+end+"---"+resp.items[i].summary;
+        li.appendChild(document.createTextNode(userEvent));
+        document.getElementById('events').appendChild(li);
+      }
+      document.getElementById('logout').onclick=function(){
+            console.log('hi');
+            document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://281alarm.firebaseapp.com";
+
+            //gapi.auth.signOut();
+            //messagesRef.unauth();
+        };
+    });
+  });
+}
+</script>
+
+<!--Add a button for the user to click to initiate auth sequence -->
+    <button id="authorize-button" style="visibility: hidden">Authorize</button>
+
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <div id="content"></div>
 <!-- alarms -->
 <div class="container">
     <div class="row" id="alarms"></div>
@@ -52,13 +130,13 @@
   <form style="color:turquoise;font-size:30px">
     Location: <input type="text"  id="origin" placeholder="Enter your origin address" style="color:black" > </input>
     Destination: <input type="text"  id="destination" placeholder="Enter your destination address" style="color:black"></input>
-    Transit Mode: 
+    Transit Mode:
     <select id="transitMode">
     	<option value="driving">Driving</option>
         <option value="walking">Walking</option>
         <option value="bicycling">Bicycling</option>
         <option value="transit">Transit</option>
-    </select> 
+    </select>
     <input type="button" value="run" id="submit" style="color:black">
   </form>
 </div>
