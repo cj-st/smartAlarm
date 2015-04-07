@@ -71,6 +71,23 @@
   </div>
 </div>
 
+<div class="container" id="ringingPage" style="display:none">
+  <div class="jumbotron">
+    <div class="spacer30"></div>
+    <div class="row row-centered">
+
+      <div class="container" style="display:none">
+           <div class="row" id="myAudio"> </div>
+      </div>
+      
+       <div style="color:white;background-color:red;" id="stop" class="btn btn-primary btn-lg btn-block">Close</div>
+
+       <div id="snooze" class="btn btn-primary btn-lg btn-block">Snooze</div>
+
+    </div>
+  </div>
+</div>
+
 
 <div class="spacer200"></div>
 <!-- location-->
@@ -170,6 +187,65 @@ document.getElementById('logout').onclick=function(){
       document.getElementById('alarmPage').style.display="block";
     }
   };
+</script>
+
+<script type="text/javascript">
+    document.body.onload=function(){
+ 
+    };
+    document.getElementById('stop').onclick=function(){
+        document.getElementById('aud').parentNode.removeChild(aud);
+        document.getElementById('ringingPage').style.display="none";
+    };
+    document.getElementById('snooze').onclick=function(){
+          var alarmTime = new Date();
+        alarmTime.setMinutes(alarmTime.getMinutes() + 5);
+        var alarmyear = alarmTime.getFullYear();
+        var alarmmonth = alarmTime.getMonth()+1;
+        var alarmdate = alarmTime.getDate();
+        var alarmhour = alarmTime.getHours();
+        var alarmmin = alarmTime.getMinutes();
+        var alarmmeridiem;
+        if(alarmhour>=12){
+            if(alarmhour==12){
+                alarmmeridiem="PM";
+            }else{
+                alarmhour-=12;
+                alarmmeridiem = "PM";
+            }
+        }else{
+            if(alarmhour==0){
+                alarmhour=12;
+            }
+            alarmmeridiem="AM";
+        }
+
+        if(alarmmonth<10){
+            alarmmonth = "0"+alarmmonth;
+        }
+
+        if(alarmdate<10){
+            alarmdate = "0" +alarmdate;
+        }
+
+        if(alarmhour<10){
+            alarmhour = "0"+alarmhour;
+        }
+        if(alarmmin<10){
+            alarmmin = "0"+alarmmin;
+        }
+
+        var currentTime = new Date();
+
+         var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
+
+         var childRef = messagesRef.child("alarm" + currentTime.getTime());
+      
+
+        childRef.set({id:currentTime.getTime(),date:alarmyear+'-'+alarmmonth+'-'+alarmdate, hour:alarmhour, minute:alarmmin, meridiem:alarmmeridiem});
+        document.getElementById('aud').parentNode.removeChild(aud);
+        document.getElementById('ringingPage').style.display="none";
+    };
 </script>
 
 
