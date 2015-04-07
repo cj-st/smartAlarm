@@ -180,6 +180,23 @@ $(document).ready( function() {
     //get root of data from firebase
     var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
 
+     var alarmAmount = document.createElement('label');
+     alarmAmount.innerText = 0;
+        
+     document.getElementById('alarmIcon').appendChild(alarmAmount);
+    
+
+     messagesRef.on('child_added', function(snapshot){
+        
+        alarmAmount.innerText = parseInt(alarmAmount.innerText) + 1;     
+
+    });
+
+    messagesRef.on('child_removed', function(snapshot){
+         alarmAmount.innerText = parseInt(alarmAmount.innerText) - 1;
+       
+    });
+
     //set alarm listener
     var set=document.getElementById('setAlarm');
     set.onclick=function(){
