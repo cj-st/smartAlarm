@@ -67,6 +67,21 @@ Snooze
             alarmmeridiem="AM";
         }
 
+        if(alarmmonth<10){
+            alarmmonth = "0"+alarmmonth;
+        }
+
+        if(alarmdate<10){
+            alarmdate = "0" +alarmdate;
+        }
+
+        if(alarmhour<10){
+            alarmhour = "0"+alarmhour;
+        }
+        if(alarmmin<10){
+            alarmmin = "0"+alarmmin;
+        }
+
         var currentTime = new Date();
 
          var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
@@ -74,7 +89,7 @@ Snooze
          var childRef = messagesRef.child("alarm" + currentTime.getTime());
       
 
-        childRef.set({id:currentTime.getTime(),date:alarmyear+'-'+'0'+alarmmonth+'-'+'0'+alarmdate, hour:alarmhour, minute:alarmmin, meridiem:alarmmeridiem});
+        childRef.set({id:currentTime.getTime(),date:alarmyear+'-'+alarmmonth+'-'+alarmdate, hour:alarmhour, minute:alarmmin, meridiem:alarmmeridiem});
         document.getElementById('aud').parentNode.removeChild(aud);
     };
 </script>
