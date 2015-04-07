@@ -63,6 +63,8 @@ $(document).ready( function() {
                    //  messagesRef.off("value");
 
                    document.getElementById('ring').click();
+                   var childRef = messagesRef.child('alarm'+snapshot.val()[id].id);
+                   childRef.remove();
                 }
             }
         });

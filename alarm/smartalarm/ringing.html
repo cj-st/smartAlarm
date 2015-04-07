@@ -23,13 +23,13 @@
     </div>
 </div>
 <a href="index.html" style="color:white;background-color:red;" id="stop" class="btn btn-primary btn-lg btn-block">
-Stop
+Close
 </a>
 
 <!-- todo? -->
-<a href="index.html" id="snooze" class="btn btn-primary btn-lg btn-block">
+<div id="snooze" class="btn btn-primary btn-lg btn-block">
 Snooze
-</a>
+</div>
 
 <script type="text/javascript">
     document.body.onload=function(){
@@ -45,6 +45,36 @@ Snooze
         document.getElementById('aud').parentNode.removeChild(audio);
     };
     document.getElementById('snooze').onclick=function(){
+          var alarmTime = new Date();
+        alarmTime.setMinutes(alarmTime.getMinutes() + 5);
+        var alarmyear = alarmTime.getFullYear();
+        var alarmmonth = alarmTime.getMonth()+1;
+        var alarmdate = alarmTime.getDate();
+        var alarmhour = alarmTime.getHours();
+        var alarmmin = alarmTime.getMinutes();
+        var alarmmeridiem;
+        if(alarmhour>=12){
+            if(alarmhour==12){
+                alarmmeridiem="PM";
+            }else{
+                alarmhour-=12;
+                alarmmeridiem = "PM";
+            }
+        }else{
+            if(alarmhour==0){
+                alarmhour=12;
+            }
+            alarmmeridiem="AM";
+        }
+
+        var currentTime = new Date();
+
+         var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
+
+         var childRef = messagesRef.child("alarm" + currentTime.getTime());
+      
+
+        childRef.set({id:currentTime.getTime(),date:alarmyear+'-'+'0'+alarmmonth+'-'+'0'+alarmdate, hour:alarmhour, minute:alarmmin, meridiem:alarmmeridiem});
         document.getElementById('aud').parentNode.removeChild(audio);
     };
 </script>
