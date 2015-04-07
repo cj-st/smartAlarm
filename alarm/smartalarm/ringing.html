@@ -42,7 +42,7 @@ Snooze
         aud.loop=true;
     };
     document.getElementById('stop').onclick=function(){
-        document.getElementById('aud').parentNode.removeChild(audio);
+        document.getElementById('aud').parentNode.removeChild(aud);
     };
     document.getElementById('snooze').onclick=function(){
           var alarmTime = new Date();
@@ -75,7 +75,7 @@ Snooze
       
 
         childRef.set({id:currentTime.getTime(),date:alarmyear+'-'+'0'+alarmmonth+'-'+'0'+alarmdate, hour:alarmhour, minute:alarmmin, meridiem:alarmmeridiem});
-        document.getElementById('aud').parentNode.removeChild(audio);
+        document.getElementById('aud').parentNode.removeChild(aud);
     };
 </script>
 
