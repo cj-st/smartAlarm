@@ -41,7 +41,18 @@
 
 
 <script type='text/javascript'>
-
+var resp=JSON.parse(localStorage.getItem("Object"));
+for (var i = 0; i < resp.items.length; i++) {
+        var li = document.createElement('li');
+        var start=resp.items[i].start.dateTime.slice(0,-6);
+        start=start.substring(0, 10) + '   ' + start.substring(11);
+        var end= resp.items[i].end.dateTime.slice(0,-6);
+        end=end.substring(0, 10) + '   ' + end.substring(11);
+        var userEvent= start+" : "+end+"---"+resp.items[i].summary;
+        console.log(userEvent);
+        // li.appendChild(document.createTextNode(userEvent));
+        // document.getElementById('events').appendChild(li);
+      }
 $(document).ready(function() {
     $('#calendar').fullCalendar({
         googleCalendarApiKey: 'AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8',

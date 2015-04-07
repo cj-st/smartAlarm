@@ -135,6 +135,7 @@ function makeApiCall() {
       //   li.appendChild(document.createTextNode(userEvent));
       //   document.getElementById('events').appendChild(li);
       // }
+      localStorage.setItem("Object",JSON.stringify(resp));
      document.location.href ="calendar.html?email="+resp.summary;
 
     });
