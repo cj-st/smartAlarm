@@ -51,7 +51,6 @@ $(document).ready( function() {
         //turn off listener when done
         messagesRef.on('value',function(snapshot){
             for(var id in snapshot.val()){
-
                 if((snapshot.val()[id].date.indexOf(year+'-'+ monthNum +'-'+date)!=-1) && snapshot.val()[id].hour==hours && snapshot.val()[id].minute==minutes &&seconds=="00"){
                    //  var aud =document.createElement("audio");
                    //  aud.setAttribute("id","aud" +snapshot.val()[id].id);
@@ -69,12 +68,18 @@ $(document).ready( function() {
         });
 
     }
+if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(weather);
+}
     //location: 49.260605,-123.245994 -UBC
     //display weather info and load weather background on webpage
-    function weather(){
+    function weather(position){
+              userLat=position.coords.latitude;
+              userLng=position.coords.longitude;
+    var fullUrl="https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/"+userLat+","+userLng;
         //get weather data from forecast.io
         $.ajax({
-        url: "https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/49.260605,-123.245994",
+        url: fullUrl,
         dataType: "jsonp",
         success: function (data) {
             var icon=data.currently.icon;
@@ -125,12 +130,15 @@ $(document).ready( function() {
     });
     }
 
-    weather();  //display weather
     var auto=setInterval(displayTime,1000); //display time every second
 
 
 	// Set the minimum date to be today
-	var today = new Date().toISOString().split('T')[0];
+	var _today = new Date().toLocaleString().split(',')[0].split('/');
+    if(_today[0]<10){_today[0]='0'+_today[0];}
+    if(_today[1]<10){_today[1]='0'+_today[1];}
+    var today= _today[2]+'-'+_today[0]+'-'+_today[1];
+    console.log(today);
     document.getElementById("alarmDate").setAttribute('min', today);
 	var alarmDate=document.getElementById("alarmDate");
 
@@ -182,19 +190,19 @@ $(document).ready( function() {
 
      var alarmAmount = document.createElement('label');
      alarmAmount.innerText = 0;
-        
+
      document.getElementById('alarmIcon').appendChild(alarmAmount);
-    
+
 
      messagesRef.on('child_added', function(snapshot){
-        
-        alarmAmount.innerText = parseInt(alarmAmount.innerText) + 1;     
+
+        alarmAmount.innerText = parseInt(alarmAmount.innerText) + 1;
 
     });
 
     messagesRef.on('child_removed', function(snapshot){
          alarmAmount.innerText = parseInt(alarmAmount.innerText) - 1;
-       
+
     });
 
     //set alarm listener
