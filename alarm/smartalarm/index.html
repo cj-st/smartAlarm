@@ -110,7 +110,9 @@
  -->
 
 <script>
-// document.getElementById('username').text=JSON.parse(localStorage.getItem("Object")).summary.split('@')[0];
+if (localStorage.getItem("Object") !== null) {
+document.getElementById('username').text=JSON.parse(localStorage.getItem("Object")).summary.split('@')[0];
+}
 var clientId = '301696899552-vpergd22gr7jkod4b4o9q9osb237t94h.apps.googleusercontent.com';
 var apiKey = 'AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
 var scopes = 'https://www.googleapis.com/auth/calendar';
