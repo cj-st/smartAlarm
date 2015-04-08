@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ringing</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+     <link rel="stylesheet" href="smartAlarm.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+
+    <script type="text/javascript"
+         src="https://maps.google.com/maps/api/js?
+                       key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8&sensor=false&libraries=places">
+    </script>
+
+</head>
+<body>
+<div class="container" style="display:none">
+    <div class="row" id="myAudio">
+    </div>
+</div>
+<a href="index.html" style="color:white;background-color:red;" id="stop" class="btn btn-primary btn-lg btn-block">
+Close
+</a>
+
+<!-- todo? -->
+<div id="snooze" class="btn btn-primary btn-lg btn-block">
+Snooze
+</div>
+
+<script type="text/javascript">
+    document.body.onload=function(){
+        var aud =document.createElement("audio");
+        aud.setAttribute("id","aud");
+        aud.setAttribute("src","alarm.mp3");
+        document.getElementById("myAudio").appendChild(aud);
+       //http://www.orangefreesounds.com/mp3-alarm-clock
+        aud.play();
+        aud.loop=true;
+    };
+    document.getElementById('stop').onclick=function(){
+        document.getElementById('aud').parentNode.removeChild(aud);
+    };
+    document.getElementById('snooze').onclick=function(){
+          var alarmTime = new Date();
+        alarmTime.setMinutes(alarmTime.getMinutes() + 5);
+        var alarmyear = alarmTime.getFullYear();
+        var alarmmonth = alarmTime.getMonth()+1;
+        var alarmdate = alarmTime.getDate();
+        var alarmhour = alarmTime.getHours();
+        var alarmmin = alarmTime.getMinutes();
+        var alarmmeridiem;
+        if(alarmhour>=12){
+            if(alarmhour==12){
+                alarmmeridiem="PM";
+            }else{
+                alarmhour-=12;
+                alarmmeridiem = "PM";
+            }
+        }else{
+            if(alarmhour==0){
+                alarmhour=12;
+            }
+            alarmmeridiem="AM";
+        }
+
+        if(alarmmonth<10){
+            alarmmonth = "0"+alarmmonth;
+        }
+
+        if(alarmdate<10){
+            alarmdate = "0" +alarmdate;
+        }
+
+        if(alarmhour<10){
+            alarmhour = "0"+alarmhour;
+        }
+        if(alarmmin<10){
+            alarmmin = "0"+alarmmin;
+        }
+
+        var currentTime = new Date();
+
+         var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
+
+         var childRef = messagesRef.child("alarm" + currentTime.getTime());
+      
+
+        childRef.set({id:currentTime.getTime(),date:alarmyear+'-'+alarmmonth+'-'+alarmdate, hour:alarmhour, minute:alarmmin, meridiem:alarmmeridiem});
+        document.getElementById('aud').parentNode.removeChild(aud);
+    };
+</script>
+
+</body>
+</html>

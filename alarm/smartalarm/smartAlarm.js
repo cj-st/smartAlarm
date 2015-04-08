@@ -8,7 +8,7 @@ $(document).ready( function() {
     var storeId=[];
     var address1;
     var address2;
-
+    var count=0;
     //display time on webpage(bug: am pm has some issues)
     function displayTime() {
         var currentTime = new Date();
@@ -28,12 +28,16 @@ $(document).ready( function() {
                 hours-=12;
                 meridiem = "PM";
             }
+        }else if(hours===0){
+                hours=12;
         }else{
             meridiem="AM";
         }
 
 
         //make it to two digits for 1-9
+        if(monthNum<10) monthNum="0"+monthNum;
+        if(date<10) date="0"+date;
         if(seconds<10) seconds="0"+seconds;
         if(minutes<10) minutes="0"+minutes;
         if(hours<10) hours="0"+hours;
@@ -47,28 +51,44 @@ $(document).ready( function() {
         //turn off listener when done
         messagesRef.on('value',function(snapshot){
             for(var id in snapshot.val()){
-                if((snapshot.val()[id].date.indexOf(date+'/'+ monthNum +'/'+year)!=-1) && snapshot.val()[id].hour==hours && snapshot.val()[id].minute==minutes &&seconds=="00"){
-                    var aud =document.createElement("audio");
-                    aud.setAttribute("id","aud" +snapshot.val()[id].id);
-                    console.log(aud.id);
-                    aud.setAttribute("src","alarm.mp3");
-                    document.getElementById("myAudio").appendChild(aud);
-                   //http://www.orangefreesounds.com/mp3-alarm-clock
-                    aud.play();
-                    aud.loop=true;
-                    messagesRef.off("value");
-                    break;
+                if((snapshot.val()[id].date.indexOf(year+'-'+ monthNum +'-'+date)!=-1) && snapshot.val()[id].hour==hours && snapshot.val()[id].minute==minutes &&seconds=="00"){
+                   //  var aud =document.createElement("audio");
+                   //  aud.setAttribute("id","aud" +snapshot.val()[id].id);
+                   //  console.log(aud.id);
+                   //  aud.setAttribute("src","alarm.mp3");
+                   //  document.getElementById("myAudio").appendChild(aud);
+                   // //http://www.orangefreesounds.com/mp3-alarm-clock
+                   //  aud.play();
+                   //  aud.loop=true;
+                   //  messagesRef.off("value");
+
+                   document.getElementById('ringingPage').style.display="block";
+                          var aud =document.createElement("audio");
+                          aud.setAttribute("id","aud");
+                        aud.setAttribute("src","alarm.mp3");
+        document.getElementById("myAudio").appendChild(aud);
+       //http://www.orangefreesounds.com/mp3-alarm-clock
+        aud.play();
+        aud.loop=true;
+                   var childRef = messagesRef.child('alarm'+snapshot.val()[id].id);
+                   childRef.remove();
                 }
             }
         });
 
     }
+if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(weather);
+}
     //location: 49.260605,-123.245994 -UBC
     //display weather info and load weather background on webpage
-    function weather(){
+    function weather(position){
+              userLat=position.coords.latitude;
+              userLng=position.coords.longitude;
+    var fullUrl="https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/"+userLat+","+userLng;
         //get weather data from forecast.io
         $.ajax({
-        url: "https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/49.260605,-123.245994",
+        url: fullUrl,
         dataType: "jsonp",
         success: function (data) {
             var icon=data.currently.icon;
@@ -119,25 +139,18 @@ $(document).ready( function() {
     });
     }
 
-    weather();  //display weather
     var auto=setInterval(displayTime,1000); //display time every second
 
 
-    var alarmDate=document.getElementById("alarmDate");
-    var option=document.createElement("option");
-    var days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    option.text="DD/MM/YY";
+	// Set the minimum date to be today
+	var _today = new Date().toLocaleString().split(',')[0].split('/');
+    if(_today[0]<10){_today[0]='0'+_today[0];}
+    if(_today[1]<10){_today[1]='0'+_today[1];}
+    var today= _today[2]+'-'+_today[0]+'-'+_today[1];
+    console.log(today);
+    document.getElementById("alarmDate").setAttribute('min', today);
+	var alarmDate=document.getElementById("alarmDate");
 
-    alarmDate.add(option,alarmDate[0]);
-
-    //drop down for date
-    for(var i=0;i<7;i++){
-        var option1=document.createElement("option");
-        var optionDate = new Date();
-        optionDate.setDate(optionDate.getDate() + i);
-        option1.text=days[optionDate.getDay()]+", "+optionDate.getDate()+'/'+ (optionDate.getMonth()+1) +'/'+optionDate.getFullYear();
-        alarmDate.add(option1,alarmDate[i+1]);
-    }
 
     var alarmHour=document.getElementById("alarmHour");
     var optionHour=document.createElement("option");
@@ -184,6 +197,23 @@ $(document).ready( function() {
     //get root of data from firebase
     var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
 
+     var alarmAmount = document.createElement('label');
+     alarmAmount.innerText = 0;
+
+     document.getElementById('alarmIcon').appendChild(alarmAmount);
+
+
+     messagesRef.on('child_added', function(snapshot){
+
+        alarmAmount.innerText = parseInt(alarmAmount.innerText) + 1;
+
+    });
+
+    messagesRef.on('child_removed', function(snapshot){
+         alarmAmount.innerText = parseInt(alarmAmount.innerText) - 1;
+
+    });
+
     //set alarm listener
     var set=document.getElementById('setAlarm');
     set.onclick=function(){
@@ -193,123 +223,33 @@ $(document).ready( function() {
         var alarmmeridiem=document.getElementById('alarmMeridiem').value;
         var childRef;
         var currentId;
-        //send valid alarm data to firebase
-        //could check if alarm has been set(more work)
-        if(alarmdate!='DD/MM/YY'&&alarmhour!='hr'&&alarmminute!='min'){
-            console.log(storeId);
-            //repopulate removed ids first
-            if(number <= 10) {
-                if(storeId.length===0){
-                    childRef = messagesRef.child("alarm" + (number+1));
-                    childRef.set({id:number+1,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
-                }else{
-                    currentId=storeId.pop();
-                    childRef = messagesRef.child("alarm" + (currentId));
-                    childRef.set({id:currentId,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
-                }
-            //alert fails when there are too many data
-            }else {
-                alert('maximum alarm set');
-            }
-        }else {
-            alert('please select a day and time');
-        }
-    };
+        var currentTime = new Date();
+    if(alarmdate!==""&&alarmhour!='hr'&&alarmminute!='min'){
+        childRef = messagesRef.child("alarm" + currentTime.getTime());
+        childRef.set({id:currentTime.getTime(),date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
+        document.getElementById('alarmPage').style.display="none";
+    }
 
-    //create alarm from firebase data
-    messagesRef.on('child_added',function(snapshot){
-        number++;
-        var showAlarm=document.createElement("button");
-        showAlarm.setAttribute("class","btn btn-primary");
-        showAlarm.id= snapshot.val().id;
-        showAlarm.innerText=snapshot.val().date+" "+snapshot.val().hour+":"+snapshot.val().minute;
-        document.getElementById("alarms").appendChild(showAlarm);
-
-        //remove alarm data and alarm object upon click
-        showAlarm.onclick=function(){
-            //store id to be remove in array
-            currentId=showAlarm.id;
-            storeId.push(currentId);
-            console.log(showAlarm.id);
-            console.log(number);
-            //taking into account user can remove button that is not ringing
-            if(document.getElementById("aud"+showAlarm.id)!==null){
-                var audio = document.getElementById('aud'+showAlarm.id);
-                audio.parentNode.removeChild(audio);
-            }
-
-            var childRef = messagesRef.child('alarm' + showAlarm.id);
-            childRef.remove();
-            var child = document.getElementById(showAlarm.id);
-            child.parentNode.removeChild(child);
-
-            number--;
-            };
-
-    });
-    //draw map(not needed)
-    // function GetMap() {
-    //     var myOptions = {
-    //         zoom: 8,
-    //         center: { lat: 49.2611, lng: -123.2531},
-    //     };
-    //     map = new google.maps.Map(document.getElementById("mapContainer"),myOptions);
-    // }
-    // google.maps.event.addDomListener(window, 'load', GetMap);
-
-    //address to lat lng(not needed)
-    // var geocoder = new google.maps.Geocoder();
-    // var address = "UBC,Vancouver,CA";
-    // var address1 = "SFU,Burnaby,CA";
-
-    // geocoder.geocode( { 'address': address1}, function(results, status) {
-
-    //     if (status == google.maps.GeocoderStatus.OK) {
-    //         latlng= results[0].geometry.location.lat()+','+results[0].geometry.location.lng();
-    //     console.log(latlng);
+		  // if(alarmdate!==""&&alarmhour!='hr'&&alarmminute!='min'){
+    //         console.log(storeId);
+    //         //repopulate removed ids first
+    //         if(number <= 10) {
+    //             if(storeId.length===0){
+    //                 childRef = messagesRef.child("alarm" + (number+1));
+    //                 childRef.set({id:number+1,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
+    //             }else{
+    //                 currentId=storeId.pop();
+    //                 childRef = messagesRef.child("alarm" + (currentId));
+    //                 childRef.set({id:currentId,date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
+    //             }
+    //         //alert fails when there are too many data
+    //         }else {
+    //             alert('maximum alarm set');
+    //         }
+    //     }else {
+    //         alert('please select a day and time');
     //     }
-    // });
-
-
-
-    //might want to call window.unload/refresh after ajax finishes
-    document.getElementById("submit").onclick= function()
-    {
-        address1 =document.getElementById("origin").value;
-        address2 =document.getElementById("destination").value;
-        console.log(address1);
-        //traffic data only valid for business customer(find other means)
-
-        //origin:49.260605,-123.245994 -UBC
-        //dest:  49.278094,-122.919883 -SFU
-        //mode: default to driving
-        //language: en -English
-        //use of proxy to encode into jsonp format
-	var transitMode = document.getElementById("transitMode").value;
-        var mapsUrl    = 'https://maps.googleapis.com/maps/api/distancematrix/json?origins='+address1+'&destinations='+address2+'&mode='+transitMode+'&language=en&key=AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
-        var encodedUrl = encodeURIComponent(mapsUrl);
-        var proxyUrl   = 'https://jsonp.afeld.me/?url=' + encodedUrl;
-        console.log(mapsUrl);
-        $.ajax({
-            url: proxyUrl,
-            dataType: 'jsonp',
-            cache: false,
-            success: function (data) {
-                console.log(data.status);
-                if(data.status!=='INVALID_REQUEST'){
-                    document.getElementById("report").innerText="Distance:"+data.rows[0].elements[0].distance.text+"\nTime:"+data.rows[0].elements[0].duration.text;
-                    document.getElementById("report").style.color='white';
-                }else{
-                    alert('Enter a valid address!');
-                }
-            },
-
-        });
-
-
     };
-
-
 
 
 
