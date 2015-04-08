@@ -12,5 +12,7 @@ stream = fs.createReadStream(songfile)
 }
 
 exports.stop = function() {
-	stream.end();
+	if(stream != undefined){
+		stream.end();
+	}
 }
