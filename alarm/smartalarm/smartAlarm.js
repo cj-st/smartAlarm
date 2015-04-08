@@ -9,7 +9,6 @@ $(document).ready( function() {
     var address1;
     var address2;
     var count=0;
-    //display time on webpage(bug: am pm has some issues)
     function displayTime() {
         var currentTime = new Date();
         var hours = currentTime.getHours();
@@ -71,7 +70,9 @@ $(document).ready( function() {
 
     }
 if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(weather);
+    navigator.geolocation.getCurrentPosition(weather,function(err){
+        alert(err);
+    });
 }
     //location: 49.260605,-123.245994 -UBC
     //display weather info and load weather background on webpage
@@ -95,11 +96,10 @@ if(navigator.geolocation) {
 
             switch(icon){
             case 'clear-day':
+            case 'partly-cloudy-day':
                 background.style.backgroundImage='url("sunny.jpg")';
                 break;
             case 'cloudy':
-            case 'partly-cloudy-day':
-            case 'partly-cloudy-night':
                 background.style.backgroundImage='url("cloudy.jpg")';
                 clockDiv.style.color='white';
                 weatherDiv.style.color='white';
@@ -122,6 +122,7 @@ if(navigator.geolocation) {
                 background.style.backgroundImage='url("mist.jpg")';
                 break;
             case 'clear-night':
+            case 'partly-cloudy-night':
                 background.style.backgroundImage='url("clearNight.jpg")';
                 weatherDiv.style.color='white';
                 clockDiv.style.color='white';
