@@ -61,7 +61,14 @@ $(document).ready( function() {
                    //  aud.loop=true;
                    //  messagesRef.off("value");
 
-                   document.getElementById('ring').click();
+                   document.getElementById('ringingPage').style.display="block";
+                          var aud =document.createElement("audio");
+                          aud.setAttribute("id","aud");
+                        aud.setAttribute("src","alarm.mp3");
+        document.getElementById("myAudio").appendChild(aud);
+       //http://www.orangefreesounds.com/mp3-alarm-clock
+        aud.play();
+        aud.loop=true;
                    var childRef = messagesRef.child('alarm'+snapshot.val()[id].id);
                    childRef.remove();
                 }

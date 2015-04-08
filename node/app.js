@@ -1,6 +1,9 @@
 /* initializations, declarations, etc... */
 
 var fs = require('fs');
+var Gpio = require('onoff').Gpio,
+	button = new Gpio(22, 'in', 'both',{ persistentWatch: true, debounceTimeout: 300 }),
+	buttonLed = new Gpio(23, 'out');
 var lame = require('lame');
 var Speaker = require('speaker');
 var Lcd = require('lcd'),
@@ -31,6 +34,7 @@ var info;
 var temp;
 var forecast;
 var forecastDetails;
+var ledInterval;
 
 firebaseRef.on('value',function(snapshot){
 	data = snapshot.val();
@@ -60,13 +64,18 @@ setInterval(function() {
 
 /* Sound some alarms */
 	for (var alarm in data.alarmdata){ 
-		console.log(data.alarmdata[alarm]);
+//		console.log(data.alarmdata[alarm]);
 		if(data.alarmdata[alarm].hour == day.getHours() && data.alarmdata[alarm].minute == day.getMinutes()) {
 //			tts.speak("Wake up dumb fuck");
 			mp3.play("./audio/ThisLove.mp3"); // because Maroon 5
-			setTimeout(function(){ // just for testing, for now
+/*			setTimeout(function(){ // just for testing, for now
 				snooze();
 			}, 10000);
+*/
+			ledInterval = setInterval(function () {
+				buttonLed.writeSync(buttonLed.readSync() ^ 1); // 1 = on, 0 = off :) 
+			}, 200);
+			
 			console.log("alarm now");
 			if(!data.alarmdata[alarm].isRepeating) { // if this is NOT a repeating alarm, remove it after it's been sounded
 				var childRef = alarmDataRef.child(alarm);
@@ -75,6 +84,15 @@ setInterval(function() {
 		}
 	}
 }, 60000);
+
+/* Watch button */
+button.watch(function (err, value) {
+	if (value == 1) {
+		clearInterval(ledInterval);
+		buttonLed.writeSync(0);
+		snooze();
+	}
+});
 
 /* Helper functions */
 
@@ -108,7 +126,7 @@ function printLCD(){
 
 function updateWeather(){
         http.get("http://api.openweathermap.org/data/2.5/weather?q=Vancouver,CAN&units=metric", function(res) {
-        console.log("Got response: " + res.statusCode);
+        console.log("Weather updated, HTTP response code: " + res.statusCode);
         var data = '';
         res.on('data', function (chunk) {
                 data += chunk;
@@ -132,6 +150,6 @@ function snooze() {
 	mp3.stop();
 	var currentTime = new Date();
 	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-	var information = "The time is currently " + currentTime.getHours() + " " + currentTime.getMinutes() + " on " + months[currentTime.getMonth()] + " " + currentTime.getDate() + ", " + currentTime.getFullYear() + ". The weather is currently " + temp + " degrees with " + forecastDetails;
+	var information = "The time is " + currentTime.getHours() + " " + currentTime.getMinutes() + " on " + currentTime.toString().substring(0,3) + ", " + months[currentTime.getMonth()] + " " + currentTime.getDate() + ". The weather is " + temp.toFixed(1) + " degrees with " + forecastDetails;
 	tts.speak(information);
 }
