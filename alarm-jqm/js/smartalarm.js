@@ -72,7 +72,13 @@ $(document).on('click', '.cancelalarm', function(event){
 });
 
 function alarmSetNoRepeat() {
-var repeatToggle = $('#flip-1').slider().val();
+						var repeatToggle;
+						if ($('#flip-1').slider().val() == "true") {
+							repeatToggle = true;
+						}
+						else {
+							repeatToggle = false;
+						}
                         var nameSend = document.getElementById("namepicked").value;
                         console.log(nameSend);
 
@@ -94,7 +100,7 @@ var repeatToggle = $('#flip-1').slider().val();
                         //console.log(songSend);
 
 
-                        var volumeSend = getVolume();
+                        var volumeSend = 100;
                         //console.log(volumeSend);
 
                         var daysRepSend = getRepeatedDays();
@@ -145,10 +151,10 @@ var repeatToggle = $('#flip-1').slider().val();
                     return "none";
                 }
 
-                function getVolume(){
+               /* function getVolume(){
                     var volumeSet = $("#slider-fill").val();
                     return volumeSet;
-                }
+                }*/
 
                 function getTime(){
                         var timeSet = document.getElementById("timepicked").value;
@@ -182,8 +188,8 @@ var repeatToggle = $('#flip-1').slider().val();
                     document.getElementById("namepicked").value = "";
                     document.getElementById("dateField").value = "";
 					$("#dayrep").find('option:selected').removeAttr("selected");
-					/*$("#songfield").val("21Guns.mp3");
-					$('.ui-select select').val('').selectmenu('refresh'); */
+					/*$("#songfield").val("21Guns.mp3");*/
+					$('#dayrep').val('').selectmenu('refresh'); 
                 }
 				
 				                function alarmTraffic(){
