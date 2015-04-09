@@ -32,6 +32,7 @@ Snooze
 </div>
 
 <script type="text/javascript">
+userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0];
     document.body.onload=function(){
         var aud =document.createElement("audio");
         aud.setAttribute("id","aud");
@@ -81,12 +82,13 @@ Snooze
         if(alarmmin<10){
             alarmmin = "0"+alarmmin;
         }
+         
 
         var currentTime = new Date();
 
          var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
 
-         var childRef = messagesRef.child("alarm" + currentTime.getTime());
+         var childRef = messagesRef.child(userId+"/alarm" + currentTime.getTime());
       
 
         childRef.set({id:currentTime.getTime(),date:alarmyear+'-'+alarmmonth+'-'+alarmdate, hour:alarmhour, minute:alarmmin, meridiem:alarmmeridiem});

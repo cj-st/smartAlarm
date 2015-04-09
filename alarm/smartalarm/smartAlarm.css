@@ -3,6 +3,7 @@ body{
     background-size:cover;
 	background-repeat:no-repeat;
 }
+
 .navbar-brand
 {
     position: absolute;
@@ -16,21 +17,21 @@ body{
 }
 
 #clock{
-    font-size:50px;
+    font-size:20px;
     text-align: center;
     font-weight: bold;
 }
 #weather{
-    font-size:30px;
+    font-size:20px;
     text-align: center;
 }
 #report{
-    font-size:50px;
+    font-size:20px;
     text-align: center;
     font-weight: bold;
 }
 #link{
-	font-size:30px;
+	font-size:20px;
     text-align: center;
 }
 .spacer1 { height: 1px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }

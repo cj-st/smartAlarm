@@ -48,7 +48,7 @@
 
 
 <script type='text/javascript'>
-var resp=JSON.parse(localStorage.getItem("Object"));
+var resp=JSON.parse(sessionStorage.getItem("Object"));
 for (var i = 0; i < resp.items.length; i++) {
         console.log(resp.items[i]);
         //var li = document.createElement('li');
@@ -78,7 +78,6 @@ $(document).ready(function() {
         },
     });
 });
-
 document.getElementById('add').onclick=function(){
      window.open('https://www.google.com/calendar/render', 'popUpWindow', 'width=700,height=600');
 };

@@ -20,9 +20,9 @@
 <body>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-right">
+<!--         <ul class="nav navbar-nav navbar-right">
           <li><a href="index.html" id="cancel">cancel</a></li>
-        </ul>
+        </ul> -->
         <ul class="nav navbar-nav navbar-left">
           <li><a href="index.html" id="done">done</a></li>
         </ul>
@@ -36,8 +36,11 @@
 <script>
    //create alarm from firebase data
     var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
+          userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0];
+
+    var ref=messagesRef.child(userId);
     var number=0;
-    messagesRef.on('child_added',function(snapshot){
+    ref.on('child_added',function(snapshot){
         number++;
         var showAlarm=document.createElement("div");
         showAlarm.setAttribute("class","row");
@@ -78,10 +81,10 @@
 
       //   number--;
       //   }
-      //       };
+
     showAlarm.onclick=function(){
       if (confirm("Press OK to REMOVE the alarm") === true) {
-        var childRef = messagesRef.child('alarm' + showAlarm.id);
+        var childRef = messagesRef.child(userId+'/alarm' + showAlarm.id);
         childRef.remove();
         var child = document.getElementById(showAlarm.id);
         child.parentNode.removeChild(child);

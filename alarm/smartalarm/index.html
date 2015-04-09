@@ -17,42 +17,24 @@
     </script>
 
 
-
-
 </head>
 <body>
 
- <body>
 <a href="ringing.html" id="ring" style="display:none">
- <div class="navbar-inner">
-  <div class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid" id="bottom">
-        <ul class="nav navbar-nav">
-          <li><a href="alarms.html" id="alarmIcon"><img src="alarm.png" style="width:20px;height:25px"> </a></li>
-          <li><a href="distance.html"><img src="transport.jpg" style="width:20px;height:25px"></a></li>
-          <li><a href="#" id="authorize-button" onclick="handleAuthClick()"><img src="calendar.png" style="width:20px;height:25px"></a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><img src="settings.png" style="width:20px;height:25px"></a></li>
-        </ul>
-      </div>
-    </div>
-    </div>
-  </div>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#" id="username" style="color:white"></a></li>
-          <li><a href="#"  id="logout">Logout</a></li>
-          <!--  <li><a href="#">Page 2</a></li> -->
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" id="plus">Add Alarm <img src="plus.png" style="width:20px;height:25px"></a></li>
-        </ul>
-      </div>
-  </div>
 
-<div class="spacer200"></div>
+<div class="row" style="width:100%;margin:0;background-color:black">
+          <a style="display:inline;font-size:20px;font-weight:bold" href="#"  id="logout">Logout</a>
+          <a style="display:inline;font-size:20px;float:right;font-weight:bold" href="#" id="plus">Add Alarm<img src="plus.png" style="width:20px;height:25px"></a>
+</div>
+<div class="row" style="bottom:0;margin:0;position:fixed;width:100%;background-color:#e7e7e7">
+          <a style="display:inline" href="alarms.html" id="alarmIcon"><img src="alarm.png" style="width:30px;height:30px;margin-left:25px"> </a>
+          <a style="display:inline;" href="distance.html"><img src="transport.jpg" style="width:30px;height:30px;margin-left:10px"></a>
+          <a style="display:inline;" href="#" id="authorize-button" onclick="handleAuthClick()"><img src="calendar.png" style="width:30px;height:30px;margin-left:10px"></a>
+          <a style="display:inline;float:right" href="#"><img src="settings.png" style="width:30px;height:30px;"></a>
+</div>
+</div>
+
+<div class="spacer100"></div>
 <!-- alarms options -->
 <div class="container" id="alarmPage" style="display:none">
   <div class="jumbotron">
@@ -89,7 +71,6 @@
 </div>
 
 
-<div class="spacer200"></div>
 <!-- location-->
 <div class="container">
     <div class="row" style="color:turquoise" id="loc"></div>
@@ -110,13 +91,16 @@
  -->
 
 <script>
-if (localStorage.getItem("Object") !== null) {
-document.getElementById('username').text=JSON.parse(localStorage.getItem("Object")).summary.split('@')[0];
-}
+//if (localStorage.getItem("Object") !== null) {
+// document.getElementById('username').text=JSON.parse(localStorage.getItem("Object")).summary.split('@')[0];
+// }
 var clientId = '301696899552-vpergd22gr7jkod4b4o9q9osb237t94h.apps.googleusercontent.com';
 var apiKey = 'AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 function handleClientLoad() {
+     userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0];
+
+
   gapi.client.setApiKey(apiKey);
   //window.setTimeout(checkAuth,1);
 }
@@ -159,7 +143,7 @@ function makeApiCall() {
       //   li.appendChild(document.createTextNode(userEvent));
       //   document.getElementById('events').appendChild(li);
       // }
-      localStorage.setItem("Object",JSON.stringify(resp));
+      sessionStorage.setItem("Object",JSON.stringify(resp));
      document.location.href ="calendar.html?email="+resp.summary;
 
     });
@@ -167,6 +151,7 @@ function makeApiCall() {
 }
 document.getElementById('logout').onclick=function(){
             console.log('hi');
+            sessionStorage.clear();
             document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://281alarm.firebaseapp.com";
             //gapi.auth.signOut();
             //messagesRef.unauth();
@@ -189,12 +174,7 @@ document.getElementById('logout').onclick=function(){
       document.getElementById('alarmPage').style.display="block";
     }
   };
-</script>
 
-<script type="text/javascript">
-    document.body.onload=function(){
- 
-    };
     document.getElementById('stop').onclick=function(){
         document.getElementById('aud').parentNode.removeChild(aud);
         document.getElementById('ringingPage').style.display="none";
@@ -241,13 +221,14 @@ document.getElementById('logout').onclick=function(){
 
          var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
 
-         var childRef = messagesRef.child("alarm" + currentTime.getTime());
-      
+         var childRef = messagesRef.child(userId+"/alarm" + currentTime.getTime());
+
 
         childRef.set({id:currentTime.getTime(),date:alarmyear+'-'+alarmmonth+'-'+alarmdate, hour:alarmhour, minute:alarmmin, meridiem:alarmmeridiem});
         document.getElementById('aud').parentNode.removeChild(aud);
         document.getElementById('ringingPage').style.display="none";
     };
+
 </script>
 
 

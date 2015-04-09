@@ -9,6 +9,18 @@ $(document).ready( function() {
     var address1;
     var address2;
     var count=0;
+    if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(weather,function(err){
+        alert(err);
+    });
+}
+    var auto=setInterval(displayTime,1000); //display time every second
+
+       messagesRef = new Firebase('https://281alarm.firebaseio.com/');
+    userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0];
+
+    ref=messagesRef.child(userId);
+
     function displayTime() {
         var currentTime = new Date();
         var hours = currentTime.getHours();
@@ -48,7 +60,7 @@ $(document).ready( function() {
          " "+ meridiem +"\n" + month+" "+date+" "+year;
 
         //turn off listener when done
-        messagesRef.on('value',function(snapshot){
+        ref.on('value',function(snapshot){
             for(var id in snapshot.val()){
                 if((snapshot.val()[id].date.indexOf(year+'-'+ monthNum +'-'+date)!=-1) && snapshot.val()[id].hour==hours && snapshot.val()[id].minute==minutes &&seconds=="00"){
                    //  var aud =document.createElement("audio");
@@ -69,18 +81,14 @@ $(document).ready( function() {
        //http://www.orangefreesounds.com/mp3-alarm-clock
         aud.play();
         aud.loop=true;
-                   var childRef = messagesRef.child('alarm'+snapshot.val()[id].id);
+                   var childRef = messagesRef.child(userId+'/alarm'+snapshot.val()[id].id);
                    childRef.remove();
                 }
             }
         });
 
     }
-if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(weather,function(err){
-        alert(err);
-    });
-}
+
     //location: 49.260605,-123.245994 -UBC
     //display weather info and load weather background on webpage
     function weather(position){
@@ -140,7 +148,6 @@ if(navigator.geolocation) {
     });
     }
 
-    var auto=setInterval(displayTime,1000); //display time every second
 
 
 	// Set the minimum date to be today
@@ -196,21 +203,19 @@ if(navigator.geolocation) {
     alarmMeridiem.add(optionPm,alarmMeridiem[1]);
 
     //get root of data from firebase
-    var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
-
      var alarmAmount = document.createElement('label');
      alarmAmount.innerText = 0;
 
      document.getElementById('alarmIcon').appendChild(alarmAmount);
 
 
-     messagesRef.on('child_added', function(snapshot){
+     ref.on('child_added', function(snapshot){
 
         alarmAmount.innerText = parseInt(alarmAmount.innerText) + 1;
 
     });
 
-    messagesRef.on('child_removed', function(snapshot){
+    ref.on('child_removed', function(snapshot){
          alarmAmount.innerText = parseInt(alarmAmount.innerText) - 1;
 
     });
@@ -225,8 +230,9 @@ if(navigator.geolocation) {
         var childRef;
         var currentId;
         var currentTime = new Date();
+
     if(alarmdate!==""&&alarmhour!='hr'&&alarmminute!='min'){
-        childRef = messagesRef.child("alarm" + currentTime.getTime());
+        childRef = messagesRef.child(userId+"/alarm" + currentTime.getTime());
         childRef.set({id:currentTime.getTime(),date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
         document.getElementById('alarmPage').style.display="none";
     }
