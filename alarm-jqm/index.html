@@ -45,7 +45,36 @@
             <h2>Welcome to The Smart Alarm!</h2>
             
             <p>
-                A simple yet useful design. 
+                <p>
+               A web-app that allows you to calculate your alarm based on traffic to your destination, syncs to your sleep cycle, and repeat alarms on days of the week.
+
+                <br>
+ 
+            <h4>To manually set an alarm, click on "Set Alarm":</h4> 
+            Title: Enter the name of your alarm 
+            <br>
+            Time: Enter the hour and minute of your alarm
+            <br>
+            Date: Enter the date of your alarm
+            <br>
+            Repeat: Select which days of the week you would like to repeat the alarm
+            <br>
+            Song Selection: Choose from a collection of upbeat and modern pop songs to kick-start your day
+            <br>
+
+            <h4>To set an alarm based off of your destination and departure locations, click "Set Traffic Alarm":</h4> 
+            After pressing the snooze button, the alarm will report your total travel time. 
+            Origin: Enter the location you are departing from.
+            <br>
+            Destination: Enter the location you are heading towards.
+            <br>
+            Get Ready Time: Enter the approximate preparation time you need before departing
+            <br>
+            Arrival Time: Enter the desired time to reach your destination. 
+            <br>
+
+            <h4>To view or delete your alarms, click on "Alarm List"</h4>
+            </p>
             </p>
 
             <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-back ui-btn-icon-left" data-rel="back">Go Back</a>
@@ -54,9 +83,11 @@
             </div>            
         <!-- End of Dialog Section -->
 
-             <br></br>     
-             <div style="font-size:10vw; text-align:center; background-color:lightgreen; border:5px solid red" id="time">00:00:00</div>
-             <br></br>
+             <br>  
+             <div id="time">00:00:00</div>
+			 <br>
+			 <div id="weather"></div>
+             <br>
 
              <hr>
              <a href="#listalarms" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b" >Alarm List</a>

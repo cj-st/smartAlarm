@@ -52,6 +52,7 @@ $(document).ready( function() {
     setInterval(function() {
         displayTime()
     }, 1000);
+	getWeather();
 });
 
 firebaseRef.on('value', function(snapshot){
@@ -70,6 +71,62 @@ $(document).on('click', '.cancelalarm', function(event){
 	var childRef = alarmDataRef.child(id);
 	childRef.remove();
 });
+
+function getWeather() {
+	 var fullUrl="https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/49.2617,-123.2490";
+        //get weather data from forecast.io
+        $.ajax({
+        url: fullUrl,
+        dataType: "jsonp",
+        success: function (data) {
+            var icon=data.currently.icon;
+            var temp=(data.currently.temperature-32)/1.8;
+            var background = document.body;
+            clockDiv = document.getElementById('clock');
+            weatherDiv=document.getElementById('weather');
+            weatherDiv=document.getElementById('weather');
+
+            weatherDiv.innerText="Currently "+ icon +" " + Math.round(temp)+" C";
+			var bgimage;
+            switch(icon){
+            case 'clear-day':
+            case 'partly-cloudy-day':
+                bgimage='url("images/sunny.jpg")';
+                break;
+            case 'cloudy':
+                bgimage='url("images/cloudy.jpg")';
+                clockDiv.style.color='white';
+                weatherDiv.style.color='white';
+                break;
+            case 'rain':
+                bgimage='url("images/rainyDay.jpg")';
+                clockDiv.style.color='white';
+                weatherDiv.style.color='white';
+                break;
+            case 'wind':
+                bgimage='url("images/thunder.jpg")';
+                clockDiv.style.color='white';
+                weatherDiv.style.color='white';
+                break;
+            case 'snow':
+            case 'sleet':
+                bgimage='url("images/snowy.jpg")';
+                break;
+            case 'fog':
+                bgimage='url("images/mist.jpg")';
+                break;
+            case 'clear-night':
+            case 'partly-cloudy-night':
+                bgimage='url("images/clearNight.jpg")';
+                weatherDiv.style.color='white';
+                clockDiv.style.color='white';
+                break;
+        }
+		$("#clockPageContent").css("backgroundImage",bgimage);
+
+        }
+    });
+}
 
 function alarmSetNoRepeat() {
 						var repeatToggle;
