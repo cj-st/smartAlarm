@@ -9,7 +9,16 @@ $(document).ready( function() {
     var address1;
     var address2;
     var count=0;
-    //display time on webpage(bug: am pm has some issues)
+    if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(weather,function(err){
+        alert(err);
+    });
+}
+       messagesRef = new Firebase('https://281alarm.firebaseio.com/');
+    userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0].split(/[^A-Za-z]/).join("");
+
+    ref=messagesRef.child(userId);
+
     function displayTime() {
         var currentTime = new Date();
         var hours = currentTime.getHours();
@@ -49,7 +58,7 @@ $(document).ready( function() {
          " "+ meridiem +"\n" + month+" "+date+" "+year;
 
         //turn off listener when done
-        messagesRef.on('value',function(snapshot){
+        ref.on('value',function(snapshot){
             for(var id in snapshot.val()){
                 if((snapshot.val()[id].date.indexOf(year+'-'+ monthNum +'-'+date)!=-1) && snapshot.val()[id].hour==hours && snapshot.val()[id].minute==minutes &&seconds=="00"){
                    //  var aud =document.createElement("audio");
@@ -70,16 +79,14 @@ $(document).ready( function() {
        //http://www.orangefreesounds.com/mp3-alarm-clock
         aud.play();
         aud.loop=true;
-                   var childRef = messagesRef.child('alarm'+snapshot.val()[id].id);
+                   var childRef = messagesRef.child(userId+'/alarm'+snapshot.val()[id].id);
                    childRef.remove();
                 }
             }
         });
 
     }
-if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(weather);
-}
+
     //location: 49.260605,-123.245994 -UBC
     //display weather info and load weather background on webpage
     function weather(position){
@@ -102,11 +109,10 @@ if(navigator.geolocation) {
 
             switch(icon){
             case 'clear-day':
+            case 'partly-cloudy-day':
                 background.style.backgroundImage='url("sunny.jpg")';
                 break;
             case 'cloudy':
-            case 'partly-cloudy-day':
-            case 'partly-cloudy-night':
                 background.style.backgroundImage='url("cloudy.jpg")';
                 clockDiv.style.color='white';
                 weatherDiv.style.color='white';
@@ -129,6 +135,7 @@ if(navigator.geolocation) {
                 background.style.backgroundImage='url("mist.jpg")';
                 break;
             case 'clear-night':
+            case 'partly-cloudy-night':
                 background.style.backgroundImage='url("clearNight.jpg")';
                 weatherDiv.style.color='white';
                 clockDiv.style.color='white';
@@ -142,14 +149,14 @@ if(navigator.geolocation) {
     var auto=setInterval(displayTime,1000); //display time every second
 
 
-	// Set the minimum date to be today
-	var _today = new Date().toLocaleString().split(',')[0].split('/');
+    // Set the minimum date to be today
+    var _today = new Date().toLocaleString().split(',')[0].split('/');
     if(_today[0]<10){_today[0]='0'+_today[0];}
     if(_today[1]<10){_today[1]='0'+_today[1];}
     var today= _today[2]+'-'+_today[0]+'-'+_today[1];
     console.log(today);
     document.getElementById("alarmDate").setAttribute('min', today);
-	var alarmDate=document.getElementById("alarmDate");
+    var alarmDate=document.getElementById("alarmDate");
 
 
     var alarmHour=document.getElementById("alarmHour");
@@ -195,21 +202,19 @@ if(navigator.geolocation) {
     alarmMeridiem.add(optionPm,alarmMeridiem[1]);
 
     //get root of data from firebase
-    var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
-
      var alarmAmount = document.createElement('label');
      alarmAmount.innerText = 0;
 
      document.getElementById('alarmIcon').appendChild(alarmAmount);
 
 
-     messagesRef.on('child_added', function(snapshot){
+     ref.on('child_added', function(snapshot){
 
         alarmAmount.innerText = parseInt(alarmAmount.innerText) + 1;
 
     });
 
-    messagesRef.on('child_removed', function(snapshot){
+    ref.on('child_removed', function(snapshot){
          alarmAmount.innerText = parseInt(alarmAmount.innerText) - 1;
 
     });
@@ -224,13 +229,14 @@ if(navigator.geolocation) {
         var childRef;
         var currentId;
         var currentTime = new Date();
+
     if(alarmdate!==""&&alarmhour!='hr'&&alarmminute!='min'){
-        childRef = messagesRef.child("alarm" + currentTime.getTime());
+        childRef = messagesRef.child(userId+"/alarm" + currentTime.getTime());
         childRef.set({id:currentTime.getTime(),date:alarmdate, hour:alarmhour, minute:alarmminute, meridiem:alarmmeridiem});
         document.getElementById('alarmPage').style.display="none";
     }
 
-		  // if(alarmdate!==""&&alarmhour!='hr'&&alarmminute!='min'){
+          // if(alarmdate!==""&&alarmhour!='hr'&&alarmminute!='min'){
     //         console.log(storeId);
     //         //repopulate removed ids first
     //         if(number <= 10) {

@@ -32,24 +32,32 @@
         </ul> -->
         <ul class="nav navbar-nav navbar-left">
           <li><a href="index.html" id="done">Home</a></li>
+          <li><a href="#" id="add">Add event</a></li>
         </ul>
     </div>
 </div>
 
 <div class="spacer200"></div>
-<div id='calendar'></div>
+
+<div id='wrap'>
+
+
+    <div id='calendar'></div>
+
+  </div>
 
 
 <script type='text/javascript'>
-var resp=JSON.parse(localStorage.getItem("Object"));
+var resp=JSON.parse(sessionStorage.getItem("Object"));
 for (var i = 0; i < resp.items.length; i++) {
-        var li = document.createElement('li');
-        var start=resp.items[i].start.dateTime.slice(0,-6);
-        start=start.substring(0, 10) + '   ' + start.substring(11);
-        var end= resp.items[i].end.dateTime.slice(0,-6);
-        end=end.substring(0, 10) + '   ' + end.substring(11);
-        var userEvent= start+" : "+end+"---"+resp.items[i].summary;
-        console.log(userEvent);
+        console.log(resp.items[i]);
+        //var li = document.createElement('li');
+        // var start=resp.items[i].start.dateTime.slice(0,-6);
+        // start=start.substring(0, 10) + '   ' + start.substring(11);
+        // var end= resp.items[i].end.dateTime.slice(0,-6);
+        // end=end.substring(0, 10) + '   ' + end.substring(11);
+        // var userEvent= start+" : "+end+"---"+resp.items[i].summary;
+        // console.log(userEvent);
         // li.appendChild(document.createTextNode(userEvent));
         // document.getElementById('events').appendChild(li);
       }
@@ -59,10 +67,21 @@ $(document).ready(function() {
         events: {
             googleCalendarId: window.location.search.substring(7),
             className: 'gcal-event' // an option!
-        }
+        },
+        dayClick:function(date){
+            //console.log(date);
+        },
+        eventClick: function(event) {
+            // opens events in a popup window
+            window.open(event.url, 'gcalevent', 'width=700,height=600');
+            return false;
+        },
     });
 });
-
+document.getElementById('add').onclick=function(){
+     window.open('https://www.google.com/calendar/render', 'popUpWindow', 'width=700,height=600');
+};
 </script>
+
 </body>
 </html>

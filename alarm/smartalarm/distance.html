@@ -32,6 +32,21 @@
 <div class="spacer200"></div>
 <form class="form-horizontal">
   <div class="form-group">
+    <label class="col-sm-2 control-label">Get Ready Time</label>
+    <div class="col-sm-2 col-centered"><select class="form-control col-centered" id='getreadyHour'></select></div>
+    <div class="col-sm-2 col-centered"><select class="form-control col-centered" id='getreadyMinute'></select>
+</div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Arrival Time</label>
+            <div class="col-sm-4 col-centered"><input class="form-control col-centered" type="date" id='alarmDate' max="2050-12-31"></div>
+        <div class="col-sm-2 col-centered"><select class="form-control col-centered" id='alarmHour'></select></div>
+        <div class="col-sm-2 col-centered"><select class="form-control col-centered" id='alarmMinute'></select>
+</div>
+        <div class="col-sm-2 col-centered"><select class="form-control col-centered" id='alarmMeridiem'></select>
+</div>
+  </div>
+  <div class="form-group">
     <label class="col-sm-2 control-label">Location</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="origin" placeholder="Enter your origin address">
@@ -73,9 +88,108 @@
   </div>
 </form>
 <div class="container">
+  <button type="button" id="setAlarm" class="btn btn-default" style="display:none">Set the Alarm</button>
     <div class="row" id="report"></div>
+
 </div>
  <script>
+
+ // Set the minimum date to be today
+  var _today = new Date().toLocaleString().split(',')[0].split('/');
+    if(_today[0]<10){_today[0]='0'+_today[0];}
+    if(_today[1]<10){_today[1]='0'+_today[1];}
+    var today= _today[2]+'-'+_today[0]+'-'+_today[1];
+    console.log(today);
+    document.getElementById("alarmDate").setAttribute('min', today);
+  var alarmDate=document.getElementById("alarmDate");
+
+
+    var alarmHour=document.getElementById("alarmHour");
+    var optionHour=document.createElement("option");
+    optionHour.text="hr";
+    alarmHour.add(optionHour,alarmHour[0]);
+
+    //drop down for hour
+    for(var j=1;j<13;j++){
+        var option2=document.createElement("option");
+        if(j<10){
+            option2.text='0'+j;
+        }else{
+            option2.text=j;
+        }
+        alarmHour.add(option2,alarmHour[j]);
+    }
+
+   var alarmMinute=document.getElementById("alarmMinute");
+    var optionMinute=document.createElement("option");
+    optionMinute.text="min";
+
+    //drop down for minute
+    alarmMinute.add(optionMinute,alarmMinute[0]);
+
+    for(var k=0;k<60;k++){
+        var option3=document.createElement("option");
+        if(k<10){
+            option3.text='0'+k;
+        }else{
+            option3.text=k;
+        }
+        alarmMinute.add(option3,alarmMinute[k+1]);
+    }
+
+var getreadyHour=document.getElementById("getreadyHour");
+    var optionHour=document.createElement("option");
+    optionHour.text="hr";
+    getreadyHour.add(optionHour,getreadyHour[0]);
+
+    //drop down for hour
+    for(var j=1;j<13;j++){
+        var option2=document.createElement("option");
+        if(j<10){
+            option2.text='0'+j;
+        }else{
+            option2.text=j;
+        }
+        getreadyHour.add(option2,getreadyHour[j]);
+    }
+
+   var getreadyMinute=document.getElementById("getreadyMinute");
+    var optionMinute=document.createElement("option");
+    optionMinute.text="min";
+
+    //drop down for minute
+    getreadyMinute.add(optionMinute,getreadyMinute[0]);
+
+    for(var k=0;k<60;k++){
+        var option3=document.createElement("option");
+        if(k<10){
+            option3.text='0'+k;
+        }else{
+            option3.text=k;
+        }
+        getreadyMinute.add(option3,getreadyMinute[k+1]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //drop down for am/pm
+    var alarmMeridiem=document.getElementById("alarmMeridiem");
+    var optionAm=document.createElement("option");
+    optionAm.text="am";
+    alarmMeridiem.add(optionAm,alarmMeridiem[0]);
+    var optionPm=document.createElement("option");
+    optionPm.text="pm";
+    alarmMeridiem.add(optionPm,alarmMeridiem[1]); 
     //Autocomplete drop down options for addresses
   function initialize() {
     var autocomplete1,autocomplete2;
@@ -119,7 +233,89 @@
             success: function (data) {
                 console.log(data);
                 if(data.status!=='INVALID_REQUEST'){
-                    document.getElementById("report").innerText="Distance:"+data.rows[0].elements[0].distance.text+"\nTime:"+data.rows[0].elements[0].duration.text;
+
+                  if( document.getElementById('alarmDate').value!==""&&document.getElementById('alarmHour').value!="hr" && document.getElementById('alarmMinute').value !="min" && document.getElementById('getreadyHour').value != "hr" && document.getElementById('getreadyMinute').value != "min" ){
+        
+        var arrivalhour=document.getElementById('alarmHour').value;
+        
+        var arrivalmeridiem=document.getElementById('alarmMeridiem').value;
+
+        if(arrivalmeridiem === "pm"){
+          if(parseInt(arrivalhour) !== 12){
+              arrivalhour= parseInt(arrivalhour)+ 12;  
+          }
+        }else{
+          if(parseInt(arrivalhour) == 12){
+            arrivalhour= 0;
+          }
+        }
+
+        
+
+        var arrivalTime = new Date();
+        arrivalTime.setFullYear(document.getElementById('alarmDate').value.split('-')[0]);
+        arrivalTime.setMonth(document.getElementById('alarmDate').value.split('-')[1]-1);
+        arrivalTime.setDate(document.getElementById('alarmDate').value.split('-')[2]);
+        arrivalTime.setHours(arrivalhour - document.getElementById('getreadyHour').value);
+        arrivalTime.setMinutes(document.getElementById('alarmMinute').value - document.getElementById('getreadyMinute').value);
+        arrivalTime.setSeconds(0-data.rows[0].elements[0].duration.value);
+
+       var year = arrivalTime.getFullYear();
+        var month = arrivalTime.getMonth()+1;
+        var date = arrivalTime.getDate();
+        var hour = arrivalTime.getHours();
+        var min = arrivalTime.getMinutes();
+        var meridiem;
+        if(hour>=12){
+            if(hour==12){
+                meridiem="PM";
+            }else{
+                hour-=12;
+                meridiem = "PM";
+            }
+        }else{
+            if(hour==0){
+                hour=12;
+            }
+            meridiem="AM";
+        }
+
+        if(month<10){
+            month = "0"+month;
+        }
+
+        if(date<10){
+            date = "0" +date;
+        }
+
+        if(hour<10){
+            hour = "0"+hour;
+        }
+        if(min<10){
+            min = "0"+min;
+        }
+
+        
+
+                    document.getElementById("report").innerText="Distance:"+data.rows[0].elements[0].distance.text+"\nTime:"+data.rows[0].elements[0].duration.text+"\nYou should set an alarm at "+ year+'-'+month+'-'+date+" "+hour + ":" +min + " " +meridiem;
+                    var alarm = document.getElementById('setAlarm');
+
+                    document.getElementById('setAlarm').style.display="block";
+         alarm.onclick = function(){
+                    var currentTime = new Date();
+
+         var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
+
+         var childRef = messagesRef.child("alarm" + currentTime.getTime());
+      alert("Alarm Set");
+
+        childRef.set({id:currentTime.getTime(),date:year+'-'+month+'-'+date, hour:hour, minute:min, meridiem:meridiem});
+      }}else{
+        document.getElementById("report").innerText="";
+        document.getElementById("report").innerText="Distance:"+data.rows[0].elements[0].distance.text+"\nTime:"+data.rows[0].elements[0].duration.text;
+        var alarm = document.getElementById('setAlarm').style.display="none";
+
+      }
                 }else{
                     alert('Enter a valid address!');
                 }
