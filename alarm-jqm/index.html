@@ -83,26 +83,42 @@
             </div>            
         <!-- End of Dialog Section -->
 
-             <br>  
-             <div id="time">00:00:00</div>
+            <br>             
+             <div id="time" style="font-size:8vw; color: red; text-align:center"><b>00:00:00</b></div>
 			 <br>
-			 <div id="weather"></div>
+			 <div id="weather" style="font-size:8vw; color: red; text-align:center"></div>
              <br>
 
-             <hr>
-             <a href="#listalarms" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b" >Alarm List</a>
-             <br>
-             <a href="#setalarm" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b">Set Normal Alarm</a>
-             <br>
-             <a href="#setalarmtraffic" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b">Set Smart Alarm</a>
-
-        </div><!-- /content -->
+             <div data-role="controlgroup" data-type="horizontal" style="text-align:center">
+             <a href="#listalarms" class="ui-btn ui-icon-bars ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b" style="width: 300px;padding-top: 10px;padding-bottom: 10px">Alarm List</a>
+             <a href="#setalarm" class="ui-btn ui-icon-clock ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b" style="width: 300px;padding-top: 10px;padding-bottom: 10px">Set Normal Alarm</a>
+             <a href="#setalarmtraffic" class="ui-btn ui-icon-navigation ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b" style="width: 300px;padding-top: 10px;padding-bottom: 10px">Set Smart Alarm</a>
+             </div>
+			 </div><!-- /content -->
  
  
         <!--Currently Set alarms, can Cancel -->
         </div><!-- /page -->
 
              <div data-role="page" id="listalarms">
+			 
+			         <!-- Instruction Dialog Box-->
+
+                <!-- <a href="#myPopupDialog" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow">Instructions</a> -->
+
+            <div data-role="popup" id="alarmSetConfirm">
+            <div data-role="header">
+            <h1>Set your alarm!</h1>
+            </div>
+
+            <div data-role="main" class="ui-content">
+            <div id="alarmconfirm">
+			</div>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-check ui-btn-icon-left" data-rel="back">OK</a>
+            </div>
+
+            </div>            
+        <!-- End of Dialog Section -->
  
             <div data-role="header">
                 <h1>Currently Set Alarms</h1>

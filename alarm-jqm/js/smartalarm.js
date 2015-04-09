@@ -16,6 +16,7 @@ function displayTime() {
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     if(seconds<10) seconds="0"+seconds;
+	if(minutes<10) minutes="0"+minutes;
     if(hours<10) hours="0"+hours;
     var clockText = hours + ":" + minutes + ":" + seconds + "\n" + months[monthNum] + " "+date+" "+year;
 
@@ -36,13 +37,13 @@ function renderAlarms() {
 				}
 			}
 			repeating = repeating + "</strong>";
-			$("#alarms").append('<li>' + repeating + ' ' + data.alarmdata[alarm].hour + ':' + data.alarmdata[alarm].minute + buttontext +'</li>');
+			$("#alarms").append('<li>"' +data.alarmdata[alarm].name +'" ' + repeating + ' ' + data.alarmdata[alarm].hour + ':' + data.alarmdata[alarm].minute + buttontext +'</li>');
 		}
 		else if (data.alarmdata[alarm].isSmart == true) {
-			$("#alarms").append('<li><strong>Smart Alarm: </strong>'+data.alarmdata[alarm].year + '-' + data.alarmdata[alarm].month + '-' + data.alarmdata[alarm].day + ' ' + data.alarmdata[alarm].hour + ':' + data.alarmdata[alarm].minute + buttontext +'</li>');
+			$("#alarms").append('<li>"'+data.alarmdata[alarm].name +'"<strong> Smart Alarm: </strong>'+data.alarmdata[alarm].year + '-' + data.alarmdata[alarm].month + '-' + data.alarmdata[alarm].day + ' ' + data.alarmdata[alarm].hour + ':' + data.alarmdata[alarm].minute + buttontext +'</li>');
 		}
         else {
-			$("#alarms").append('<li>'+data.alarmdata[alarm].year + '-' + data.alarmdata[alarm].month + '-' + data.alarmdata[alarm].day + ' ' + data.alarmdata[alarm].hour + ':' + data.alarmdata[alarm].minute + buttontext +'</li>');
+			$("#alarms").append('<li>"'+data.alarmdata[alarm].name + '" '+data.alarmdata[alarm].year + '-' + data.alarmdata[alarm].month + '-' + data.alarmdata[alarm].day + ' ' + data.alarmdata[alarm].hour + ':' + data.alarmdata[alarm].minute + buttontext +'</li>');
 		}
 	}
     $("#alarms").listview('refresh');
@@ -178,7 +179,17 @@ function alarmSetNoRepeat() {
 							isRepeating: repeatToggle
 						}
 						console.log(obj);
-						alarmDataRef.push(obj);
+						alarmDataRef.push(obj, function() {
+							var string = "Your alarm " + obj.name + " has been set for " + obj.hour + ":" + obj.minute + ".";
+							$('#alarmconfirm').text(string);
+							$(':mobile-pagecontainer').pagecontainer('change', '#listalarms', {
+							});
+							setTimeout(function() {
+								$('#alarmSetConfirm').popup('open', {
+            transition: 'pop'
+        });
+							},200);
+						});
 						
                         ClearFields();
 
@@ -310,7 +321,17 @@ function alarmSetNoRepeat() {
 							extraText: infostring,
 						}
 						console.log(obj);
-						alarmDataRef.push(obj);
+						alarmDataRef.push(obj, function(){
+							var string = "Your smart alarm " + obj.name + " has been set for " + obj.hour + ":" + obj.minute + ". Your trip from " + obj.origin + " to " + obj.destination + " will take " + durationMinutes + " minutes. This has been taken into account when setting the alarm.";
+							$('#alarmconfirm').text(string);
+							$(':mobile-pagecontainer').pagecontainer('change', '#listalarms', {
+							});
+							setTimeout(function() {
+								$('#alarmSetConfirm').popup('open', {
+            transition: 'pop'
+        });
+							},200);
+						});
 						
 						
                         //var value = [newHours, newMinutes];                      
