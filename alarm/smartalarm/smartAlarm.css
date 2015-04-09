@@ -1,8 +1,12 @@
+/* ### Desktop ### */
+@media screen and (min-width: 761px){
 body{
     height:100vh;
     background-size:cover;
 	background-repeat:no-repeat;
 }
+
+
 .navbar-brand
 {
     position: absolute;
@@ -46,3 +50,40 @@ body{
 .spacer50 { height: 50px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer100 { height: 100px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
 .spacer200 { height: 200px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+
+}
+
+/* ### HandHeld ### */
+@media screen and (max-width: 760px){
+
+
+.btn-group-vertical>.btn-group:after,.btn-group-vertical>.btn-group:before,.btn-toolbar:after,.btn-toolbar:before,.clearfix:after,.clearfix:before,.container-fluid:after,.container-fluid:before,.container:after,.container:before,.dl-horizontal dd:after,.dl-horizontal dd:before,.form-horizontal .form-group:after,.form-horizontal .form-group:before,.modal-footer:after,.modal-footer:before,.nav:after,.nav:before,.navbar-collapse:after,.navbar-collapse:before,.navbar-header:after,.navbar-header:before,.navbar:after,.navbar:before,.pager:after,.pager:before,.panel-body:after,.panel-body:before,.row:after,.row:before {
+	display:inline;
+}
+.nav>li>a {
+	display:inline;
+}
+
+.container-fluid .navbar-nav {
+	float:left;
+}
+
+
+.navbar-nav li {
+	width:150px;
+	display:inline;
+}
+.nav {
+	display: inline;
+}
+
+
+.container-fluid .navbar-right{
+	float: right;
+	margin-right: -15px;
+}
+
+.container-fluid .navbar-right img {
+	position:relative;
+
+}
