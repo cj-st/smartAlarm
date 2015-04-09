@@ -14,6 +14,10 @@ var Lcd = require('lcd'),
     cols: 16,
     rows: 2
   });
+var SerialPort = require("serialport").SerialPort
+var serialPort = new SerialPort("/dev/ttyUSB0", {
+  baudrate: 9600
+});
 var http = require('http');
 var Firebase = require('firebase');
 var firebaseRef = new Firebase("https://smartalarmv2.firebaseio.com");
@@ -34,13 +38,13 @@ var info;
 var temp;
 var forecast;
 var forecastDetails;
+var extraText;
 var ledInterval;
 
 firebaseRef.on('value',function(snapshot){
 	data = snapshot.val();
 	console.log("Firebase data changed!");
 	console.log(data);
-//	tts.speak("hello world");
 });
 
 /* Update weather data every 30 minutes */
@@ -64,32 +68,42 @@ setInterval(function() {
 
 /* Sound some alarms */
 	for (var alarm in data.alarmdata){ 
-//		console.log(data.alarmdata[alarm]);
-		if(data.alarmdata[alarm].hour == day.getHours() && data.alarmdata[alarm].minute == day.getMinutes()) {
-			if (data.alarmdata[alarm] != undefined) {
+		if((data.alarmdata[alarm].month == day.getMonth()+1) && data.alarmdata[alarm].day == day.getDate() && data.alarmdata[alarm].hour == day.getHours() && data.alarmdata[alarm].minute == day.getMinutes()) { // non-repeating case
+			if (data.alarmdata[alarm].ringtone != undefined) {
 				mp3.play("./audio/"+data.alarmdata[alarm].ringtone);
 			}
 			else {
 				mp3.play("./audio/ThisLove.mp3");
 			}
-/*			setTimeout(function(){ // just for testing, for now
-				snooze();
-			}, 10000);
-*/
-			ledInterval = setInterval(function () {
-				buttonLed.writeSync(buttonLed.readSync() ^ 1); // 1 = on, 0 = off :) 
+
+			ledInterval = setInterval(function () { // blink the LED on the button
+				buttonLed.writeSync(buttonLed.readSync() ^ 1);
 			}, 200);
 			
-			console.log("alarm now");
-			if(!data.alarmdata[alarm].isRepeating) { // if this is NOT a repeating alarm, remove it after it's been sounded
+			console.log("Alarm sounding at " + day.toString());
+			//if(!data.alarmdata[alarm].isRepeating) { // if this is NOT a repeating alarm, remove it after it's been sounded
 				var childRef = alarmDataRef.child(alarm);
 				childRef.remove();
+			//}
+		}
+		else if(data.alarmdata[alarm].isRepeating == true && data.alarmdata[alarm].hour == day.getHours() && data.alarmdata[alarm].minute == day.getMinutes() && (data.alarmdata[alarm].repeatDays.indexOf(day.getDay()) > -1)) { // repeating case
+			if (data.alarmdata[alarm].ringtone != undefined) {
+				mp3.play("./audio/"+data.alarmdata[alarm].ringtone);
 			}
+			else {
+				mp3.play("./audio/ThisLove.mp3");
+			}
+
+			ledInterval = setInterval(function () { // blink the LED on the button
+				buttonLed.writeSync(buttonLed.readSync() ^ 1);
+			}, 200);
+			
+			console.log("Alarm sounding at " + day.toString() + " TYPE REPEAT");
 		}
 	}
 }, 60000);
 
-/* Watch button */
+/* Event listener for button */
 button.watch(function (err, value) {
 	if (value == 1) {
 		clearInterval(ledInterval);
@@ -97,6 +111,14 @@ button.watch(function (err, value) {
 		snooze();
 	}
 });
+
+/* Event listener for accelerometer via serial/arduino */
+serialPort.on('data', function(data) {
+//      console.log('data received: ' + data);
+	var d = new Date();
+	console.log('Accelerometer event at ' + d.toString());
+});
+
 
 /* Helper functions */
 
