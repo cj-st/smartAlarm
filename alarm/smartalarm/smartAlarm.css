@@ -88,4 +88,26 @@ body{
 
 }
 
+main {
+	text-align:center;
+
+}
+
+#clock {
+
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:55px;
+
+
+	font-size:30px;
+	font-weight:bold;
+	
+}
+
+#weather {
+	font-size:15px;
+	font-weight:bold;
+}
+
 }
