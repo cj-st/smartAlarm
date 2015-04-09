@@ -113,10 +113,19 @@ button.watch(function (err, value) {
 });
 
 /* Event listener for accelerometer via serial/arduino */
-serialPort.on('data', function(data) {
+serialPort.on('data', function(meh) {
 //      console.log('data received: ' + data);
 	var d = new Date();
+	var currentSecs = d.getSeconds() + (60 * d.getMinutes()) + (60 * 60 * d.getHours());
 	console.log('Accelerometer event at ' + d.toString());
+	for (var alarm in data.alarmdata) {
+		var alarmSecs = data.alarmdata[alarm].minute*60 + data.alarmdata[alarm].hour*60*60;
+		var diff = alarmSecs - currentSecs;
+		console.log("diff between alarm: " + diff);
+		if (diff < 1800 && diff > 0) {
+			console.log("Accelerometer early alarm!");
+		}
+	}
 });
 
 

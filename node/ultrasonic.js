@@ -19,10 +19,11 @@ function puts(error, stdout, stderr) {
 //	console.log(stdout);
 };
 
-/*exports.stopSensing = function() {
+exports.stopSensing = function() {
 	clearInterval(interval);
-}*/
+}
 
-/*exports.setVolume = function(volume) {
-	 var command = "amixer cset numid=1 " + (distance + offset) + "%";
-}*/
+exports.setVolume = function(volume) {
+	var command = "amixer cset numid=1 " + volume + "%";
+	exec(command, puts);
+}
