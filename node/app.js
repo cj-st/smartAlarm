@@ -66,8 +66,12 @@ setInterval(function() {
 	for (var alarm in data.alarmdata){ 
 //		console.log(data.alarmdata[alarm]);
 		if(data.alarmdata[alarm].hour == day.getHours() && data.alarmdata[alarm].minute == day.getMinutes()) {
-//			tts.speak("Wake up dumb fuck");
-			mp3.play("./audio/ThisLove.mp3"); // because Maroon 5
+			if (data.alarmdata[alarm] != undefined) {
+				mp3.play("./audio/"+data.alarmdata[alarm].ringtone);
+			}
+			else {
+				mp3.play("./audio/ThisLove.mp3");
+			}
 /*			setTimeout(function(){ // just for testing, for now
 				snooze();
 			}, 10000);

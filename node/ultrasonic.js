@@ -2,9 +2,10 @@ var sys = require('sys');
 var exec = require('child_process').exec;
 var usonic = require('r-pi-usonic');
 var sensor = usonic.createSensor(27, 17, 450);
+var interval;
 
 exports.startSensing = function(offset){
-setInterval(function() {
+interval = setInterval(function() {
 	var distance = Math.round(sensor());
 	var volume = "amixer cset numid=1 " + (distance + offset) + "%";
 //	console.log(volume);
@@ -17,3 +18,11 @@ setInterval(function() {
 function puts(error, stdout, stderr) {  
 //	console.log(stdout);
 };
+
+/*exports.stopSensing = function() {
+	clearInterval(interval);
+}*/
+
+/*exports.setVolume = function(volume) {
+	 var command = "amixer cset numid=1 " + (distance + offset) + "%";
+}*/
