@@ -9,10 +9,14 @@ $(document).ready( function() {
     var address1;
     var address2;
     var count=0;
-    if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(weather,function(err){
-        alert(err);
-    });
+    navigator.geolocation.getCurrentPosition(getLocation, locationFail);
+    
+    function locationFail () {  
+        alert("Default Location: UBC.\nPlease allow the alarm access your geolocation.");
+        userLat=49.260605;
+        userLng=-123.245994;
+        weather();
+    }
 }
     var auto=setInterval(displayTime,1000); //display time every second
 
@@ -89,12 +93,17 @@ $(document).ready( function() {
 
     }
 
-    //location: 49.260605,-123.245994 -UBC
     //display weather info and load weather background on webpage
-    function weather(position){
-              userLat=position.coords.latitude;
-              userLng=position.coords.longitude;
-    var fullUrl="https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/"+userLat+","+userLng;
+	//location: 49.260605,-123.245994 -UBC
+    //function weather(position){
+	function getLocation(position){
+    	userLat=position.coords.latitude;
+		userLng=position.coords.longitude;
+		weather();
+    }
+	
+	function weather() {
+		var fullUrl="https://api.forecast.io/forecast/c041d01ad874a1877cd9917877f38154/"+userLat+","+userLng;
         //get weather data from forecast.io
         $.ajax({
         url: fullUrl,
@@ -105,16 +114,17 @@ $(document).ready( function() {
             var background = document.body;
             clockDiv = document.getElementById('clock');
             weatherDiv=document.getElementById('weather');
-            weatherDiv=document.getElementById('weather');
+
 
             weatherDiv.innerText="Currently "+ icon +" " + Math.round(temp)+" °C";
 
             switch(icon){
             case 'clear-day':
-            case 'partly-cloudy-day':
                 background.style.backgroundImage='url("sunny.jpg")';
                 break;
             case 'cloudy':
+            case 'partly-cloudy-day':
+            case 'partly-cloudy-night':
                 background.style.backgroundImage='url("cloudy.jpg")';
                 clockDiv.style.color='white';
                 weatherDiv.style.color='white';
@@ -137,7 +147,6 @@ $(document).ready( function() {
                 background.style.backgroundImage='url("mist.jpg")';
                 break;
             case 'clear-night':
-            case 'partly-cloudy-night':
                 background.style.backgroundImage='url("clearNight.jpg")';
                 weatherDiv.style.color='white';
                 clockDiv.style.color='white';
@@ -146,7 +155,7 @@ $(document).ready( function() {
 
         }
     });
-    }
+	}
 
 
 
