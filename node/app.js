@@ -28,7 +28,7 @@ var tts = require('./tts'); // my function for text to speech
 var mp3 = require('./mp3'); // play mp3s
 var ultrasonic = require('./ultrasonic'); // ultrasonic sensor
 
-ultrasonic.startSensing(60); // requires superuser. syntax is startSensing(offset).
+//ultrasonic.startSensing(60); // requires superuser. syntax is startSensing(offset).
 // volume control logic is (distance + offset) = % volume.
 
 /* Some variables to hold data. */
@@ -80,13 +80,16 @@ setInterval(function() {
 				buttonLed.writeSync(buttonLed.readSync() ^ 1);
 			}, 200);
 			
+			if (data.alarmdata[alarm].extraText != undefined) {
+				extraText = data.alarmdata[alarm].extraText;
+			}
 			console.log("Alarm sounding at " + day.toString());
 			//if(!data.alarmdata[alarm].isRepeating) { // if this is NOT a repeating alarm, remove it after it's been sounded
 				var childRef = alarmDataRef.child(alarm);
 				childRef.remove();
 			//}
 		}
-		else if(data.alarmdata[alarm].isRepeating == true && data.alarmdata[alarm].hour == day.getHours() && data.alarmdata[alarm].minute == day.getMinutes() && (data.alarmdata[alarm].repeatDays.indexOf(day.getDay()) > -1)) { // repeating case
+		else if(data.alarmdata[alarm].isRepeating == true && data.alarmdata[alarm].hour == day.getHours() && data.alarmdata[alarm].minute == day.getMinutes() && (data.alarmdata[alarm].repeats.indexOf(day.getDay()) > -1)) { // repeating case
 			if (data.alarmdata[alarm].ringtone != undefined) {
 				mp3.play("./audio/"+data.alarmdata[alarm].ringtone);
 			}
@@ -97,6 +100,10 @@ setInterval(function() {
 			ledInterval = setInterval(function () { // blink the LED on the button
 				buttonLed.writeSync(buttonLed.readSync() ^ 1);
 			}, 200);
+
+			if (data.alarmdata[alarm].extraText != undefined) {
+				extraText = data.alarmdata[alarm].extraText;
+			}
 			
 			console.log("Alarm sounding at " + day.toString() + " TYPE REPEAT");
 		}
@@ -124,6 +131,28 @@ serialPort.on('data', function(meh) {
 		console.log("diff between alarm: " + diff);
 		if (diff < 1800 && diff > 0) {
 			console.log("Accelerometer early alarm!");
+			if((data.alarmdata[alarm].month == d.getMonth()+1) && data.alarmdata[alarm].day == d.getDate() && data.alarmdata[alarm].isRepeating == false) { // non-repeating case
+				if (data.alarmdata[alarm].ringtone != undefined) {
+					mp3.play("./audio/"+data.alarmdata[alarm].ringtone);
+				}
+				else {
+					mp3.play("./audio/ThisLove.mp3");
+				}
+
+				ledInterval = setInterval(function () { // blink the LED on the button
+					buttonLed.writeSync(buttonLed.readSync() ^ 1);
+				}, 200);
+			
+				if (data.alarmdata[alarm].extraText != undefined) {
+					extraText = data.alarmdata[alarm].extraText;
+				}
+				//console.log("Alarm sounding at " + day.toString());
+				//if(!data.alarmdata[alarm].isRepeating) { // if this is NOT a repeating alarm, remove it after it's been sounded
+				var childRef = alarmDataRef.child(alarm);
+				childRef.remove();
+			//}
+			}
+
 		}
 	}
 });
@@ -187,4 +216,10 @@ function snooze() {
 	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	var information = "The time is " + currentTime.getHours() + " " + currentTime.getMinutes() + " on " + currentTime.toString().substring(0,3) + ", " + months[currentTime.getMonth()] + " " + currentTime.getDate() + ". The weather is " + temp.toFixed(1) + " degrees with " + forecastDetails;
 	tts.speak(information);
+	if (extraText != undefined) {
+		setTimeout(function() {
+			tts.speak(extraText);
+			extraText = "";
+		},7750);
+	}
 }
