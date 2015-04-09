@@ -41,7 +41,7 @@
     <div class="spacer30"></div>
     <div class="row row-centered">
         <!--<div class="col-sm-4 col-centered"><select class="form-control col-centered" id='alarmDate'></select></div>-->
-        <div class="col-sm-4 col-centered"><input class="form-control col-centered" type="date" id='alarmDate' max="2050-12-31"></div>
+        <div class="col-sm-4 col-centered"><input class="form-control col-centered" type="date" id='alarmDate' ></div>
         <div class="col-sm-2 col-centered"><select class="form-control col-centered" id='alarmHour'></select></div>
         <div class="col-sm-2 col-centered"><select class="form-control col-centered" id='alarmMinute'></select>
 </div>
@@ -98,7 +98,7 @@ var clientId = '301696899552-vpergd22gr7jkod4b4o9q9osb237t94h.apps.googleusercon
 var apiKey = 'AIzaSyCD9gW0p7LS9Y5gLs8gHCgrV1WplVLU1E8';
 var scopes = 'https://www.googleapis.com/auth/calendar';
 function handleClientLoad() {
-     userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0];
+     userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0].split(/[^A-Za-z]/).join("");
 
 
   gapi.client.setApiKey(apiKey);

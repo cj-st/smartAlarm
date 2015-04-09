@@ -32,7 +32,7 @@ Snooze
 </div>
 
 <script type="text/javascript">
-userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0];
+userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0].split(/[^A-Za-z]/).join("");
     document.body.onload=function(){
         var aud =document.createElement("audio");
         aud.setAttribute("id","aud");

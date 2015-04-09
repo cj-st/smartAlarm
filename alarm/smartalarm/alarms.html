@@ -36,7 +36,7 @@
 <script>
    //create alarm from firebase data
     var messagesRef = new Firebase('https://281alarm.firebaseio.com/');
-          userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0];
+          userId=JSON.parse(sessionStorage.getItem("Object")).summary.split('@')[0].split(/[^A-Za-z]/).join("");
 
     var ref=messagesRef.child(userId);
     var number=0;
