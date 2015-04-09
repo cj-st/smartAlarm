@@ -1,0 +1,18 @@
+html,
+body,
+#clock { /* specify page */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#clock .ui-content {
+  padding: 0;
+}
+
+.ui-content,
+.ui-content #full-height-div { /* divs will inherit page's height */
+  height: inherit;
+}
+
+.cancelbutton { position:absolute; right:0; top:-7px; }

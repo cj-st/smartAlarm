@@ -1,0 +1,222 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>My Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" href="./css/default.css">
+        <script src="https://cdn.firebase.com/js/client/2.2.3/firebase.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        
+
+        <link rel="stylesheet" type="text/css" href="http://cdn.jtsage.com/datebox/latest/jqm-datebox.min.css">
+        <script type="text/javascript" src="http://cdn.jtsage.com/datebox/latest/jqm-datebox.core.min.js"></script>
+        <script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.mode.calbox.min.js"></script>
+        <script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.mode.datebox.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+		
+		<script src="./js/smartalarm.js"></script>
+          
+    </head>
+
+    <body>
+
+        <!--MAIN PAGE-->
+        <div data-role="page" id="clock">
+ 
+        <div data-role="header">
+            <h1>smartAlarm</h1>
+        </div><!-- /header -->
+ 
+        <div data-role="content" id="clockPageContent">
+
+        <!-- Instruction Dialog Box-->
+
+                <a href="#myPopupDialog" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow">Instructions</a>
+
+            <div data-role="popup" id="myPopupDialog">
+            <div data-role="header">
+            <h1>Instructions</h1>
+            </div>
+
+            <div data-role="main" class="ui-content">
+            <h2>Welcome to The Smart Alarm!</h2>
+            
+            <p>
+                A simple yet useful design. 
+            </p>
+
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-back ui-btn-icon-left" data-rel="back">Go Back</a>
+            </div>
+
+            </div>            
+        <!-- End of Dialog Section -->
+
+             <br></br>     
+             <div style="font-size:10vw; text-align:center; background-color:lightgreen; border:5px solid red" id="time">00:00:00</div>
+             <br></br>
+
+             <hr>
+             <a href="#listalarms" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b" >Alarm List</a>
+             <br>
+             <a href="#setalarm" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b">Set Normal Alarm</a>
+             <br>
+             <a href="#setalarmtraffic" class="ui-btn ui-icon-arrow-r ui-btn-icon-right ui-shadow ui-corner-all ui-btn-b">Set Smart Alarm</a>
+
+        </div><!-- /content -->
+ 
+ 
+        <!--Currently Set alarms, can Cancel -->
+        </div><!-- /page -->
+
+             <div data-role="page" id="listalarms">
+ 
+            <div data-role="header">
+                <h1>Currently Set Alarms</h1>
+            </div><!-- /header -->
+ 
+            <div data-role="content">
+                <ul data-role="listview" id="alarms"></ul>
+            
+                <br>
+                
+                <a href="#clock" class="ui-btn ui-icon-home ui-btn-icon-right ui-corner-all ui-shadow ui-btn-b">Go Back To Clock</a>
+            
+            </div><!-- /content -->
+
+
+
+        <!--Traffic alarms -->
+        </div><!-- /page -->
+
+             <div data-role="page" id="setalarmtraffic">
+ 
+            <div data-role="header">
+                <h1>Smart Traffic Alarm</h1>
+            </div><!-- /header -->
+ 
+            <div data-role="content">
+			<p><h4>Name of Alarm:</h4> <input id="almnametraffic" type="text"></p>
+			<p><h4>Date:</h4><input id="trafficdate" type="text" data-role="datebox" data-options='{"mode":"calbox","overrideDateFormat":"%d/%m/%Y"}'></p>
+
+                <p><h4>Arrival Time:</h4><input id="arrivaltime" type="text" data-role="datebox" data-options='{"mode":"timebox"}'></p>
+
+                <h4>Get Ready Time:</h4>
+                <input id="readytime" type="number" />
+
+            <form>
+                <h4>Origin:</h4>
+                <input id="start" type="text" name="firstname">
+                <h4>Destination:</h4>
+                <input id="end" type="text" name="lastname">
+            </form>
+			<h4 style="text-align:left">Select a Song</h4>
+			    <select id="songfield2" name="select-native-1">
+
+                <option value="21Guns.mp3">21 Guns</option>
+                <option value="FeelLikeDancing.mp3">I Feel Like Dancing</option>
+                <option value="Holiday.mp3">Holiday</option>
+                <option value="SingleLadies.mp3">Single Ladies</option>
+                <option value="TheWay.mp3">The Way</option>
+                <option value="ThisLove.mp3">This Love</option>
+                <option value="WereBoy.mp3">If I Were A Boy</option>
+                </select>
+
+
+                <!-- Start of the Traffic Alarm -->
+                <script>
+
+
+
+
+                </script>
+                <!-- End of Javascript -->
+
+                <button onclick="alarmTraffic()">Set Traffic Alarm</button>
+
+                <a href="#clock" class="ui-btn ui-icon-home ui-btn-icon-right ui-corner-all ui-shadow ui-btn-b">Go Back To Clock</a>
+            
+            </div><!-- /content -->
+
+    
+        <!-- SET ALARM PAGE -->   
+        </div><!-- /page -->
+
+        <div data-role="page" id="setalarm">
+ 
+            <div data-role="header">
+                <h1>Set Normal Alarm</h1>
+            </div><!-- /header -->
+ 
+            <div data-role="content">
+                <!-- Added part for time and Date -->
+
+                <form>
+                    <label for="flip-1">Repeat Alarm:</label>
+                    <select name="flip-1" id="flip-1" data-role="slider">
+                    <option value="false">Off</option>
+                    <option value="true">On</option>
+                    </select>
+                </form>    
+
+                <p><h4>Name of Alarm:</h4> <input id="namepicked" type="text"></p>
+                <p><h4>Time:</h4><input id="timepicked" type="text" data-role="datebox" data-options='{"mode":"timebox"}'></p>
+                
+                <!-- For Setting Day When Repeat toggle is off -->
+                <p><h4>Date:</h4><input id="dateField" type="text" data-role="datebox" data-options='{"mode":"calbox","overrideDateFormat":"%d/%m/%Y"}'></p>
+
+                <!-- For Setting Day when Repeat toggle is on -->
+                <fieldset class="ui-field-contain">
+                <h4>Select Days To Repeat:</h4>
+                    <select name="day" id="dayrep" multiple="multiple" data-native-menu="false">
+                      <option>Days List</option>
+                      <option value="1">Monday</option>
+                      <option value="2">Tuesday</option>
+                      <option value="3">Wednesday</option>
+                      <option value="4">Thursday</option>
+                      <option value="5">Friday</option>
+                      <option value="6">Saturday</option>
+                      <option value="0">Sunday</option>
+                    </select>
+                </fieldset>
+                <!-- End of repeat-->
+
+
+                <!-- Start of Javascript part -->
+                <script>
+                </script>
+
+                <!-- End of Javascript part-->
+                        
+                <!-- FOR SETTING THE SONG OF THE ALARM -->
+                <h4 style="text-align:left">Select a Song</h4>
+                
+                <div class="ui-field-contain">
+                <select id="songfield" name="select-native-1">
+
+                <option value="21Guns.mp3">21 Guns</option>
+                <option value="FeelLikeDancing.mp3">I Feel Like Dancing</option>
+                <option value="Holiday.mp3">Holiday</option>
+                <option value="SingleLadies.mp3">Single Ladies</option>
+                <option value="TheWay.mp3">The Way</option>
+                <option value="ThisLove.mp3">This Love</option>
+                <option value="WereBoy.mp3">If I Were A Boy</option>
+                </select>
+                </div>
+
+                 <label for="slider-fill"><h4 style="text-align:left">Volume Control</h4></label>
+                <input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" data-highlight="true">
+                <!-- End of setting the song for alarm -->
+
+                <button onclick="alarmSetNoRepeat()">Set Alarm</button>
+
+                <a href="#clock" class="ui-btn ui-icon-home ui-btn-icon-right ui-corner-all ui-shadow ui-btn-b">Go Back To Clock</a>    
+
+            </div><!-- /content -->
+  
+            </div><!-- /page -->
+    </body>
+
+</html>
