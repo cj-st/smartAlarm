@@ -7,7 +7,7 @@ exports.speak = function(text) {
 
 //var url = "http://translate.google.com/translate_tts?tl=en&q=hello world";
 var url = "http://translate.google.com/translate_tts?tl=en&q=" + text;
-console.log(url);
+console.log("TTS Speaking: " + text);
 http.get(url, function(res) {
 	console.log("Response status: " + res.statusCode);
 	res.pipe(new lame.Decoder)

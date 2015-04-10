@@ -6,18 +6,20 @@ var interval;
 
 exports.startSensing = function(offset){
 interval = setInterval(function() {
-	var distance = Math.round(sensor());
-	var percent = Math.round(70 + sensor()/4);
+	var distance = sensor();
+	var percent = Math.round(75 + distance/4);
+//	console.log(percent);
 	var volume = "amixer cset numid=1 " + percent + "%";
 //	console.log(volume);
 	if (distance < 60 && distance >= 0) {
+//		console.log(percent);
 		exec(volume, puts);
 	}
-	else if ((distance > 60 && distance < 100) || distance > 150) {
-		// do nothing
+	else if (distance > 60 && distance < 200) {
+		exec("amixer cset numid=1 85%", puts);
 	}
 	else {
-		exec("amixer cset numid=1 85%", puts);
+	// do nothing for now.
 	}
 }, 200);
 };

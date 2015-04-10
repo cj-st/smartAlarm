@@ -69,6 +69,7 @@ setInterval(function() {
 /* Sound some alarms */
 	for (var alarm in data.alarmdata){ 
 		if((data.alarmdata[alarm].month == day.getMonth()+1) && data.alarmdata[alarm].day == day.getDate() && data.alarmdata[alarm].hour == day.getHours() && data.alarmdata[alarm].minute == day.getMinutes()) { // non-repeating case
+			ultrasonic.startSensing(100);
 			if (data.alarmdata[alarm].ringtone != undefined) {
 				mp3.play("./audio/"+data.alarmdata[alarm].ringtone);
 			}
@@ -90,6 +91,7 @@ setInterval(function() {
 			//}
 		}
 		else if(data.alarmdata[alarm].isRepeating == true && data.alarmdata[alarm].hour == day.getHours() && data.alarmdata[alarm].minute == day.getMinutes() && (data.alarmdata[alarm].repeats.indexOf(day.getDay()) > -1)) { // repeating case
+			ultrasonic.startSensing(100);
 			if (data.alarmdata[alarm].ringtone != undefined) {
 				mp3.play("./audio/"+data.alarmdata[alarm].ringtone);
 			}
@@ -132,6 +134,7 @@ serialPort.on('data', function(meh) {
 		if (diff < 1800 && diff > 0) {
 			console.log("Accelerometer early alarm!");
 			if((data.alarmdata[alarm].month == d.getMonth()+1) && data.alarmdata[alarm].day == d.getDate() && data.alarmdata[alarm].isRepeating == false) { // non-repeating case
+				ultrasonic.startSensing(100);
 				if (data.alarmdata[alarm].ringtone != undefined) {
 					mp3.play("./audio/"+data.alarmdata[alarm].ringtone);
 				}
@@ -211,6 +214,8 @@ function updateWeather(){
 }
 
 function snooze() {
+	ultrasonic.stopSensing();
+	ultrasonic.setVolume(95);
 	mp3.stop();
 	var currentTime = new Date();
 	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
